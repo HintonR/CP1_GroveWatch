@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4c8b6c81e1c6040860abd0cc906dd8, type: 3}
+  m_Name: Police
+  m_EditorClassIdentifier: 
+  _type: 1
+  _cooldown: 10
+  _damage: 7
+  _t1Inc: 2000
+  _t2Inc: 4000
+  _t3Inc: 6000
