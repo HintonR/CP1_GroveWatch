@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60fdded7697c3340a44edc9d792e9c5, type: 3}
   m_Name: RangerCDR
   m_EditorClassIdentifier: 
-  _name: Better Ranger Outposts
-  _desc: 'Improve Forest Ranger Response Time
-
-    (Reduce Cooldown)'
+  _name: Improve PENR Outposts
+  _desc: "Reduce Forest Ranger \nDispatch Cooldown"
   _id: 5
   _cap: 3
   _c1: 10000
-  _c2: 15000
-  _c3: 25000
+  _c2: 20000
+  _c3: 30000

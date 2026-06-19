@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: "Illegal \nConstruction"
   _stateType: 4
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: 4bbacdccd212f72438b49f277371506f, type: 3}
   _requiredUnit: 1
   _availableSeason: 2
   _health: 120
-  _chance: 10
-  _damage: 0.7
+  _chance: 15
+  _damage: 0.8

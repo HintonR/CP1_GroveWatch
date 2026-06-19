@@ -37,6 +37,9 @@ public class QuadrantController : MonoBehaviour
 
     void Update()
     {
+        if (_sH._gM._inScreen)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Alpha1)) ActivateQ1();
         if (Input.GetKeyDown(KeyCode.Alpha2)) ActivateQ2();
         if (Input.GetKeyDown(KeyCode.Alpha3)) ActivateQ3();
@@ -45,25 +48,41 @@ public class QuadrantController : MonoBehaviour
 
     public void ActivateQ1()
     {
+        if (_sH._qM.ActiveQuadrant == 1)
+            return;
+
         _sH._qM.SetActiveQuadrant(1);
+        _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q1.sprite = _q1A;
     }
     public void ActivateQ2()
     {
+        if (_sH._qM.ActiveQuadrant == 2)
+            return;
+
         _sH._qM.SetActiveQuadrant(2);
+        _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q2.sprite = _q2A;
     }
     public void ActivateQ3()
     {
+        if (_sH._qM.ActiveQuadrant == 3)
+            return;
+
         _sH._qM.SetActiveQuadrant(3);
+        _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q3.sprite = _q3A;
     }
     public void ActivateQ4()
     {
+        if (_sH._qM.ActiveQuadrant == 4)
+            return;
+
         _sH._qM.SetActiveQuadrant(4);
+        _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q4.sprite = _q4A;
     }

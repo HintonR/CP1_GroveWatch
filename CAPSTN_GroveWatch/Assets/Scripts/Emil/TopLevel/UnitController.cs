@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
     ServiceHub _sH;
 
-    float _penalty = -15f;
+    const float PENALTY = 15f;
     void Awake()
     {
         ServiceHub.Instance._unit = this;
@@ -14,17 +15,17 @@ public class UnitController : MonoBehaviour
     }
     public bool TryResolveEvent(UnitDrag unitDrag, Forest forest)
     {
-        if (unitDrag == null || forest == null || forest.IsResolving) return false;
+        if (forest.IsResolving) return false;
         if (!unitDrag.IsAvailable) return false;
+        if (forest.CurrentState.StateType == ForestState.Idle || forest.CurrentState.StateType == ForestState.Dead)
+            return false;
 
         NegativeForestState nfs = forest.CurrentState as NegativeForestState;
-
-        if (nfs == null)
-            return false;
         
         if (nfs.RequiredUnit != unitDrag.UnitData.Type)
         {
-            _sH._gM.ChangeReputation(_penalty);
+            _sH._gM.ChangeReputation(-PENALTY);
+            _sH._aM.PlaySFX(SFX.Invalid);
             return false;
         }
 

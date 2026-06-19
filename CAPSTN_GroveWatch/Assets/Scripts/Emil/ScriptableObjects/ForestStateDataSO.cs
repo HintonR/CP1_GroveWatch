@@ -29,10 +29,10 @@ public class ForestStateData : ScriptableObject
 {
     [SerializeField, TextArea(2, 2)] string _name;
     [SerializeField] ForestState _stateType;
-    [SerializeField] Texture2D _image;
+    [SerializeField] Sprite _image;
 
     public string Name => _name;
     public ForestState StateType => _stateType;
-    public Texture Image => _image;
+    public Sprite Image => _image;
 
 }

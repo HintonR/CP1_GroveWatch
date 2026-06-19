@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,19 +22,27 @@ public enum ResearchId
 
 public class Research : MonoBehaviour
 {
+    const float CHARACTER_SPEED = 30f;
     ServiceHub _sH;
 
     [SerializeField] TextMeshProUGUI _funit, _runit, _punit, _fcdr, _rcdr, _pcdr, _feff, _reff, _peff, _forest, _rep;
     [SerializeField] TextMeshProUGUI _finc, _rinc, _pinc;
     [SerializeField] TextMeshProUGUI _name, _desc, _cost, _money;
     [SerializeField] UnitData _funitd, _runitd, _punitd;
+    [SerializeField] GameObject _nameP, _purchase, _descP, _costP;
 
     [SerializeField] List<ResearchSO> _research;
+    
+    Coroutine _nameRoutine;
+    Coroutine _descRoutine;
+    Coroutine _costRoutine;
 
     ResearchSO _selectedResearch;
 
-    int _funitc, _runitc, _punitc, _fcdrc, _rcdrc, _pcdrc, _feffc, _reffc, _peffc, _forestc, _repc;
-    Dictionary<int, ResearchSO> _researchById = new Dictionary<int, ResearchSO>();
+    Dictionary<ResearchId, ResearchSO> _researchById = new Dictionary<ResearchId, ResearchSO>();
+    Dictionary<ResearchId, int> _researchLevels = new Dictionary<ResearchId, int>();
+    Dictionary<ResearchId, TextMeshProUGUI> _progressTextsById = new Dictionary<ResearchId, TextMeshProUGUI>();
+    Dictionary<ResearchId, UnitType> _incomeUnitsByResearchId = new Dictionary<ResearchId, UnitType>();
 
     void OnEnable()
     {
@@ -43,6 +53,10 @@ public class Research : MonoBehaviour
     {
         _selectedResearch = null;
         ClearText();
+        _purchase.SetActive(false);
+        _nameP.SetActive(false);
+        _descP.SetActive(false);
+        _costP.SetActive(false);
     }
 
     void Awake()
@@ -53,46 +67,103 @@ public class Research : MonoBehaviour
     void Start()
     {
         ClearText();
+        CacheProgressTexts();
+        CacheIncomeUpgradeUnits();
+        CacheResearchLevels();
         CacheResearch();
         RefreshAllProgressTexts();
         RefreshIncomeTexts();
     }
 
+    void StartTypewriter(TextMeshProUGUI textComponent, string content, float speed, ref Coroutine routine)
+    {
+        if (routine != null)
+            StopCoroutine(routine);
+
+        routine = StartCoroutine(TypewriterRoutine(textComponent, content, speed));
+    }
+
+    IEnumerator TypewriterRoutine(TextMeshProUGUI textComponent, string fullText, float speed)
+    {
+        textComponent.text = fullText;
+        textComponent.maxVisibleCharacters = 0;
+
+        int total = fullText.Length;
+        float interval = 1f / speed;
+        float timer = 0f;
+        int visible = 0;
+
+        while (visible < total)
+        {
+            timer += Time.deltaTime;
+
+            while (timer >= interval && visible < total)
+            {
+                timer -= interval;
+                visible++;
+                textComponent.maxVisibleCharacters = visible;
+            }
+
+            yield return null;
+        }
+
+        textComponent.maxVisibleCharacters = total;
+    }
+
     public void SelectUpgrade(int i)
     {
-        if (!_researchById.TryGetValue(i, out ResearchSO research))
+        _sH._aM.PlaySFX(SFX.Rune);
+        SelectUpgrade((ResearchId)i);
+    }
+
+    public void SelectUpgrade(ResearchId researchId)
+    {
+        if (!_researchById.TryGetValue(researchId, out ResearchSO research))
             return;
 
         _selectedResearch = research;
 
-        _name.text = research.ResearchName;
+        StartTypewriter(_name, research.ResearchName, CHARACTER_SPEED, ref _nameRoutine);        
         _desc.text = research.Description;
         RefreshSelectedUpgrade();
+        _purchase.SetActive(true);
+        _nameP.SetActive(true);
+        _descP.SetActive(true);
+        _costP.SetActive(true);
     }
 
     public void PurchaseUpgrade()
     {
-        if (!TryGetPurchaseData(out ResearchSO research, out int currentLevel, out int cost))
+        if (!TryGetPurchaseData(out ResearchSO research, out int cost))
             return;
 
-        if (_sH._gM._money < cost) { Debug.Log("Can't Purchase"); } //Play Sound Effect
+        if (_sH._gM._money < cost)
+        {
+            _sH._aM.PlaySFX(SFX.Invalid);
+            //return;
+        }
 
         _sH._gM.ChangeMoney(-cost);
+        _sH._aM.PlaySFX(SFX.Purchase);
         IncreaseResearchLevel(research.ID);
         RefreshProgressText(research);
-        ApplyIncomeUpgrade(research.ID);
+        ApplyUpgrade(research.ID);
         RefreshIncomeTexts();
         RefreshSelectedUpgrade();
     }
 
     void ClearText()
     {
+        if (_nameRoutine != null) StopCoroutine(_nameRoutine);
+        if (_descRoutine != null) StopCoroutine(_descRoutine);
+        if (_costRoutine != null) StopCoroutine(_costRoutine);
+
         _name.text = "";
         _desc.text = "";
         _cost.text = "";
     }
 
-    void IncreaseResearchLevel(int researchId)
+    void IncreaseResearchLevel(ResearchId researchId)
     {
         if (!_researchById.TryGetValue(researchId, out ResearchSO research))
             return;
@@ -111,9 +182,9 @@ public class Research : MonoBehaviour
 
     void RefreshIncomeTexts()
     {
-        _finc.text = "Income: \n" + _sH._iM.GetIncomeForUnit(_funitd);
-        _rinc.text = "Income: \n" + _sH._iM.GetIncomeForUnit(_runitd);
-        _pinc.text = "Income: \n" + _sH._iM.GetIncomeForUnit(_punitd);
+        _finc.text = _sH._iM.GetIncomeForUnit(_funitd) + "php";
+        _rinc.text = _sH._iM.GetIncomeForUnit(_runitd) + "php";
+        _pinc.text = _sH._iM.GetIncomeForUnit(_punitd) + "php";
     }
 
     void CacheResearch()
@@ -124,6 +195,48 @@ public class Research : MonoBehaviour
             _researchById[research.ID] = research;
     }
 
+    void CacheResearchLevels()
+    {
+        _researchLevels.Clear();
+
+        foreach (ResearchId researchId in Enum.GetValues(typeof(ResearchId)))
+            _researchLevels[researchId] = 0;
+    }
+
+    void CacheProgressTexts()
+    {
+        _progressTextsById = new Dictionary<ResearchId, TextMeshProUGUI>
+        {
+            { ResearchId.FireUnit, _funit },
+            { ResearchId.FireCdr, _fcdr },
+            { ResearchId.FireEffect, _feff },
+            { ResearchId.RangerUnit, _runit },
+            { ResearchId.RangerCdr, _rcdr },
+            { ResearchId.RangerEffect, _reff },
+            { ResearchId.PoliceUnit, _punit },
+            { ResearchId.PoliceCdr, _pcdr },
+            { ResearchId.PoliceEffect, _peff },
+            { ResearchId.ForestHealth, _forest },
+            { ResearchId.Reputation, _rep }
+        };
+    }
+
+    void CacheIncomeUpgradeUnits()
+    {
+        _incomeUnitsByResearchId = new Dictionary<ResearchId, UnitType>
+        {
+            { ResearchId.FireUnit, UnitType.Firefighter },
+            { ResearchId.FireCdr, UnitType.Firefighter },
+            { ResearchId.FireEffect, UnitType.Firefighter },
+            { ResearchId.RangerUnit, UnitType.Ranger },
+            { ResearchId.RangerCdr, UnitType.Ranger },
+            { ResearchId.RangerEffect, UnitType.Ranger },
+            { ResearchId.PoliceUnit, UnitType.Police },
+            { ResearchId.PoliceCdr, UnitType.Police },
+            { ResearchId.PoliceEffect, UnitType.Police }
+        };
+    }
+
     void RefreshAllProgressTexts()
     {
         foreach (ResearchSO research in _research)
@@ -132,7 +245,9 @@ public class Research : MonoBehaviour
 
     void RefreshProgressText(ResearchSO research)
     {
-        TextMeshProUGUI progressText = GetProgressText(research.ID);
+        if (!_progressTextsById.TryGetValue(research.ID, out TextMeshProUGUI progressText) || progressText == null)
+            return;
+
         progressText.text = $"{GetCurrentLevel(research.ID)}/{research.Cap}";
     }
 
@@ -144,7 +259,9 @@ public class Research : MonoBehaviour
         int currentLevel = GetCurrentLevel(_selectedResearch.ID);
         int nextCost = _selectedResearch.GetCostForLevel(currentLevel);
 
-        _cost.text = nextCost < 0 ? "MAXED" : nextCost.ToString();
+        string costText = nextCost < 0 ? "<color=#FFD700>MAXED</color>" : nextCost + "php";
+
+        _cost.text = costText;
         UpdateMoney();
     }
 
@@ -153,16 +270,12 @@ public class Research : MonoBehaviour
         _money.text = _sH._gM._money + "php";
     }
 
-    bool TryGetPurchaseData(out ResearchSO research, out int currentLevel, out int cost)
+    bool TryGetPurchaseData(out ResearchSO research, out int cost)
     {
         research = _selectedResearch;
-        currentLevel = 0;
         cost = -1;
 
-        if (research == null)
-            return false;
-
-        currentLevel = GetCurrentLevel(research.ID);
+        int currentLevel = GetCurrentLevel(research.ID);
 
         if (currentLevel >= research.Cap)
             return false;
@@ -171,105 +284,145 @@ public class Research : MonoBehaviour
         return cost >= 0;
     }
 
-    void ApplyIncomeUpgrade(int researchId)
+    void ApplyIncomeUpgrade(ResearchId researchId)
     {
-
-        if (!TryGetIncomeUnitType(researchId, out UnitType unitType))
+        if (!_incomeUnitsByResearchId.TryGetValue(researchId, out UnitType unitType))
             return;
 
         _sH._iM.IncreaseUpgrade(unitType);
     }
 
-    bool TryGetIncomeUnitType(int researchId, out UnitType unitType)
+    int GetCurrentLevel(ResearchId researchId)
     {
-        switch ((ResearchId)researchId)
+        return _researchLevels.TryGetValue(researchId, out int currentLevel) ? currentLevel : 0;
+    }
+
+    void SetCurrentLevel(ResearchId researchId, int value)
+    {
+        _researchLevels[researchId] = value;
+    }
+
+    void ApplyUpgrade(ResearchId researchId)
+    {
+        int currentLevel = GetCurrentLevel(researchId);
+        float modifier;
+
+        switch (researchId)
         {
             case ResearchId.FireUnit:
-            case ResearchId.FireCdr:
-            case ResearchId.FireEffect:
-                unitType = UnitType.Firefighter;
-                return true;
+                _sH._UI.ActivateUnit(UnitType.Firefighter, currentLevel);
+                ApplyIncomeUpgrade(researchId);
+                break;
 
             case ResearchId.RangerUnit:
-            case ResearchId.RangerCdr:
-            case ResearchId.RangerEffect:
-                unitType = UnitType.Ranger;
-                return true;
+                _sH._UI.ActivateUnit(UnitType.Ranger, currentLevel);
+                ApplyIncomeUpgrade(researchId);
+                break;
 
             case ResearchId.PoliceUnit:
-            case ResearchId.PoliceCdr:
-            case ResearchId.PoliceEffect:
-                unitType = UnitType.Police;
-                return true;
+                _sH._UI.ActivateUnit(UnitType.Police, currentLevel);
+                ApplyIncomeUpgrade(researchId);
+                break;
 
-            default:
-                unitType = default;
-                return false;
+            case ResearchId.FireCdr:
+                modifier = GetUnitModifierValue(UnitType.Firefighter, ModifierType.CDR, currentLevel);
+                _sH._gMods.SetResearchMod(ModifierType.CDR, UnitType.Firefighter, modifier);
+                ApplyIncomeUpgrade(researchId);
+                break;
+
+            case ResearchId.RangerCdr:
+                modifier = GetUnitModifierValue(UnitType.Ranger, ModifierType.CDR, currentLevel);
+                _sH._gMods.SetResearchMod(ModifierType.CDR, UnitType.Ranger, modifier);
+                ApplyIncomeUpgrade(researchId);
+                break;
+
+            case ResearchId.PoliceCdr:
+                modifier = GetUnitModifierValue(UnitType.Police, ModifierType.CDR, currentLevel);
+                _sH._gMods.SetResearchMod(ModifierType.CDR, UnitType.Police, modifier);
+                ApplyIncomeUpgrade(researchId);
+                break;
+
+            case ResearchId.FireEffect:
+                modifier = GetUnitModifierValue(UnitType.Firefighter, ModifierType.EFF, currentLevel);
+                _sH._gMods.SetResearchMod(ModifierType.EFF, UnitType.Firefighter, modifier);
+                ApplyIncomeUpgrade(researchId);
+                break;
+
+            case ResearchId.RangerEffect:
+                modifier = GetUnitModifierValue(UnitType.Ranger, ModifierType.EFF, currentLevel);
+                _sH._gMods.SetResearchMod(ModifierType.EFF, UnitType.Ranger, modifier);
+                ApplyIncomeUpgrade(researchId);
+                break;
+
+            case ResearchId.PoliceEffect:
+                modifier = GetUnitModifierValue(UnitType.Police, ModifierType.EFF, currentLevel);
+                _sH._gMods.SetResearchMod(ModifierType.EFF, UnitType.Police, modifier);
+                ApplyIncomeUpgrade(researchId);
+                break;
+
+            case ResearchId.ForestHealth:
+                modifier = GetHealthModifier(currentLevel);           
+                _sH._gMods.SetForestHealthMod(modifier);
+                break;
+
+            case ResearchId.Reputation:
+                modifier = GetReputationModifier(currentLevel);
+                _sH._gMods.SetReputationBonus(modifier);
+                break;
         }
     }
 
-    int GetCurrentLevel(int researchId)
+    float GetHealthModifier(int cLevel)
     {
-        return (ResearchId)researchId switch
+        return cLevel switch
         {
-            ResearchId.FireUnit => _funitc,
-            ResearchId.RangerUnit => _runitc,
-            ResearchId.PoliceUnit => _punitc,
-
-            ResearchId.FireCdr => _fcdrc,
-            ResearchId.RangerCdr => _rcdrc,
-            ResearchId.PoliceCdr => _pcdrc,
-            
-            ResearchId.FireEffect => _feffc,
-            ResearchId.PoliceEffect => _peffc,
-            ResearchId.RangerEffect => _reffc,
-            
-            ResearchId.ForestHealth => _forestc,
-            ResearchId.Reputation => _repc,
-            _ => 0
+            1 => 1.2f,
+            2 => 1.4f,
+            3 => 1.6f,
+            4 => 1.8f,
+            5 => 2f,
+            _ => 0f
         };
     }
 
-    void SetCurrentLevel(int researchId, int value)
+    float GetReputationModifier(int cLevel)
     {
-        switch ((ResearchId)researchId)
+        return cLevel switch
         {
-            case ResearchId.FireUnit:      _funitc  = value; break;
-            case ResearchId.RangerUnit:    _runitc  = value; break;
-            case ResearchId.PoliceUnit:    _punitc  = value; break;
-
-            case ResearchId.FireCdr:       _fcdrc   = value; break;
-            case ResearchId.RangerCdr:     _rcdrc   = value; break;
-            case ResearchId.PoliceCdr:     _pcdrc   = value; break;
-
-            case ResearchId.FireEffect:    _feffc   = value; break;
-            case ResearchId.RangerEffect:  _reffc   = value; break;
-            case ResearchId.PoliceEffect:  _peffc   = value; break;
-
-            case ResearchId.ForestHealth:  _forestc = value; break;
-            case ResearchId.Reputation:    _repc    = value; break;
-        }
+            1 => 1.1f,
+            2 => 1.2f,
+            3 => 1.3f,
+            4 => 1.4f,
+            5 => 1.5f,
+            _ => 0f
+        };
     }
 
-    TextMeshProUGUI GetProgressText(int researchId)
+    float GetUnitModifierValue(UnitType uType, ModifierType mType, int cLevel)
     {
-        return (ResearchId)researchId switch
+        return (uType, mType, cLevel) switch
         {
-            ResearchId.FireUnit => _funit,
-            ResearchId.RangerUnit => _runit,
-            ResearchId.PoliceUnit => _punit,
+            (UnitType.Firefighter, ModifierType.CDR, 1) => 0.8f,
+            (UnitType.Firefighter, ModifierType.CDR, 2) => 0.6f,
+            (UnitType.Firefighter, ModifierType.CDR, 3) => 0.4f,
+            (UnitType.Firefighter, ModifierType.EFF, 1) => 1.5f,
+            (UnitType.Firefighter, ModifierType.EFF, 2) => 2f,
+            (UnitType.Firefighter, ModifierType.EFF, 3) => 2.5f,
 
-            ResearchId.FireCdr => _fcdr,
-            ResearchId.RangerCdr => _rcdr,
-            ResearchId.PoliceCdr => _pcdr,
-            
-            ResearchId.FireEffect => _feff,
-            ResearchId.RangerEffect => _reff,
-            ResearchId.PoliceEffect => _peff,
-            
-            ResearchId.ForestHealth => _forest,
-            ResearchId.Reputation => _rep,
-            _ => null
+            (UnitType.Ranger, ModifierType.CDR, 1) => 0.9f,
+            (UnitType.Ranger, ModifierType.CDR, 2) => 0.7f,
+            (UnitType.Ranger, ModifierType.CDR, 3) => 0.5f,
+            (UnitType.Ranger, ModifierType.EFF, 1) => 1.2f,
+            (UnitType.Ranger, ModifierType.EFF, 2) => 1.8f,
+            (UnitType.Ranger, ModifierType.EFF, 3) => 2.1f,
+
+            (UnitType.Police, ModifierType.CDR, 1) => 0.9f,
+            (UnitType.Police, ModifierType.CDR, 2) => 0.8f,
+            (UnitType.Police, ModifierType.CDR, 3) => 0.7f,
+            (UnitType.Police, ModifierType.EFF, 1) => 1.5f,
+            (UnitType.Police, ModifierType.EFF, 2) => 2f,
+            (UnitType.Police, ModifierType.EFF, 3) => 2.75f,
+            _ => 0f
         };
     }
 }

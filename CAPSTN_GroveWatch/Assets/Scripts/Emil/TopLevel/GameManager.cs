@@ -29,6 +29,8 @@ public class GameManager : Singleton<GameManager>
     public bool _isPaused;
     public bool _inScreen;
 
+    public bool _isEndless;
+
     public int[] _incidents = new int[6];
     public event Action GameOver;
 
@@ -41,18 +43,13 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         InitValues();
-
-        UpdateProgress();
-        UpdateReputation();
-
-        _sH._UI.UpdateMoney();
     }
 
     void InitValues()
     {
+        _maxProgress = 50; //to be removed
         _maxReputation = 300;
         _reputation = _maxReputation * 0.9f;
-        _maxProgress = 30;
         _progress = 0;
 
         _money = 1000;
@@ -77,7 +74,6 @@ public class GameManager : Singleton<GameManager>
         _progress = 0;
     } 
 
-    //Method For Main Menu
     public void SetMaxProgress(float value)
     {
         _maxProgress = value;

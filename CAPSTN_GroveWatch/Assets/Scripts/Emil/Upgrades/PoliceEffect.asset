@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60fdded7697c3340a44edc9d792e9c5, type: 3}
   m_Name: PoliceEffect
   m_EditorClassIdentifier: 
-  _name: Better Police Officer Equipment
-  _desc: 'Increase Effectiveness Resolving
-
-    Police Officer Related Incidents'
+  _name: Improve PNP Equipment
+  _desc: "Increase Effectiveness \nResolving Police Officer\nRelated Incidents"
   _id: 9
   _cap: 3
-  _c1: 20000
-  _c2: 40000
-  _c3: 60000
+  _c1: 25000
+  _c2: 50000
+  _c3: 75000

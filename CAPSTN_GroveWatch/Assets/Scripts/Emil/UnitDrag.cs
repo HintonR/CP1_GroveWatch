@@ -108,12 +108,21 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if (_cooldownRoutine != null)
             StopCoroutine(_cooldownRoutine);
 
+        _cd.gameObject.SetActive(true);
         _cooldownRoutine = StartCoroutine(CooldownRoutine());
     }
 
     IEnumerator CooldownRoutine()
     {
-        float cooldown = _unitData != null ? _unitData.Cooldown : 0f;
+        float modifier = UnitData.Type switch
+        {
+            UnitType.Firefighter => _sH._gMods._researchFCDR,
+            UnitType.Ranger      => _sH._gMods._researchRCDR,
+            UnitType.Police      => _sH._gMods._researchPCDR,
+            _ => 0f
+        };
+
+        float cooldown = _unitData.Cooldown * modifier * _sH._gMods._policyCDR;
 
         if (cooldown <= 0f)
         {
@@ -121,20 +130,18 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             yield break;
         }
 
-        if (_cd != null)
-        {
-            _cd.fillAmount = 1f;
-            _cd.gameObject.SetActive(true);
-        }
-
         float elapsedTime = 0f;
 
         while (elapsedTime < cooldown)
         {
+            if (_sH._gM._isPaused || _sH._gM._inScreen)
+            {
+                yield return null;
+                continue;
+            }
             elapsedTime += Time.deltaTime;
 
-            if (_cd != null)
-                _cd.fillAmount = Mathf.Lerp(1f, 0f, elapsedTime / cooldown);
+            _cd.fillAmount = Mathf.Lerp(1f, 0f, elapsedTime / cooldown);
 
             yield return null;
         }
@@ -144,11 +151,8 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     void FinishCooldown()
     {
-        if (_cd != null)
-        {
-            _cd.fillAmount = 0f;
-            _cd.gameObject.SetActive(false);
-        }
+        _cd.fillAmount = 0f;
+        _cd.gameObject.SetActive(false);
 
         _cooldownRoutine = null;
         _isBusy = false;

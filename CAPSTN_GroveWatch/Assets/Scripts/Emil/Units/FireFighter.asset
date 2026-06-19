@@ -17,4 +17,4 @@ MonoBehaviour:
   _damage: 6
   _t1Inc: 2000
   _t2Inc: 3000
-  _t3Inc: 5000
+  _t3Inc: 4000

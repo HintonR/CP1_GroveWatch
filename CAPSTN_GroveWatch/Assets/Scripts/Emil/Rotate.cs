@@ -3,7 +3,7 @@ using UnityEngine;
 public class Rotate : MonoBehaviour
 {
     ServiceHub _sH;
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] float rotationSpeed;
 
     void Awake()
     {
@@ -12,7 +12,7 @@ public class Rotate : MonoBehaviour
 
     private void Update()
     {
-        if (!_sH._gM._isPaused)
+        if (!_sH._gM._isPaused && !_sH._gM._inScreen)
             transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
     }
 }

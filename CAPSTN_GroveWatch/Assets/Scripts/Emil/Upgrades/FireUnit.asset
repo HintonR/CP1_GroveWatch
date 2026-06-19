@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30133c972486d274c8a71a3eac2950c5, type: 3}
   m_Name: FireUnit
   m_EditorClassIdentifier: 
-  _name: Fire Fighter Recruitment
-  _desc: Gain An Additional Fire Fighter
+  _name: BFP Recruitment
+  _desc: 'Gain An Additional Dispatchable
+
+    Fire Fighter Unit'
   _id: 1
   _cap: 2
   _c1: 15000
-  _c2: 30000
+  _c2: 35000

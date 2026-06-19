@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60fdded7697c3340a44edc9d792e9c5, type: 3}
   m_Name: RangerEffect
   m_EditorClassIdentifier: 
-  _name: Better Forest Ranger Equipment
-  _desc: 'Increase Effectiveness Resolving
-
-    Forest Ranger Related Incidents'
+  _name: Improve PENR Equipment
+  _desc: "Increase Effectiveness \nResolving Forest Ranger \nRelated Incidents"
   _id: 8
   _cap: 3
   _c1: 10000
-  _c2: 20000
-  _c3: 30000
+  _c2: 25000
+  _c3: 50000

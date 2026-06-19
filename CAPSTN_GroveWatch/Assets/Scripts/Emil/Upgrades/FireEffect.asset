@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60fdded7697c3340a44edc9d792e9c5, type: 3}
   m_Name: FireEffect
   m_EditorClassIdentifier: 
-  _name: Better Fire Fighter Equipment
-  _desc: 'Increase Effectiveness Resolving
-
-    Fire Fighter Related Incidents'
+  _name: Improve BFP Equipment
+  _desc: "Increase Effectiveness \nResolving Fire Fighter \nRelated Incidents"
   _id: 7
   _cap: 3
   _c1: 15000
-  _c2: 30000
-  _c3: 50000
+  _c2: 45000
+  _c3: 75000

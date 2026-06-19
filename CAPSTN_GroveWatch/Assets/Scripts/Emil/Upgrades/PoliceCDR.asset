@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60fdded7697c3340a44edc9d792e9c5, type: 3}
   m_Name: PoliceCDR
   m_EditorClassIdentifier: 
-  _name: Better Police Stations
-  _desc: 'Improve Police Officer Response Time
-
-    (Reduce Cooldown)'
+  _name: Improve PNP Precincts
+  _desc: "Reduce Police Officer \nDispatch Cooldown"
   _id: 6
   _cap: 3
-  _c1: 5000
-  _c2: 10000
-  _c3: 20000
+  _c1: 10000
+  _c2: 25000
+  _c3: 50000

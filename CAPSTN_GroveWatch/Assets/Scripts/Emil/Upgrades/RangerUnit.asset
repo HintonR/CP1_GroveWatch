@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30133c972486d274c8a71a3eac2950c5, type: 3}
   m_Name: RangerUnit
   m_EditorClassIdentifier: 
-  _name: Forest Ranger Recruitment
-  _desc: Gain An Additional Forest Ranger
+  _name: PENR Recruitment
+  _desc: 'Gain An Additional  Dispatchable
+
+    Forest Ranger Unit'
   _id: 2
   _cap: 2
   _c1: 10000
-  _c2: 20000
+  _c2: 25000

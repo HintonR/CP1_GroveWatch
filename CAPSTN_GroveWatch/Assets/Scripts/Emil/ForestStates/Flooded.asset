@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Flood
   _stateType: 5
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: 438ea8141b6698d459c9043d05aa7498, type: 3}
   _requiredUnit: 0
   _availableSeason: 1
-  _health: 80
-  _chance: 20
-  _damage: 0.75
+  _health: 70
+  _chance: 30
+  _damage: 0.8

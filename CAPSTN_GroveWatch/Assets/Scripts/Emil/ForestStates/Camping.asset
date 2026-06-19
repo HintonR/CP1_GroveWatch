@@ -16,9 +16,9 @@ MonoBehaviour:
 
     Camping'
   _stateType: 2
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: 8785992651950bb47be1166a310e73a5, type: 3}
   _requiredUnit: 1
   _availableSeason: 0
-  _health: 40
-  _chance: 25
+  _health: 50
+  _chance: 20
   _damage: 0.5

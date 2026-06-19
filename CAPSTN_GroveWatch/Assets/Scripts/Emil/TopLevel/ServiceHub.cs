@@ -5,6 +5,8 @@ using UnityEngine;
 public class ServiceHub : Singleton<ServiceHub>
 {
     public GameManager _gM;
+    public AudioManager _aM;
+    public GameModifiers _gMods;
     public IncomeManager _iM;
     public QuadrantManager _qM;
 
@@ -15,5 +17,6 @@ public class ServiceHub : Singleton<ServiceHub>
     void Awake()
     {
         _gM = GameManager.Instance;
+        _aM = AudioManager.Instance;
     }
 }

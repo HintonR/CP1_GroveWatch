@@ -12,7 +12,7 @@ public class QuadrantManager : MonoBehaviour
     public event Action<int, bool> QuadrantEventStatusChanged;
     public event Action<int> ActiveQuadrantChanged;
 
-    int _activeQuadrant;
+    int _activeQuadrant = 1;
     public int ActiveQuadrant => _activeQuadrant;
     bool _q1HasEvent;
     bool _q2HasEvent;
@@ -41,9 +41,6 @@ public class QuadrantManager : MonoBehaviour
 
     void Update()
     {
-        if (_sH == null || _sH._time == null)
-            return;
-
         if (!_sH._time.CanSpawnForestEvent())
             return;
 
@@ -95,30 +92,14 @@ public class QuadrantManager : MonoBehaviour
 
     void SubscribeToForestEvents(List<Forest> forests)
     {
-        if (forests == null)
-            return;
-
         foreach (Forest forest in forests)
-        {
-            if (forest == null)
-                continue;
-
             forest.EventStatusChanged += HandleForestEventStatusChanged;
-        }
     }
 
     void UnsubscribeFromForestEvents(List<Forest> forests)
     {
-        if (forests == null)
-            return;
-
         foreach (Forest forest in forests)
-        {
-            if (forest == null)
-                continue;
-
             forest.EventStatusChanged -= HandleForestEventStatusChanged;
-        }
     }
 
     void HandleForestEventStatusChanged(Forest forest, bool hasEvent)
@@ -173,12 +154,9 @@ public class QuadrantManager : MonoBehaviour
 
     bool QuadrantHasEvent(List<Forest> forests)
     {
-        if (forests == null)
-            return false;
-
         foreach (Forest forest in forests)
         {
-            if (forest != null && forest.HasActiveEvent)
+            if (forest.HasActiveEvent)
                 return true;
         }
 
@@ -197,12 +175,9 @@ public class QuadrantManager : MonoBehaviour
 
     void AddUniqueForests(List<Forest> forests)
     {
-        if (forests == null)
-            return;
-
         foreach (Forest forest in forests)
         {
-            if (forest == null || _trackedForests.Contains(forest))
+            if (_trackedForests.Contains(forest))
                 continue;
 
             _trackedForests.Add(forest);
@@ -215,7 +190,7 @@ public class QuadrantManager : MonoBehaviour
 
         foreach (Forest forest in _trackedForests)
         {
-            if (forest != null && forest.IsReadyForEventSpawn())
+            if (forest.IsReadyForEventSpawn())
                 _readyForests.Add(forest);
         }
 

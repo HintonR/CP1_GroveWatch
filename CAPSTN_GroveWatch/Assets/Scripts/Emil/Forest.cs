@@ -7,6 +7,15 @@ using UnityEngine.UI;
 
 public class Forest : MonoBehaviour
 {
+    const float BASE_MAX_HEALTH = 20f;
+    const float DEATH_PENALTY = 35f;
+    const float RECOVERY_RATE = 1.25f;
+    const float RECOVERY_AMOUNT = 1.5f;
+    const float UNIT_DAMAGE_RATE = 0.5f;
+    const float EVENT_DAMAGE_RATE = 1.25f;
+    const float REP_BONUS = 15;
+    const float REP_DAMAGE_MOD = 1.25f;
+    
     static int _activeNegativeForestCount;
     public static int ActiveNegativeForestCount => _activeNegativeForestCount;
     public event Action<Forest, bool> EventStatusChanged;
@@ -19,14 +28,11 @@ public class Forest : MonoBehaviour
     [SerializeField] TextMeshProUGUI _eventName;
     [SerializeField] Image _eventLife, _forestLife;
     [SerializeField] Sprite _fire, _police, _ranger;
+    [SerializeField] SpriteRenderer _forestRenderer;
 
-    float _forestMaxHealth = 20f;
-    float _deathPenalty = 30f;
-    float _recoveryTickRate = 1.5f;
-    float _recoveryAmount = 1f;
-    float _damageTickRate = 0.5f;
+    float _forestHealth;
+    float _forestMaxHealth;
 
-    float _repBonus = 10;
 
     ForestStateData _currentState;
     public ForestStateData CurrentState => _currentState;
@@ -42,13 +48,17 @@ public class Forest : MonoBehaviour
     float _currentEventHealth;
     float _currentEventMaxHealth;
 
-    float _forestHealth;
 
     float _stateTimer;
     float _changeTime;
 
     bool _countsAsActiveNegative;
     UnitDrag _resolvingUnitDrag;
+
+    void Awake()
+    {
+        _forestRenderer = GetComponent<SpriteRenderer>();
+    }
 
     void Start()
     {
@@ -107,13 +117,20 @@ public class Forest : MonoBehaviour
         {
             while (_currentState == nfs && _currentEventHealth > 0f && _forestHealth > 0f)
             {
-                _sH._gM.ChangeReputation(-nfs.Damage);
+
+                if (_sH._gM._isPaused || _sH._gM._inScreen)
+                {
+                    yield return null;
+                    continue;
+                }
+
+                _sH._gM.ChangeReputation(-nfs.Damage * REP_DAMAGE_MOD);
                 DamageForestHealth(-nfs.Damage);
 
                 if (_currentState == _deadState)
                     yield break;
 
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(EVENT_DAMAGE_RATE);
             }
         }
 
@@ -131,11 +148,14 @@ public class Forest : MonoBehaviour
 
     void ResetForestHealth()
     {
+        _forestMaxHealth = BASE_MAX_HEALTH * _sH._gMods._health;
         _forestHealth = _forestMaxHealth;
     }
 
     void TrackEventSpawnTimer()
     {
+        if (_sH._gM._isPaused || _sH._gM._inScreen) return;
+
         if (_currentState.StateType != ForestState.Idle) return;
 
         _stateTimer += Time.deltaTime;
@@ -143,10 +163,10 @@ public class Forest : MonoBehaviour
 
     public bool IsReadyForEventSpawn()
     {
-        if (_sH == null || _sH._time == null)
+        if (_sH._gM._isPaused || _sH._gM._inScreen)
             return false;
 
-        if (_currentState == null || _currentState.StateType != ForestState.Idle)
+        if (_currentState.StateType != ForestState.Idle)
             return false;
 
         return _stateTimer >= _changeTime;
@@ -154,6 +174,9 @@ public class Forest : MonoBehaviour
 
     public bool TrySpawnEvent()
     {
+        if (_sH._gM._isPaused || _sH._gM._inScreen)
+            return false;
+
         if (!IsReadyForEventSpawn())
             return false;
 
@@ -212,6 +235,7 @@ public class Forest : MonoBehaviour
         _currentState = data;
         NotifyEventStatusChanged(hadActiveEvent);
         _eventName.text = _currentState.Name;
+        SetForestSprite();
         SetEventSprite();
 
         if (data is NegativeForestState nfs)
@@ -266,22 +290,39 @@ public class Forest : MonoBehaviour
             return false;
 
         _isResolving = true;
+        _sH._aM.PlaySFX(SFX.Dropped);
         _resolvingUnitDrag = unitDrag;
         _resolveRoutine = StartCoroutine(ResolutionRoutine(unit, unitDrag));
         return true;
     }
 
     IEnumerator ResolutionRoutine(UnitData unit, UnitDrag unitDrag)
-    {
+    {   
         while (_currentState is NegativeForestState && _currentEventHealth > 0f)
         {
-            _currentEventHealth = Mathf.Max(0f, _currentEventHealth - unit.Damage);
+            if (_sH._gM._isPaused || _sH._gM._inScreen)
+            {
+                yield return null;
+                continue;
+            }
+
+            float modifier = unit.Type switch
+            {
+                UnitType.Firefighter => _sH._gMods._researchFEFF,
+                UnitType.Ranger      => _sH._gMods._researchREFF,
+                UnitType.Police      => _sH._gMods._researchPEFF,
+                _ => 0f  
+            };    
+
+            float dmg = unit.Damage * modifier * _sH._gMods._policyEFF;
+
+            _currentEventHealth = Mathf.Max(0f, _currentEventHealth - dmg);
             UpdateLifeUI(true, _eventLife);
 
             if (_currentEventHealth <= 0f)
                 break;
 
-            yield return new WaitForSeconds(_damageTickRate);
+            yield return new WaitForSeconds(UNIT_DAMAGE_RATE);
         }
 
         _resolveRoutine = null;
@@ -307,7 +348,9 @@ public class Forest : MonoBehaviour
         StopStateEffects();
         SetState(_baseState);
         
-        _sH._gM.ChangeReputation(_repBonus);
+        var modifiedBonus = REP_BONUS * _sH._gMods._rep;
+        _sH._aM.PlaySFX(SFX.Success);
+        _sH._gM.ChangeReputation(modifiedBonus);
         _sH._gM.ChangeProgress(1f);
         _sH._gM.ChangeMoney(_sH._iM.GetIncomeForUnit(resolvedUnit));
 
@@ -326,16 +369,23 @@ public class Forest : MonoBehaviour
         StopResolutionRoutine();
         ClearActiveResolution(false, true);
         SetState(_deadState);
-        _sH._gM.ChangeReputation(-_deathPenalty);
+        _sH._gM.ChangeReputation(-DEATH_PENALTY);
+        _sH._aM.PlaySFX(SFX.Deforestation);
     }
 
     IEnumerator RecoveryRoutine()
     {
         while (_currentState == _deadState && _forestHealth < _forestMaxHealth)
         {
-            _forestHealth = Mathf.Min(_forestMaxHealth, _forestHealth + _recoveryAmount);
+            if (_sH._gM._isPaused || _sH._gM._inScreen)
+            {
+                yield return null;
+                continue;
+            }
+
+            _forestHealth = Mathf.Min(_forestMaxHealth, _forestHealth + RECOVERY_AMOUNT);
             UpdateLifeUI(true, _forestLife);
-            yield return new WaitForSeconds(_recoveryTickRate);
+            yield return new WaitForSeconds(RECOVERY_RATE);
         }
 
         _recoveryRoutine = null;
@@ -453,5 +503,10 @@ public class Forest : MonoBehaviour
                 _eventLife.sprite = _police;
                 break;
         }
+    }
+
+    void SetForestSprite()
+    {
+        _forestRenderer.sprite = _currentState.Image;
     }
 }

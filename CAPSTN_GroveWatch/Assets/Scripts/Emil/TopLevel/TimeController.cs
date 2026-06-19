@@ -76,16 +76,19 @@ public class TimeController : MonoBehaviour
     {
         while (true)
         {
-            if (_sH._gM._isPaused)
-            {
+            while (_sH._gM._isPaused || _sH._gM._inScreen)            
                 yield return null;
-                continue;
-            }
 
             yield return new WaitForSeconds(TIME_SPEED);
+
+            if (_sH._gM._isPaused || _sH._gM._inScreen)
+                continue;
+
             _mCounter++;
             UpdateMonth();
             UpdateSeason();
+
+            
         }
     }
 
@@ -116,7 +119,7 @@ public class TimeController : MonoBehaviour
 
     void UpdateSeason()
     {
-        _isWet = _mCounter >= 6 && _mCounter <= 11;
+        _isWet = _mCounter >= 5 && _mCounter <= 10;
         _sH._UI.UpdateSeason(_isWet);
     }
 

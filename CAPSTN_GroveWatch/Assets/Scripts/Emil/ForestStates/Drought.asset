@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Drought
   _stateType: 3
-  _image: {fileID: 0}
+  _image: {fileID: 21300000, guid: 8a41f13d3d34bdd48b6c588555811163, type: 3}
   _requiredUnit: 0
   _availableSeason: 0
-  _health: 60
-  _chance: 20
-  _damage: 0.9
+  _health: 70
+  _chance: 35
+  _damage: 0.8

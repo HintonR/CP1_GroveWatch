@@ -15,6 +15,6 @@ MonoBehaviour:
   _type: 1
   _cooldown: 10
   _damage: 7
-  _t1Inc: 2000
+  _t1Inc: 2500
   _t2Inc: 4000
-  _t3Inc: 6000
+  _t3Inc: 5500

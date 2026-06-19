@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30133c972486d274c8a71a3eac2950c5, type: 3}
   m_Name: PoliceUnit
   m_EditorClassIdentifier: 
-  _name: Police Officer Recruitment
-  _desc: Gain An Additional Police Officer
+  _name: PNP Recruitment
+  _desc: 'Gain An Additional Dispatchable
+
+    Police Officer Unit'
   _id: 3
   _cap: 2
   _c1: 20000
-  _c2: 40000
+  _c2: 50000

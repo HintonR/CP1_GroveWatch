@@ -1,8 +1,18 @@
+using EasyTransition;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+
+    const float Q_LENGTH = 75;
+    const float M_LENGTH = 200;
+    const float L_LENGTH = 500;
+    const float E_LENGTH = 999999999;
+    ServiceHub _sH;
+
+    [SerializeField] TransitionSettings _transition;
+
     [Header("Panels")]
     public GameObject mainMenuPanel;
     public GameObject gameModePanel;
@@ -16,72 +26,93 @@ public class MainMenu : MonoBehaviour
     [Header("Game Mode Buttons")]
     public Button classicButton;
     public Button endlessButton;
+    public Button backMain;
 
     [Header("Duration Buttons")]
     public Button quickButton;
     public Button mediumButton;
     public Button longButton;
+    public Button backMode;
 
-    
-    [HideInInspector]
-    public float chosenMaxProgress;
-
-    private void Start()
+    void Awake()
     {
-   
-        newGameButton.onClick.AddListener(ShowGameModeMenu);
-        quitButton.onClick.AddListener(QuitGame);
+        _sH = ServiceHub.Instance;
+    }
 
+    void Start()
+    {
+        newGameButton.onClick.AddListener(ShowGameModeMenu);
+        newGameButton.onClick.AddListener(PlayGenericSFX);
+
+        quitButton.onClick.AddListener(QuitGame);
        
         classicButton.onClick.AddListener(ShowDurationMenu);
-
+        classicButton.onClick.AddListener(PlayGenericSFX);
         
-        quickButton.onClick.AddListener(() => OnDurationSelected("Quick", 30f));
-        mediumButton.onClick.AddListener(() => OnDurationSelected("Medium", 100f));
-        longButton.onClick.AddListener(() => OnDurationSelected("Long", 150f));
+        endlessButton.onClick.AddListener(() => OnDurationSelected(E_LENGTH, true));
+ 
+        quickButton.onClick.AddListener(() => OnDurationSelected(Q_LENGTH));
+        mediumButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH));
+        longButton.onClick.AddListener(() => OnDurationSelected(L_LENGTH));
 
-        
+        backMain.onClick.AddListener(ShowMainMenu);
+        backMain.onClick.AddListener(PlayBackSFX);
+        backMode.onClick.AddListener(ShowGameModeMenu);
+        backMode.onClick.AddListener(PlayBackSFX);
+   
         ShowMainMenu();
     }
 
-  
+    void PlayGenericSFX()
+    {
+        _sH._aM.PlaySFX(SFX.Generic);
+    }
 
-    public void ShowMainMenu()
+    void PlayBackSFX()
+    {
+        _sH._aM.PlaySFX(SFX.Back);
+    }
+
+    void ShowMainMenu()
     {
         mainMenuPanel.SetActive(true);
         gameModePanel.SetActive(false);
         durationPanel.SetActive(false);
     }
 
-    public void ShowGameModeMenu()
+    void ShowGameModeMenu()
     {
         mainMenuPanel.SetActive(false);
         gameModePanel.SetActive(true);
         durationPanel.SetActive(false);
     }
 
-    public void ShowDurationMenu()
+    void ShowDurationMenu()
     {
         mainMenuPanel.SetActive(false);
         gameModePanel.SetActive(false);
         durationPanel.SetActive(true);
     }
 
-    
-
-    private void OnDurationSelected(string durationName, float progressValue)
+    void OnDurationSelected(float progressValue, bool p)
     {
-       
-        chosenMaxProgress = progressValue;
-
-        Debug.Log(durationName + " mode selected! Logic ready. Value stored: " + chosenMaxProgress);
-
-       
+        _sH._aM.PlaySFX(SFX.Generic);
+        _sH._gM._isEndless = true;
+        _sH._gM.SetMaxProgress(progressValue);
+        var _tM = TransitionManager.Instance();
+        _tM.Transition("Main", _transition, 0.2f);
     }
 
-    public void QuitGame()
+    void OnDurationSelected(float progressValue)
     {
-        Debug.Log("Player Has Quit The Game");
+        _sH._aM.PlaySFX(SFX.Generic);
+        _sH._gM.SetMaxProgress(progressValue);
+        var _tM = TransitionManager.Instance();
+        _tM.Transition("Main", _transition, 0.2f);
+    }
+
+    void QuitGame()
+    {
         Application.Quit();
     }
 }
