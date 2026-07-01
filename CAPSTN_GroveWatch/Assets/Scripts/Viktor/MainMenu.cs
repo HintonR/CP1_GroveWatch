@@ -1,5 +1,6 @@
 using EasyTransition;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
@@ -33,6 +34,9 @@ public class MainMenu : MonoBehaviour
     public Button mediumButton;
     public Button longButton;
     public Button backMode;
+
+    //cutscene here
+    [SerializeField] private CutsceneData cutsceneToPlay;
 
     void Awake()
     {
@@ -99,16 +103,22 @@ public class MainMenu : MonoBehaviour
         _sH._aM.PlaySFX(SFX.Generic);
         _sH._gM._isEndless = true;
         _sH._gM.SetMaxProgress(progressValue);
+
+        //cutscene
         var _tM = TransitionManager.Instance();
-        _tM.Transition("Main", _transition, 0.2f);
+        _tM.Transition("TutorialScene", _transition, 0.2f);
+        CutsceneState.SelectedCutscene = cutsceneToPlay;
     }
 
     void OnDurationSelected(float progressValue)
     {
         _sH._aM.PlaySFX(SFX.Generic);
         _sH._gM.SetMaxProgress(progressValue);
+
+        //cutscene
         var _tM = TransitionManager.Instance();
-        _tM.Transition("Main", _transition, 0.2f);
+        _tM.Transition("TutorialScene", _transition, 0.2f);
+        CutsceneState.SelectedCutscene = cutsceneToPlay;
     }
 
     void QuitGame()

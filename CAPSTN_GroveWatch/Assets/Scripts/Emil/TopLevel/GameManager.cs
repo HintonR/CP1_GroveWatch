@@ -1,3 +1,4 @@
+using EasyTransition;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,12 @@ public enum IncidentType
     Camping,
     Logging,
     Construction
+}
+
+public enum GameOverReason
+{
+    Reputation,
+    Debt
 }
 
 public class GameManager : Singleton<GameManager>
@@ -33,6 +40,11 @@ public class GameManager : Singleton<GameManager>
 
     public int[] _incidents = new int[6];
     public event Action GameOver;
+
+    [SerializeField] private int debtThreshold = -50000;
+
+    public static GameOverReason LastGameOverReason = GameOverReason.Reputation;
+    private bool _gameOverTriggered = false;
 
     void Awake()
     {
@@ -92,20 +104,49 @@ public class GameManager : Singleton<GameManager>
         _reputation = Mathf.Min(_reputation, _maxReputation);
         UpdateReputation();
 
-        if (_reputation <= 0)
-            GameOver?.Invoke();
+        //if (_reputation <= 0)
+        //    GameOver?.Invoke();
+        if (_reputation <= 0 && !_gameOverTriggered) //slight mods here
+        {
+            LastGameOverReason = GameOverReason.Reputation;
+            TriggerGameOver();
+        }
+    }
+
+    private void TriggerGameOver()
+    {
+        if (_gameOverTriggered) return;
+        _gameOverTriggered = true;
+        GameOver?.Invoke();
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("CutsceneScene"); //find out how to put in a transition without using inspector :(
+        var _tM = TransitionManager.Instance();
+        var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush"); //hacky, the entire transitions folder got copied to Resources
+        _tM.Transition("CutsceneScene", transitionSetting, 0.2f);
     }
 
     public void ChangeMoney(int value)
     {
         _money += value;
         _sH._UI.UpdateMoney();
+        CheckDebt();
+    }
+
+    public void CheckDebt()
+    {
+        if (_gameOverTriggered) return;
+        if (_money <= debtThreshold)
+        {
+            LastGameOverReason = GameOverReason.Debt;
+            TriggerGameOver();
+        }
     }
 
     public void IncreaseIncident(IncidentType i)
     {
         _incidents[(int)i]++;
     }
+
+
     //Method For Game Over
     public IncidentType GetDominantIncident()
     {

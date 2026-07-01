@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3a7bbaa64130c4781c9d04ef9e1b1e, type: 3}
+  m_Name: Intro
+  m_EditorClassIdentifier: 
+  cutsceneName: Intro
+  lines:
+  - image: {fileID: 0}
+    title: 
+    text: You are a PENR Dispatcher assigned to the city of Minglanilla, Cebu.
+    changeMusic: 1
+    music: 0
+  - image: {fileID: 0}
+    title: 
+    text: "Minglanilla is a city nestled deep within one of the region\u2019s last
+      remaining forested frontiers."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 0}
+    title: 
+    text: Illegal loggers close in, forest fires rage unchecked, and environmental
+      pressures mount.
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 93200a5ec75906c4998456fede0bb60d, type: 3}
+    title: 
+    text: You have been tasked to watch over its forests.
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 93200a5ec75906c4998456fede0bb60d, type: 3}
+    title: 
+    text: You are the final line of defense. Welcome to GroveWatch!
+    changeMusic: 0
+    music: 0
+  onComplete: 0
+  nextSceneName: Main
+  playMode: 0
