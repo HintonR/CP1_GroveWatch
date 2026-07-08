@@ -1,0 +1,176 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3a7bbaa64130c4781c9d04ef9e1b1e, type: 3}
+  m_Name: Tutorial
+  m_EditorClassIdentifier: 
+  cutsceneName: Intro
+  lines:
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Welcome Recruit
+    text: 'This will be a brief breakdown of
+
+      Gameplay Systems and Mechanics
+
+      as
+      you try to save the Lapad Forest.'
+    changeMusic: 1
+    music: 2
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Heads Up Display (HUD)
+    text: "In the gameplay screen, there are a variety of\ninteractable components
+      that will aid you in \nthe successful protection of Lapad Forest."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Progress and Reputation
+    text: 'In the top center of the screen, there are two
+
+      bars. The blue bar
+      corresponds to the DENR''s
+
+      reputation, while the yellow bar corresponds
+      to
+
+      the progress towards the DENR''s objective quota.'
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Reputation
+    text: "Reputation will dimish over time while active incidents spawn or are being
+      resolved. You will also be penalized for attempting to send the wrong unit
+      to an Incident. \nPolicy Choices may also affect Reputation."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Reputation
+    text: "When the Reputation bar is empty, the game will be \nover and depending
+      on what incidents were failed, \nYou  will see the devastating outcomes of
+      your choices."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Progress
+    text: "Each successful resolution of an incident will \nincrease the progress
+      bar. Once the progress bar\nis full, your tenure at the PENRO in Cebu will
+      \nbe over and considered a success!"
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Time Management
+    text: "In the top left are Time Indicators. As months \nand years go by, the
+      amount of incidents you will \nneed to mitigate will increase. Seasons \nwill
+      dictate which incidents will spawn."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Time Management
+    text: "Furthermore, pressing [Space] or the Play/Pause\nIcon on the Time Dial, 
+      pauses gameplay. While \npaused, you are free to check different sectors and
+      \ndeploy units; but you will need to unpause to \ncontinue resolving incidents."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Quadrants
+    text: 'The Lapad Forest is vast and we have divided it
+
+      into four sectors.
+      On the right side are the quadrants
+
+      that you will be overseeing. You
+      may click on a quadrant
+
+      to move there or use [1] [2] [3] [4].'
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Deployment
+    text: "In the lower center is your Dispatch Hotbar. In the\nbeginning, you will
+      only have a handful of units to \ndeploy. You will be able to upgrade and increase
+      your forces via the Research Screen as the budget allows."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Deployment
+    text: "Incident Markers are color coded with their \nrespective unit type. Drag
+      an available unit onto \nan active incident to begin resolving. \nDoing so
+      will make the unit unavailable."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Deployment
+    text: "After a successful dispatch, the budget will decrease\nbased on the unit's
+      respective income and the unit \nwill go on cooldown making them further unavailable
+      \nuntil they fully recuperate."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Deployment
+    text: 'Ignoring an incident or failing to resolve it on time
+
+      will result
+      in a large reputation penalty while also putting
+
+      the unit on cooldown.
+      Be wise about your deployment!'
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Budget and Research
+    text: "In the lower left is the Budget Display and Research \nButton. As budget
+      increases or decreases, floating \nbudget numbers will signify changes in the
+      Budget."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Research Screen
+    text: 'Pressing the Green Research Button or [Tab] will bring
+
+      up the Research
+      Screen. Here you will be able to pick
+
+      from a variety of research and
+      purchase them.'
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Debt
+    text: "You may also incur debt; however, if at any point \nyou incur a debt greater
+      than 50000php, you will \nbe reprimanded and your tenure at the PENRO \nwill
+      immediately cease."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Policies
+    text: 'Every 6 Months, your secretary will inform you about
+
+      political
+      events happening in the surrounding area.
+
+      You will need to determine
+      the best action to take.'
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: Pause Menu
+    text: "If at any point you want to change audio settings\nor quit the game, you
+      may press the Orange Gear Button \nor [Esc] to view the Pause Menu."
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    title: End Briefing
+    text: "Good luck new recruit! \nMay the will of the Filipino People be your guiding
+      hand! You may now start!"
+    changeMusic: 0
+    music: 0
+  onComplete: 0
+  nextSceneName: Intro
+  playMode: 1

@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
+    const int QUATERLY_BUDGET = 10000;
     const float TIME_SPEED = 20;
     
     ServiceHub _sH;
 
     [SerializeField] int _baseActiveEvents = 1;
     [SerializeField] int _difficultyScaler = 2;
+    [SerializeField] UnitData _f, _r, _p;
 
     string[] _months = { "January", "February", "March", "April", 
                          "May", "June", "July", "August", 
@@ -33,11 +35,10 @@ public class TimeController : MonoBehaviour
     }
 
     bool _isWet;
+    public bool IsWet => _isWet;
     public Season CurrentSeason => _isWet ? Season.Wet : Season.Dry;
 
     Coroutine _timeRoutine;
-
-    public event Action NewPolicy;
 
     void Awake()
     {
@@ -87,19 +88,31 @@ public class TimeController : MonoBehaviour
             _mCounter++;
             UpdateMonth();
             UpdateSeason();
-
-            
         }
     }
 
     void UpdateMonth()
-    {
+    {        
+        if (_mCounter % 3 == 0)
+        {
+            int finc = _sH._iM.GetIncomeForUnit(_f);
+            int rinc = _sH._iM.GetIncomeForUnit(_r);
+            int pinc = _sH._iM.GetIncomeForUnit(_p);
+            
+            finc *= _dCounter;
+            rinc *= _dCounter;
+            pinc *= _dCounter;
+
+            int deploymentIncentive = finc + rinc + pinc;
+
+            _sH._gM.ChangeMoney(QUATERLY_BUDGET + deploymentIncentive);
+        }
 
         if (_mCounter % 4 == 0)
             _dCounter++;
 
         if (_mCounter % 6 == 0)
-            NewPolicy?.Invoke();
+            _sH._UI.OpenPolicyScreen();
 
         if (_mCounter > 12)
         {

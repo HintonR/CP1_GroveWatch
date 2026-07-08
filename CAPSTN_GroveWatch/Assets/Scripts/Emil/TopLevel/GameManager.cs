@@ -39,12 +39,12 @@ public class GameManager : Singleton<GameManager>
     public bool _isEndless;
 
     public int[] _incidents = new int[6];
-    public event Action GameOver;
+
 
     [SerializeField] private int debtThreshold = -50000;
 
     public static GameOverReason LastGameOverReason = GameOverReason.Reputation;
-    private bool _gameOverTriggered = false;
+    public bool _gameOverTriggered = false;
 
     void Awake()
     {
@@ -61,10 +61,10 @@ public class GameManager : Singleton<GameManager>
     {
         _maxProgress = 50; //to be removed
         _maxReputation = 300;
-        _reputation = _maxReputation * 0.9f;
+        _reputation = _maxReputation * 0.8f;
         _progress = 0;
 
-        _money = 1000;
+        _money = 5000;
     }
 
     void UpdateProgress()
@@ -80,11 +80,6 @@ public class GameManager : Singleton<GameManager>
         var repCo = _sH._UI.RepFill;
         _sH._UI.UpdateBar(_reputation, _maxReputation, repBar, repCo);
     }
-
-    public void ResetProgress()
-    {
-        _progress = 0;
-    } 
 
     public void SetMaxProgress(float value)
     {
@@ -104,8 +99,6 @@ public class GameManager : Singleton<GameManager>
         _reputation = Mathf.Min(_reputation, _maxReputation);
         UpdateReputation();
 
-        //if (_reputation <= 0)
-        //    GameOver?.Invoke();
         if (_reputation <= 0 && !_gameOverTriggered) //slight mods here
         {
             LastGameOverReason = GameOverReason.Reputation;
@@ -116,9 +109,8 @@ public class GameManager : Singleton<GameManager>
     private void TriggerGameOver()
     {
         if (_gameOverTriggered) return;
+        
         _gameOverTriggered = true;
-        GameOver?.Invoke();
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("CutsceneScene"); //find out how to put in a transition without using inspector :(
         var _tM = TransitionManager.Instance();
         var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush"); //hacky, the entire transitions folder got copied to Resources
         _tM.Transition("CutsceneScene", transitionSetting, 0.2f);
@@ -126,8 +118,14 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeMoney(int value)
     {
+        _sH._UI.SpawnFloatingMoney(value);
+        
+        if (value > 0)
+            _sH._aM.PlaySFX(SFX.Money);
+
         _money += value;
         _sH._UI.UpdateMoney();
+
         CheckDebt();
     }
 

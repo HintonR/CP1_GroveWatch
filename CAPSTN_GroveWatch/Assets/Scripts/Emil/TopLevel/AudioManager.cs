@@ -24,7 +24,8 @@ public enum SFX
     Switch,
     Deforestation,
     Policy,
-    Success
+    Success,
+    Money
 }
 
 public class AudioManager : Singleton<AudioManager>
@@ -39,7 +40,9 @@ public class AudioManager : Singleton<AudioManager>
 
     AudioClip _titleBGM, _gameplayBGM, _researchBGM, _policyBGM, _gameoverBGM, _victoryBGM;
 
-    AudioClip _runeBTN, _purchaseBTN, _researchBTN, _backBTN, _genericBTN, _invalidSFX, _textSFX, _droppedSFX, _switchSFX, _deforSFX, _policySFX, _successSFX;
+    AudioClip _runeBTN, _purchaseBTN, _researchBTN, _backBTN, _genericBTN, 
+            _invalidSFX, _textSFX, _droppedSFX, _switchSFX, _deforSFX, 
+            _policySFX, _successSFX, _moneySFX;
 
     Music _current;
     Coroutine _currentCrossfade;
@@ -64,12 +67,12 @@ public class AudioManager : Singleton<AudioManager>
         _sfx.playOnAwake = false;
 
         //ADD RESOURCES HERE
-        _titleBGM     = Resources.Load<AudioClip>("Audio/Title"); //To Add New
+        _titleBGM     = Resources.Load<AudioClip>("Audio/TitleScreen"); //To Add New
         _gameplayBGM  = Resources.Load<AudioClip>("Audio/GameplayBGM");
         _researchBGM  = Resources.Load<AudioClip>("Audio/UpgradesBGM");
         _policyBGM    = Resources.Load<AudioClip>("Audio/PolicyBGM");
         _gameoverBGM  = Resources.Load<AudioClip>("Audio/GameOverBGM");
-        _victoryBGM   = Resources.Load<AudioClip>("Audio/Title"); //To Add New
+        _victoryBGM   = Resources.Load<AudioClip>("Audio/TitleScreen"); //To Add New
         
         _runeBTN      = Resources.Load<AudioClip>("Audio/Rune"); 
         _purchaseBTN  = Resources.Load<AudioClip>("Audio/Purchase");
@@ -83,6 +86,7 @@ public class AudioManager : Singleton<AudioManager>
         _deforSFX     = Resources.Load<AudioClip>("Audio/Deforestation");
         _policySFX    = Resources.Load<AudioClip>("Audio/PolicySFX");
         _successSFX   = Resources.Load<AudioClip>("Audio/Success");
+        _moneySFX     = Resources.Load<AudioClip>("Audio/Money");
 
         PreloadMusic();
     }
@@ -168,12 +172,13 @@ public class AudioManager : Singleton<AudioManager>
             case SFX.Back:          _sfx.PlayOneShot(_backBTN,      0.4f); break;
             case SFX.Generic:       _sfx.PlayOneShot(_genericBTN,   0.3f); break;
             case SFX.Invalid:       _sfx.PlayOneShot(_invalidSFX,  0.35f); break;
-            case SFX.Text:          _sfx.PlayOneShot(_textSFX,     0.25f); break;
+            case SFX.Text:          _sfx.PlayOneShot(_textSFX,     0.08f); break;
             case SFX.Dropped:       _sfx.PlayOneShot(_droppedSFX,  0.25f); break;
-            case SFX.Switch:        _sfx.PlayOneShot(_switchSFX,   0.09f); break;
+            case SFX.Switch:        _sfx.PlayOneShot(_switchSFX,   0.08f); break;
             case SFX.Deforestation: _sfx.PlayOneShot(_deforSFX,     0.2f); break;
             case SFX.Policy:        _sfx.PlayOneShot(_policySFX,    0.5f); break;
             case SFX.Success:       _sfx.PlayOneShot(_successSFX,   0.3f); break;
+            case SFX.Money:         _sfx.PlayOneShot(_moneySFX,    0.15f); break;
         }
         _sfx.pitch = 1.0f;
     }

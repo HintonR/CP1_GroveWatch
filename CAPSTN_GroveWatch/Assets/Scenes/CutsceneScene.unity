@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -383,7 +384,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -398,12 +399,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    m_Quality: 3
-    m_FrameInfluence: 0.1
-    m_JitterScale: 1
-    m_MipBias: 0
-    m_VarianceClampScale: 0.9
-    m_ContrastAdaptiveSharpening: 0
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &528434054
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,8 +476,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -122.1, y: 77.6}
-  m_SizeDelta: {x: 41.52, y: 68}
+  m_AnchoredPosition: {x: -174.3, y: 43.9}
+  m_SizeDelta: {x: 49, y: 87}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &542511010
 MonoBehaviour:
@@ -588,6 +589,9 @@ MonoBehaviour:
   panelImage: {fileID: 0}
   dialoguePanel: {fileID: 0}
   navigationRow: {fileID: 0}
+  introCutscene: {fileID: 0}
+  _panel: {fileID: 0}
+  _tape: {fileID: 0}
   charactersPerSecond: 40
   fadeOutDuration: 0.35
   fadeInDuration: 0.35
@@ -993,7 +997,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1198768897}
-  - {fileID: 214518616}
   - {fileID: 946876427}
   - {fileID: 1807648728}
+  - {fileID: 1198768897}
+  - {fileID: 214518616}

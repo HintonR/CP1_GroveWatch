@@ -13,11 +13,15 @@ public class UIController : MonoBehaviour
 
     [SerializeField] Image _repBar, _progBar, _season;
     [SerializeField] TextMeshProUGUI _money, _month, _year;
-    [SerializeField] Sprite _dry, _wet, _dryBG, _wetBG;
+    [SerializeField] Sprite _dry, _wet, _dryBG, _wetBG, _pausedBG;
     [SerializeField] SpriteRenderer _bg;
-    [SerializeField] GameObject _researchScreen;
+    [SerializeField] GameObject _researchScreen, _policyScreen, _pauseMenu, _pauseVolume;
     [SerializeField] Button _play, _pause;
     [SerializeField] GameObject _funit1, _funit2, _runit1, _runit2, _punit1, _punit2;
+
+    [SerializeField] Animator _left, _top, _bottom, _right;
+
+    [SerializeField] RectTransform _fbn;
 
     Coroutine _repFill, _progFill;
 
@@ -50,18 +54,74 @@ public class UIController : MonoBehaviour
                 PauseGameplay();
         }
 
+        if (_sH._gM._inScreen)
+            return;
+
+        if (TransitionManager.Instance().isBusy)
+            return;
+
         if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (_sH._gM._inScreen)
-                CloseResearch();
-            else
                 OpenResearch();
-        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+                OpenPauseMenu();
     }
 
     public void UpdateMoney()
     {
         _money.text = _sH._gM._money + "php";
+    }
+
+    public void SpawnFloatingMoney(int value)
+    {
+        var floatingMoney = new GameObject("Floating Money", typeof(RectTransform), typeof(TextMeshProUGUI), typeof(CanvasGroup));
+        var rectTransform = floatingMoney.GetComponent<RectTransform>();
+        var label = floatingMoney.GetComponent<TextMeshProUGUI>();
+        var canvasGroup = floatingMoney.GetComponent<CanvasGroup>();
+
+        rectTransform.SetParent(_fbn, false);
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        rectTransform.pivot = new Vector2(0.5f, 0.5f);
+        rectTransform.sizeDelta = new Vector2(200f, 50f);
+        rectTransform.anchoredPosition = Vector2.zero;
+        rectTransform.localScale = Vector3.one;
+
+        label.text = value >= 0 ? $"+{value}php" : $"-{Mathf.Abs(value)}php";
+        if (value == 0)
+            label.text = string.Empty;
+        
+        label.font = _money.font;
+        label.fontSharedMaterial = _money.fontSharedMaterial;
+        label.fontSize = _money.fontSize;
+        label.color = value >= 0 ? new Color(0.35f, 0.85f, 0.35f, 1f) : new Color(0.95f, 0.35f, 0.35f, 1f);
+        label.alignment = TMPro.TextAlignmentOptions.Left;
+        label.raycastTarget = false;
+
+        canvasGroup.alpha = 1f;
+
+        StartCoroutine(AnimateFloatingMoney(rectTransform, canvasGroup, value >= 0));
+    }
+
+    IEnumerator AnimateFloatingMoney(RectTransform target, CanvasGroup canvasGroup, bool floatUp)
+    {
+        float duration = 5f;
+        float elapsed = 0f;
+        Vector2 startPos = target.anchoredPosition;
+        Vector2 endPos = startPos + (floatUp ? Vector2.up : Vector2.down) * 60f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            target.anchoredPosition = Vector2.Lerp(startPos, endPos, t);
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, t);
+
+            yield return null;
+        }
+
+        Destroy(target.gameObject);
     }
 
     public void UpdateMonth(string month)
@@ -110,9 +170,10 @@ public class UIController : MonoBehaviour
         _sH._gM._inScreen = true;
         _sH._aM.PlayMusic(Music.Research);
         _sH._aM.PlaySFX(SFX.Research);
+        ToggleHUD(false);
         var _tM = TransitionManager.Instance();
         _tM.onTransitionCutPointReached += ActivateResearch;
-        _tM.Transition(_transition, 0.2f);
+        _tM.Transition(_transition, 0.1f);
     }
 
     public void CloseResearch()
@@ -121,13 +182,12 @@ public class UIController : MonoBehaviour
         _sH._aM.PlaySFX(SFX.Back);
         var _tM = TransitionManager.Instance();
         _tM.onTransitionCutPointReached += DeactivateResearch;
-        _tM.Transition(_transition, 0.2f);
+        _tM.Transition(_transition, 0.1f);
     }
 
     void ActivateResearch()
     {
         _researchScreen.SetActive(true);
-
         var _tM = TransitionManager.Instance();
         _tM.onTransitionCutPointReached -= ActivateResearch;
     }
@@ -136,7 +196,7 @@ public class UIController : MonoBehaviour
     {
         _sH._gM._inScreen = false;
         _researchScreen.SetActive(false);
-
+        ToggleHUD(true);
         var _tM = TransitionManager.Instance();
         _tM.onTransitionCutPointReached -= DeactivateResearch;
     }
@@ -147,6 +207,8 @@ public class UIController : MonoBehaviour
         _sH._gM._isPaused = false;
         _play.gameObject.SetActive(true);
         _pause.gameObject.SetActive(false);
+        _pauseVolume.SetActive(false);
+        UpdateSeason(_sH._time.IsWet);
     }
 
     public void PauseGameplay()
@@ -155,6 +217,91 @@ public class UIController : MonoBehaviour
         _sH._gM._isPaused = true;
         _pause.gameObject.SetActive(true);
         _play.gameObject.SetActive(false);
+        _pauseVolume.SetActive(true);
+        _bg.sprite = _pausedBG;
+    }
+
+    void ToggleHUD(bool value)
+    {
+        _left.SetBool("In", value);
+        _top.SetBool("In", value);
+        _bottom.SetBool("In", value);
+        _right.SetBool("In", value);
+    }
+
+    public void OpenPauseMenu()
+    {
+        _sH._aM.PlaySFX(SFX.Generic);
+        _sH._gM._inScreen = true;
+        ToggleHUD(false);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached += ActivatePause;
+        _tM.Transition(_transition, 0.1f);
+    }
+
+    public void ClosePauseMenu()
+    {
+        _sH._aM.PlaySFX(SFX.Back);    
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached += DeactivatePause;
+        _tM.Transition(_transition, 0.1f);
+    }
+
+    void ActivatePause()
+    {
+        _pauseMenu.SetActive(true);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached -= ActivatePause;
+    }
+
+    void DeactivatePause()
+    {
+        _sH._gM._inScreen = false;
+        _pauseMenu.SetActive(false);
+        ToggleHUD(true);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached -= DeactivatePause;
+    }
+
+    public void QuitToMenu()
+    {
+        _sH._aM.PlaySFX(SFX.Back);
+        var _tM = TransitionManager.Instance();
+        _tM.Transition("TitleScreen", _transition, 0.2f);
+    }
+
+    public void OpenPolicyScreen()
+    {
+        _sH._gM._inScreen = true;
+        _sH._aM.PlayMusic(Music.Policy);
+        ToggleHUD(false);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached += ActivatePolicy;
+        _tM.Transition(_transition, 0.1f);
+    }
+
+    public void ClosePolicyScreen()
+    {
+        _sH._aM.PlayMusic(Music.Gameplay);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached += DeactivatePolicy;
+        _tM.Transition(_transition, 0.1f);
+    }
+
+    void ActivatePolicy()
+    {
+        _policyScreen.SetActive(true);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached -= ActivatePolicy;
+    }
+
+    void DeactivatePolicy()
+    {
+        _sH._gM._inScreen = false;
+        _policyScreen.SetActive(false);
+        ToggleHUD(true);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached -= DeactivatePolicy;
     }
 
     public void ActivateUnit (UnitType uType, int uID)

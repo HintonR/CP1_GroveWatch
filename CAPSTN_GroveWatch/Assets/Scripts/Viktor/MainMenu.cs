@@ -1,3 +1,4 @@
+using System.Collections;
 using EasyTransition;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,6 +42,11 @@ public class MainMenu : MonoBehaviour
     void Awake()
     {
         _sH = ServiceHub.Instance;
+    }
+
+    void OnEnable()
+    {
+        
     }
 
     void Start()
@@ -98,14 +104,19 @@ public class MainMenu : MonoBehaviour
         durationPanel.SetActive(true);
     }
 
-    void OnDurationSelected(float progressValue, bool p)
+    void OnDurationSelected(float progressValue, bool value)
     {
         _sH._aM.PlaySFX(SFX.Generic);
-        _sH._gM._isEndless = true;
+        ResetVariables();
+        _sH._gM._isEndless = value;
         _sH._gM.SetMaxProgress(progressValue);
-
+        
         //cutscene
         var _tM = TransitionManager.Instance();
+        
+        if (_tM.isBusy)
+            return;
+        
         _tM.Transition("TutorialScene", _transition, 0.2f);
         CutsceneState.SelectedCutscene = cutsceneToPlay;
     }
@@ -114,11 +125,27 @@ public class MainMenu : MonoBehaviour
     {
         _sH._aM.PlaySFX(SFX.Generic);
         _sH._gM.SetMaxProgress(progressValue);
+        ResetVariables();
 
         //cutscene
         var _tM = TransitionManager.Instance();
+
+        if (_tM.isBusy)
+            return;
+            
         _tM.Transition("TutorialScene", _transition, 0.2f);
         CutsceneState.SelectedCutscene = cutsceneToPlay;
+    }
+
+    void ResetVariables()
+    {
+        _sH._gM._reputation = _sH._gM._maxReputation * 0.8f;
+        _sH._gM._progress = 0;
+        _sH._gM._money = 5000;
+        _sH._gM._gameOverTriggered = false;
+        _sH._gM._isPaused = false;
+        _sH._gM._inScreen = false;
+        _sH._gM._isEndless = false;
     }
 
     void QuitGame()

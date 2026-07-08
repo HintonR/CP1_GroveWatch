@@ -13,6 +13,8 @@ namespace EasyTransition
 
         private bool runningTransition;
 
+        public bool isBusy => runningTransition;
+
         public UnityAction onTransitionBegin;
         public UnityAction onTransitionCutPointReached;
         public UnityAction onTransitionEnd;

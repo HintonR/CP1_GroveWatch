@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class CutscenePlayer : MonoBehaviour
 {
+    ServiceHub _sH;
+
     [Header("UI References")]
     [SerializeField] private Image displayImage;
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -30,6 +32,7 @@ public class CutscenePlayer : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject navigationRow;
     [SerializeField] private CutsceneData introCutscene;
+    [SerializeField] GameObject _panel, _tape;
 
     [Header("Typewriter")]
     [SerializeField] private float charactersPerSecond = 40f;
@@ -57,6 +60,11 @@ public class CutscenePlayer : MonoBehaviour
     private bool isTyping;
     private bool isTransitioning;
     private string currentFullText;
+
+    void Awake()
+    {
+        _sH = ServiceHub.Instance;
+    }
 
     void Start()
     {
@@ -88,6 +96,7 @@ public class CutscenePlayer : MonoBehaviour
 
     void OnPromptYes()
     {
+        _sH._aM.PlaySFX(SFX.Generic);
         CutsceneState.SelectedCutscene = introCutscene;
         if (promptPanel != null) promptPanel.SetActive(false);
         SetTutorialContentActive(true);
@@ -97,12 +106,14 @@ public class CutscenePlayer : MonoBehaviour
 
     void OnPromptNo()
     {
+        _sH._aM.PlaySFX(SFX.Back);
         var _tM = TransitionManager.Instance();
         CutsceneState.SelectedCutscene = introCutscene;
         _tM.Transition("CutsceneScene", _transition, 0.2f);
     }
     void StartGameTutorial()
     {
+        _sH._aM.PlaySFX(SFX.Generic);
         var _tM = TransitionManager.Instance();
         CutsceneState.SelectedCutscene = introCutscene;
         _tM.Transition("CutsceneScene", _transition, 0.2f);
@@ -115,10 +126,6 @@ public class CutscenePlayer : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 OnAdvanceInput();
         }
-        else if (currentCutscene.playMode == CutscenePlayMode.Tutorial)
-        {
-            
-        }
     }
 
     void ShowLine(bool isFirstLine = false)
@@ -126,42 +133,34 @@ public class CutscenePlayer : MonoBehaviour
         var line = currentCutscene.lines[currentLine];
         currentFullText = line.text;
         if (line.changeMusic)
-        {
             ServiceHub.Instance._aM.PlayMusic(line.music);
-        }
+
         dialogueText.text = "";
-        if (continueIndicator) continueIndicator.SetActive(false);
+
+        if (continueIndicator) 
+            continueIndicator.SetActive(false);
 
         bool spriteChanged = isFirstLine || (line.image != null && displayImage.sprite != line.image);
-
-        if (lineRoutine != null) StopCoroutine(lineRoutine);
-        lineRoutine = StartCoroutine(PlayLine(line.image, spriteChanged));
 
         if (currentCutscene.playMode == CutscenePlayMode.Tutorial)
         {
             UpdateTutorialUI();
+            return;
         }
+        
+        if (lineRoutine != null) StopCoroutine(lineRoutine);
+            lineRoutine = StartCoroutine(PlayLine(line.image, spriteChanged));
+
     }
 
     void UpdateTutorialUI()
     {
         int lastIndex = currentCutscene.lines.Length - 1;
-        if (backButton != null)
-        {
-            backButton.gameObject.SetActive(currentLine > 0);
-        }
-        if (nextButton != null)
-        {
-            nextButton.gameObject.SetActive(currentLine < lastIndex);
-        }
-        if (startGameButton != null)
-        {
-            startGameButton.gameObject.SetActive(currentLine == lastIndex);
-        }
-        if (titleText != null)
-        {
-            titleText.text = currentCutscene.lines[currentLine].title;
-        }
+        if (backButton != null) backButton.gameObject.SetActive(currentLine > 0);
+        if (nextButton != null) nextButton.gameObject.SetActive(currentLine < lastIndex);
+        if (startGameButton != null) startGameButton.gameObject.SetActive(currentLine == lastIndex);
+        if (titleText != null) titleText.text = currentCutscene.lines[currentLine].title;
+        dialogueText.text = currentCutscene.lines[currentLine].text;
     }
 
     void SetTutorialContentActive(bool active)
@@ -171,6 +170,8 @@ public class CutscenePlayer : MonoBehaviour
         if (navigationRow != null) navigationRow.SetActive(active);
         if (displayImage != null) displayImage.gameObject.SetActive(active);
         if (titleText != null) titleText.gameObject.SetActive(active);
+        if (_panel != null) _panel.SetActive(active);
+        if (_tape != null) _tape.SetActive(active);
     }
 
     IEnumerator PlayLine(Sprite newSprite, bool fade)
@@ -195,16 +196,7 @@ public class CutscenePlayer : MonoBehaviour
 
         if (typingRoutine != null) StopCoroutine(typingRoutine);
         typingRoutine = StartCoroutine(TypewriterRoutine());
-        //if (currentCutscene.playMode == CutscenePlayMode.Cutscene)
-        //{
-        //    if (typingRoutine != null) StopCoroutine(typingRoutine);
-        //    typingRoutine = StartCoroutine(TypewriterRoutine());
-        //}
-        //else
-        //{
-        //    if (typingRoutine != null) StopCoroutine(typingRoutine);
-        //    typingRoutine = StartCoroutine(TypewriterRoutine());
-        //}
+
     }
 
     IEnumerator FadeImage(float from, float to, float duration)
@@ -280,19 +272,17 @@ public class CutscenePlayer : MonoBehaviour
 
     void Advance()
     {
+        _sH._aM.PlaySFX(SFX.Generic);
         currentLine++;
         if (currentLine >= currentCutscene.lines.Length)
             OnCutsceneComplete();
         else
             ShowLine();
     }
-    void StartGame()
-    {
-        var _tM = TransitionManager.Instance();
-        _tM.Transition("Main", _transition, 0.2f);
-    }
+
     void GoBack()
     {
+        _sH._aM.PlaySFX(SFX.Generic);
         if (currentLine <= 0) return;
         currentLine--;
         ShowLine();
@@ -304,14 +294,13 @@ public class CutscenePlayer : MonoBehaviour
 
         if (currentCutscene.playMode == CutscenePlayMode.Cutscene)
         {
-            //StartCoroutine(EndFadeRoutine());
             var _tM = TransitionManager.Instance();
+            if (_tM.isBusy)
+                return;      
             _tM.Transition(currentCutscene.nextSceneName, _transition, 0.2f);
         }
         else
-        {
             HandleCompletion();
-        }
     }
 
     IEnumerator EndFadeRoutine() //mostly unused now, here if needed later

@@ -27,12 +27,14 @@ public class Forest : MonoBehaviour
     [SerializeField] List<NegativeForestState> _possibleStates;
     [SerializeField] TextMeshProUGUI _eventName;
     [SerializeField] Image _eventLife, _forestLife;
+    [SerializeField] GameObject _forestLifeBG;
     [SerializeField] Sprite _fire, _police, _ranger;
-    [SerializeField] SpriteRenderer _forestRenderer;
+    [SerializeField] GameObject _fireUnit, _policeUnit, _rangerUnit;
 
+    SpriteRenderer _forestRenderer;
+    
     float _forestHealth;
     float _forestMaxHealth;
-
 
     ForestStateData _currentState;
     public ForestStateData CurrentState => _currentState;
@@ -251,6 +253,7 @@ public class Forest : MonoBehaviour
             _currentEventHealth = nfs.Health;
             UpdateLifeUI(true, _eventLife);
             UpdateLifeUI(true, _forestLife);
+            _forestLifeBG.SetActive(true);
             return;
         }
 
@@ -261,11 +264,13 @@ public class Forest : MonoBehaviour
         if (data == _deadState)
         {
             UpdateLifeUI(true, _forestLife);
+            _forestLifeBG.SetActive(true);
             return;
         }
 
         ResetForestHealth();
         UpdateLifeUI(false, _forestLife);
+        _forestLifeBG.SetActive(false);
     }
 
     void NegativeStateTracking(bool isNegativeState)
@@ -292,6 +297,15 @@ public class Forest : MonoBehaviour
         _isResolving = true;
         _sH._aM.PlaySFX(SFX.Dropped);
         _resolvingUnitDrag = unitDrag;
+
+        switch (unit.Type)
+        {
+            case UnitType.Firefighter : _fireUnit.SetActive(true);   break;
+            case UnitType.Ranger      : _rangerUnit.SetActive(true); break;
+            case UnitType.Police      : _policeUnit.SetActive(true); break;
+        }
+
+
         _resolveRoutine = StartCoroutine(ResolutionRoutine(unit, unitDrag));
         return true;
     }
@@ -352,8 +366,9 @@ public class Forest : MonoBehaviour
         _sH._aM.PlaySFX(SFX.Success);
         _sH._gM.ChangeReputation(modifiedBonus);
         _sH._gM.ChangeProgress(1f);
-        _sH._gM.ChangeMoney(_sH._iM.GetIncomeForUnit(resolvedUnit));
+        _sH._gM.ChangeMoney(-_sH._iM.GetIncomeForUnit(resolvedUnit));
 
+        DisableUnits();
         unitToCooldown?.StartCooldown();
     }
 
@@ -371,6 +386,15 @@ public class Forest : MonoBehaviour
         SetState(_deadState);
         _sH._gM.ChangeReputation(-DEATH_PENALTY);
         _sH._aM.PlaySFX(SFX.Deforestation);
+
+        DisableUnits();
+    }
+
+    void DisableUnits()
+    {
+        _fireUnit.SetActive(false);
+        _rangerUnit.SetActive(false);
+        _policeUnit.SetActive(false);
     }
 
     IEnumerator RecoveryRoutine()

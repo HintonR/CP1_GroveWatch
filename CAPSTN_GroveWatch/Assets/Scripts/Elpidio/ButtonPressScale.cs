@@ -6,18 +6,22 @@ public class ButtonPressScale : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 {
     private Vector3 originalScale;
 
-    void Awake()
+    private void Awake()
     {
         originalScale = transform.localScale;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        transform.DOScale(originalScale * 0.9f, 0.1f);
+        transform.DOKill();
+        transform.DOScale(originalScale * 0.9f, 0.08f)
+            .SetEase(Ease.OutQuad);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        transform.DOScale(originalScale, 0.1f);
+        transform.DOKill();
+        transform.DOScale(originalScale, 0.2f)
+            .SetEase(Ease.OutBack);
     }
 }
