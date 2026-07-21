@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: P2C2
   m_EditorClassIdentifier: 
   _title: Negotiate Smaller For Scale
-  _rep: 5
+  _rep: 10
   _budget: 5000
   _cooldown: 1.2
   _effectiveness: 0.8

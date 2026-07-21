@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Approve With Strict Rules
   _rep: 5
-  _budget: 10000
+  _budget: 15000
   _cooldown: 1.3
   _effectiveness: 0.7

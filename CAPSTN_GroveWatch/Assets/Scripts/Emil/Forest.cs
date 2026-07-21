@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class Forest : MonoBehaviour
 {
-    const float BASE_MAX_HEALTH = 20f;
-    const float DEATH_PENALTY = 35f;
+    const float BASE_MAX_HEALTH = 18f;
+    const float DEATH_PENALTY = 30f;
     const float RECOVERY_RATE = 1.25f;
-    const float RECOVERY_AMOUNT = 1.5f;
+    const float RECOVERY_AMOUNT = 2f;
     const float UNIT_DAMAGE_RATE = 0.5f;
-    const float EVENT_DAMAGE_RATE = 1.25f;
-    const float REP_BONUS = 15;
-    const float REP_DAMAGE_MOD = 1.25f;
+    const float EVENT_DAMAGE_RATE = 1.3f;
+    const float REP_BONUS = 10;
+    const float REP_DAMAGE_MOD = 1.125f;
     
     static int _activeNegativeForestCount;
     public static int ActiveNegativeForestCount => _activeNegativeForestCount;
@@ -30,6 +30,7 @@ public class Forest : MonoBehaviour
     [SerializeField] GameObject _forestLifeBG;
     [SerializeField] Sprite _fire, _police, _ranger;
     [SerializeField] GameObject _fireUnit, _policeUnit, _rangerUnit;
+    [SerializeField] GameObject _alert;
 
     SpriteRenderer _forestRenderer;
     
@@ -254,6 +255,7 @@ public class Forest : MonoBehaviour
             UpdateLifeUI(true, _eventLife);
             UpdateLifeUI(true, _forestLife);
             _forestLifeBG.SetActive(true);
+            _alert.SetActive(true);
             return;
         }
 
@@ -297,6 +299,7 @@ public class Forest : MonoBehaviour
         _isResolving = true;
         _sH._aM.PlaySFX(SFX.Dropped);
         _resolvingUnitDrag = unitDrag;
+        _alert.SetActive(false);
 
         switch (unit.Type)
         {
@@ -384,6 +387,7 @@ public class Forest : MonoBehaviour
         StopResolutionRoutine();
         ClearActiveResolution(false, true);
         SetState(_deadState);
+        _alert.SetActive(false);
         _sH._gM.ChangeReputation(-DEATH_PENALTY);
         _sH._aM.PlaySFX(SFX.Deforestation);
 

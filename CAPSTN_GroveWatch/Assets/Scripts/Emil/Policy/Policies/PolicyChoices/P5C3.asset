@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: P5C3
   m_EditorClassIdentifier: 
   _title: Reject And Report To DENR
-  _rep: 33
+  _rep: 30
   _budget: 0
   _cooldown: 0.8
   _effectiveness: 1.2

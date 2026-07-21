@@ -33,6 +33,8 @@ public class CutscenePlayer : MonoBehaviour
     [SerializeField] private GameObject navigationRow;
     [SerializeField] private CutsceneData introCutscene;
     [SerializeField] GameObject _panel, _tape;
+    [SerializeField] TextMeshProUGUI _pageNumber;
+    [SerializeField] GameObject _tutorialPanel;
 
     [Header("Typewriter")]
     [SerializeField] private float charactersPerSecond = 40f;
@@ -108,6 +110,10 @@ public class CutscenePlayer : MonoBehaviour
     {
         _sH._aM.PlaySFX(SFX.Back);
         var _tM = TransitionManager.Instance();
+
+        if (_tM.isBusy)
+         return;
+         
         CutsceneState.SelectedCutscene = introCutscene;
         _tM.Transition("CutsceneScene", _transition, 0.2f);
     }
@@ -161,6 +167,18 @@ public class CutscenePlayer : MonoBehaviour
         if (startGameButton != null) startGameButton.gameObject.SetActive(currentLine == lastIndex);
         if (titleText != null) titleText.text = currentCutscene.lines[currentLine].title;
         dialogueText.text = currentCutscene.lines[currentLine].text;
+        var currentPage = currentLine + 1;
+        _pageNumber.text = currentPage + "/" + currentCutscene.lines.Length;
+
+        var line = currentCutscene.lines[currentLine];
+        currentFullText = line.text;
+        bool isFirstLine = false;
+        bool spriteChanged = isFirstLine || (line.image != null && displayImage.sprite != line.image);
+        if (lineRoutine != null) StopCoroutine(lineRoutine);
+            lineRoutine = StartCoroutine(TutorialImage(line.image, spriteChanged));
+
+        
+        _tutorialPanel.GetComponent<Shake>().DoShake();
     }
 
     void SetTutorialContentActive(bool active)
@@ -172,6 +190,27 @@ public class CutscenePlayer : MonoBehaviour
         if (titleText != null) titleText.gameObject.SetActive(active);
         if (_panel != null) _panel.SetActive(active);
         if (_tape != null) _tape.SetActive(active);
+    }
+
+    IEnumerator TutorialImage(Sprite newSprite, bool fade)
+    {
+                if (fade && newSprite != null)
+        {
+            isTransitioning = true;
+
+            if (displayImage.sprite != null && displayImage.color.a > 0f)
+                yield return FadeImage(1f, 0f, fadeOutDuration);
+
+            displayImage.sprite = newSprite;
+
+            yield return FadeImage(0f, 1f, fadeInDuration);
+
+            isTransitioning = false;
+        }
+        else if (newSprite != null)
+        {
+            displayImage.sprite = newSprite;
+        }
     }
 
     IEnumerator PlayLine(Sprite newSprite, bool fade)

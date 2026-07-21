@@ -24,4 +24,9 @@ public class ButtonPressScale : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         transform.DOScale(originalScale, 0.2f)
             .SetEase(Ease.OutBack);
     }
+
+    private void OnDestroy()
+    {
+        transform.DOKill();
+    }
 }

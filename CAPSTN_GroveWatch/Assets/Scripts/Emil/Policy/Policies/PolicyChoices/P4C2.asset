@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: P4C2
   m_EditorClassIdentifier: 
   _title: 'Hold Town Hall Meeting '
-  _rep: 5
+  _rep: 10
   _budget: -5000
   _cooldown: 1.25
-  _effectiveness: 1
+  _effectiveness: 0.9

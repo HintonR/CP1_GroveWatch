@@ -613,13 +613,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireEnding: {fileID: 11400000, guid: ad4c93c79de600b4d90be1e05c93ca6d, type: 2}
-  droughtEnding: {fileID: 11400000, guid: ee82dc48cd213474a8e8d05cc8169a85, type: 2}
-  floodEnding: {fileID: 11400000, guid: 3921edeb58769a74bb461c3b319e3478, type: 2}
-  campingEnding: {fileID: 11400000, guid: 500e27def583d004a9ca68d09203a159, type: 2}
-  loggingEnding: {fileID: 11400000, guid: 3b4ba9a6cb56b4e4b95acf3029e62782, type: 2}
-  constructionEnding: {fileID: 11400000, guid: 3921edeb58769a74bb461c3b319e3478, type: 2}
+  droughtEnding: {fileID: 11400000, guid: 500e27def583d004a9ca68d09203a159, type: 2}
+  floodEnding: {fileID: 11400000, guid: ee82dc48cd213474a8e8d05cc8169a85, type: 2}
+  campingEnding: {fileID: 11400000, guid: 3b4ba9a6cb56b4e4b95acf3029e62782, type: 2}
+  loggingEnding: {fileID: 11400000, guid: a90a5679d332a804991f71fc0e7e275a, type: 2}
+  constructionEnding: {fileID: 11400000, guid: bc8e6d805080804428acb054a4216d2b, type: 2}
   debtEnding: {fileID: 11400000, guid: d78baebace51c9543b7f9d1aaf4a8d42, type: 2}
-  fallbackEnding: {fileID: 11400000, guid: 3921edeb58769a74bb461c3b319e3478, type: 2}
+  victoryEnding: {fileID: 11400000, guid: cff2d1a0f75bbc749bf136dca4e0386a, type: 2}
+  fallbackEnding: {fileID: 11400000, guid: 1047df6d80693894d9bfd5a64e2144bc, type: 2}
 --- !u!1 &1178734270
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,5 +15,5 @@ MonoBehaviour:
   _title: Approve With Environmental Safeguards
   _rep: -25
   _budget: 20000
-  _cooldown: 1.25
+  _cooldown: 1.2
   _effectiveness: 0.9

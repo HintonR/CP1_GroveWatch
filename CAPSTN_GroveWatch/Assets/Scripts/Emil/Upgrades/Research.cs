@@ -129,7 +129,12 @@ public class Research : MonoBehaviour
         StartTypewriter(_name, research.ResearchName, CHARACTER_SPEED, ref _nameRoutine);        
         _desc.text = research.Description;
         RefreshSelectedUpgrade();
-        _purchase.SetActive(true);
+        
+        int currentLevel = GetCurrentLevel(_selectedResearch.ID);
+        int nextCost = _selectedResearch.GetCostForLevel(currentLevel);
+        bool showPurchase = nextCost < 0 ? false : true;
+        _purchase.SetActive(showPurchase);
+        
         _nameP.SetActive(true);
         _descP.SetActive(true);
         _costP.SetActive(true);
@@ -226,7 +231,7 @@ public class Research : MonoBehaviour
         if (_costRoutine != null) StopCoroutine(_costRoutine);
 
         _name.text = string.Empty;
-        _desc.text = "Click on a Rune for Research Description";
+        _desc.text = "Press On a Rune for Research Description";
         _cost.text = string.Empty;
     }
 
@@ -327,8 +332,10 @@ public class Research : MonoBehaviour
         int nextCost = _selectedResearch.GetCostForLevel(currentLevel);
 
         string costText = nextCost < 0 ? "<color=#FFD700>MAXED</color>" : nextCost + "php";
+        bool showPurchase = nextCost < 0 ? false : true;
 
         _cost.text = costText;
+        _purchase.SetActive(showPurchase);
         UpdateMoney();
     }
 

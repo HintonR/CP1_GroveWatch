@@ -14,31 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneName: Intro
   lines:
-  - image: {fileID: 0}
+  - image: {fileID: 21300000, guid: 75e590af7edf7f040ae94c608f6e68c6, type: 3}
     title: 
-    text: You are a PENR Dispatcher assigned to the city of Minglanilla, Cebu.
+    text: You are a newly recruited dispatcher assigned to the city of Minglanilla,
+      Cebu.
     changeMusic: 1
     music: 0
-  - image: {fileID: 0}
+  - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
     title: 
     text: "Minglanilla is a city nestled deep within one of the region\u2019s last
       remaining forested frontiers."
     changeMusic: 0
     music: 0
-  - image: {fileID: 0}
+  - image: {fileID: 21300000, guid: 8a3e144b151a54047a29ad34bb5a6a3c, type: 3}
     title: 
-    text: Illegal loggers close in, forest fires rage unchecked, and environmental
-      pressures mount.
+    text: The trust of the people have diminished as illegal activity and natural
+      disasters have impacted the Lapad Forest.
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: 93200a5ec75906c4998456fede0bb60d, type: 3}
+  - image: {fileID: 21300000, guid: 8a3e144b151a54047a29ad34bb5a6a3c, type: 3}
     title: 
-    text: You have been tasked to watch over its forests.
+    text: You have been tasked to oversee the forest. Do your best to sway back the
+      citizen's favor!
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: 93200a5ec75906c4998456fede0bb60d, type: 3}
+  - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
     title: 
-    text: You are the final line of defense. Welcome to GroveWatch!
+    text: ' Welcome to GroveWatch!'
     changeMusic: 0
     music: 0
   onComplete: 0

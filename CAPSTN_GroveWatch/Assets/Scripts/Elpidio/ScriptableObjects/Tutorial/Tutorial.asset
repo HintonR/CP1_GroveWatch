@@ -14,23 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneName: Intro
   lines:
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Welcome Recruit
-    text: 'This will be a brief breakdown of
-
-      Gameplay Systems and Mechanics
-
-      as
-      you try to save the Lapad Forest.'
-    changeMusic: 1
-    music: 2
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Heads Up Display (HUD)
-    text: "In the gameplay screen, there are a variety of\ninteractable components
-      that will aid you in \nthe successful protection of Lapad Forest."
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: 9ecdf0768efb3b8479fcba7044005517, type: 3}
     title: Progress and Reputation
     text: 'In the top center of the screen, there are two
 
@@ -41,114 +25,53 @@ MonoBehaviour:
       to
 
       the progress towards the DENR''s objective quota.'
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Reputation
-    text: "Reputation will dimish over time while active incidents spawn or are being
-      resolved. You will also be penalized for attempting to send the wrong unit
-      to an Incident. \nPolicy Choices may also affect Reputation."
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+    changeMusic: 1
+    music: 2
+  - image: {fileID: 21300000, guid: 18230166a29b2c44e96683694bb01f8d, type: 3}
     title: Reputation
     text: "When the Reputation bar is empty, the game will be \nover and depending
       on what incidents were failed, \nYou  will see the devastating outcomes of
       your choices."
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: f8a51a71ebb1d684ca6c662af3ee939d, type: 3}
     title: Progress
-    text: "Each successful resolution of an incident will \nincrease the progress
-      bar. Once the progress bar\nis full, your tenure at the PENRO in Cebu will
-      \nbe over and considered a success!"
+    text: "Each successful resolution of an incident will increase \nthe progress
+      bar. Once the progress bar is full, your \ntenure at the PENRO will be considered
+      a success!"
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: 3c0ff2aec21aac44298c42ad7a9f0c95, type: 3}
     title: Time Management
-    text: "In the top left are Time Indicators. As months \nand years go by, the
-      amount of incidents you will \nneed to mitigate will increase. Seasons \nwill
-      dictate which incidents will spawn."
+    text: "In the top left are Time Indicators. \nPressing [Space] or the Play/Pause
+      Icon \non the Time Dial pauses gameplay. "
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Time Management
-    text: "Furthermore, pressing [Space] or the Play/Pause\nIcon on the Time Dial, 
-      pauses gameplay. While \npaused, you are free to check different sectors and
-      \ndeploy units; but you will need to unpause to \ncontinue resolving incidents."
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: 66c351e89bd2e4343ab305372efb3dfc, type: 3}
     title: Quadrants
-    text: 'The Lapad Forest is vast and we have divided it
-
-      into four sectors.
-      On the right side are the quadrants
-
-      that you will be overseeing. You
-      may click on a quadrant
-
-      to move there or use [1] [2] [3] [4].'
+    text: "On the right side are the quadrants that you \nwill be overseeing. You
+      may click on a quadrant\nto move there or use [1] [2] [3] [4]."
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: ebea8b9c5fa977d4796aa15e47e88519, type: 3}
     title: Deployment
-    text: "In the lower center is your Dispatch Hotbar. In the\nbeginning, you will
-      only have a handful of units to \ndeploy. You will be able to upgrade and increase
-      your forces via the Research Screen as the budget allows."
+    text: "In the lower center is your Dispatch Hotbar. \nIncidents are color coded.
+      Drag an available unit onto \nan active incident to begin resolving. "
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Deployment
-    text: "Incident Markers are color coded with their \nrespective unit type. Drag
-      an available unit onto \nan active incident to begin resolving. \nDoing so
-      will make the unit unavailable."
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Deployment
-    text: "After a successful dispatch, the budget will decrease\nbased on the unit's
-      respective income and the unit \nwill go on cooldown making them further unavailable
-      \nuntil they fully recuperate."
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Deployment
-    text: 'Ignoring an incident or failing to resolve it on time
-
-      will result
-      in a large reputation penalty while also putting
-
-      the unit on cooldown.
-      Be wise about your deployment!'
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: fe531459c3cce6d419c778109dd0792f, type: 3}
     title: Budget and Research
-    text: "In the lower left is the Budget Display and Research \nButton. As budget
-      increases or decreases, floating \nbudget numbers will signify changes in the
-      Budget."
+    text: "In the lower left is the Budget Display and \nResearch Button. Pressing
+      the Research Button\nor [Tab] will bring up the Research Screen. "
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: Research Screen
-    text: 'Pressing the Green Research Button or [Tab] will bring
-
-      up the Research
-      Screen. Here you will be able to pick
-
-      from a variety of research and
-      purchase them.'
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: 2452854c486d52c479ffec81470dacce, type: 3}
     title: Debt
     text: "You may also incur debt; however, if at any point \nyou incur a debt greater
-      than 50000php, you will \nbe reprimanded and your tenure at the PENRO \nwill
-      immediately cease."
+      than 50000php, your tenure \nat the PENRO will immediately cease!"
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: 1ea03c9b1785681438296f1aad4913a3, type: 3}
     title: Policies
     text: 'Every 6 Months, your secretary will inform you about
 
@@ -159,16 +82,10 @@ MonoBehaviour:
       the best action to take.'
     changeMusic: 0
     music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
+  - image: {fileID: 21300000, guid: dbd864b06bfd19344a3888d09ed77700, type: 3}
     title: Pause Menu
     text: "If at any point you want to change audio settings\nor quit the game, you
-      may press the Orange Gear Button \nor [Esc] to view the Pause Menu."
-    changeMusic: 0
-    music: 0
-  - image: {fileID: 21300000, guid: e60529e0b0b499b4daf53d04a663b4eb, type: 3}
-    title: End Briefing
-    text: "Good luck new recruit! \nMay the will of the Filipino People be your guiding
-      hand! You may now start!"
+      may press the Gear Button \nor [Esc] to view the Pause Menu."
     changeMusic: 0
     music: 0
   onComplete: 0

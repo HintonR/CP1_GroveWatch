@@ -19,23 +19,13 @@ public class PolicyChoiceDataSO : ScriptableObject
     public int Rep => _rep;
     public int Budget => _budget;
     
-    public string GetSign(BonusType type)
+    public float GetValue(BonusType type)
     {
-        string ToReturn = "";
+        float ToReturn = 0f;
         if (type == BonusType.CD)
-        {
-            if (_cooldown > 1)
-                ToReturn = "<color=#F25959>+</color>";
-            else if (_cooldown < 1)
-                ToReturn = "<color=#59D959>--</color>";
-        }
-        else
-        {
-            if (_effectiveness > 1)
-                ToReturn = "<color=#59D959>+</color>";
-            else if (_effectiveness < 1)
-                ToReturn = "<color=#F25959>--</color>";
-        }
+            ToReturn = _cooldown;
+        if (type == BonusType.EF)
+            ToReturn = _effectiveness;
 
         return ToReturn;
     }

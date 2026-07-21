@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: P1C3
   m_EditorClassIdentifier: 
   _title: Deny Farmer Requests
-  _rep: -20
+  _rep: -15
   _budget: 0
   _cooldown: 0.9
   _effectiveness: 1.1

@@ -1,7 +1,6 @@
 using UnityEngine;
 
 [DefaultExecutionOrder(-100)] //you're a wizard harry
-
 public class GameOverCutsceneSelector : MonoBehaviour
 {
     [Header("Cutscene per IncidentType (match with GameManager.cs)")]
@@ -15,12 +14,13 @@ public class GameOverCutsceneSelector : MonoBehaviour
     [Header("Debt / Corruption Ending")]
     [SerializeField] private CutsceneData debtEnding;
 
+    [Header("Victory Ending")]
+    [SerializeField] private CutsceneData victoryEnding;
+
     [Header("Fallback")]
     [SerializeField] private CutsceneData fallbackEnding;
 
-    ServiceHub _sH;
-
-    //_sH.gM. to access GameManager
+    ServiceHub _sH; //_sH.gM. to access GameManager
 
     void Awake()
     {
@@ -34,8 +34,12 @@ public class GameOverCutsceneSelector : MonoBehaviour
 
     CutsceneData SelectEnding()
     {
+        //victory
+        if (GameManager.LastGameOverReason == CutsceneReason.Victory)
+            return victoryEnding;
+
         //debt
-        if (GameManager.LastGameOverReason == GameOverReason.Debt)
+        if (GameManager.LastGameOverReason == CutsceneReason.Debt)
             return debtEnding;
 
         //incident

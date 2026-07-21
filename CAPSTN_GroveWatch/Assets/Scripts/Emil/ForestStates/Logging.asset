@@ -20,5 +20,5 @@ MonoBehaviour:
   _requiredUnit: 1
   _availableSeason: 2
   _health: 90
-  _chance: 15
-  _damage: 1.2
+  _chance: 20
+  _damage: 1

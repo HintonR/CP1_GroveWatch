@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: P5C1
   m_EditorClassIdentifier: 
   _title: Allow Illegal Mining
-  _rep: -66
-  _budget: 75000
+  _rep: -50
+  _budget: 60000
   _cooldown: 1.5
   _effectiveness: 0.7

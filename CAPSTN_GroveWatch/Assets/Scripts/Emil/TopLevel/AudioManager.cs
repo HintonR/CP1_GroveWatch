@@ -32,11 +32,17 @@ public class AudioManager : Singleton<AudioManager>
 {
 
     ServiceHub _sH;
+    const float _maxBGMVolume = .3f;
 
     [Header("Audio Sources")]
     public AudioSource _bgm1;
     public AudioSource _bgm2;
     public AudioSource _sfx;
+
+    [Header("Volume")]
+    [SerializeField, Range(0f, 1f)] float _masterVolume = 1f;
+    [SerializeField, Range(0f, 1f)] float _bgmVolume = 1f;
+    [SerializeField, Range(0f, 1f)] float _sfxVolume = 1f;
 
     AudioClip _titleBGM, _gameplayBGM, _researchBGM, _policyBGM, _gameoverBGM, _victoryBGM;
 
@@ -48,6 +54,11 @@ public class AudioManager : Singleton<AudioManager>
     Coroutine _currentCrossfade;
 
     public Music Current => _current;
+    public float MasterVolume => _masterVolume;
+    public float BGMVolume => _bgmVolume;
+    public float SFXVolume => _sfxVolume;
+    float CurrentBGMVolume => _maxBGMVolume * _masterVolume * _bgmVolume;
+    float CurrentSFXVolume => _masterVolume * _sfxVolume;
     
     void Awake()
     {
@@ -65,6 +76,7 @@ public class AudioManager : Singleton<AudioManager>
         _bgm1.playOnAwake = false;
         _bgm2.playOnAwake = false;
         _sfx.playOnAwake = false;
+        ApplyVolumes();
 
         //ADD RESOURCES HERE
         _titleBGM     = Resources.Load<AudioClip>("Audio/TitleScreen"); //To Add New
@@ -97,6 +109,39 @@ public class AudioManager : Singleton<AudioManager>
 
         foreach (var c in clips)
             c.LoadAudioData();
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        _masterVolume = Mathf.Clamp01(volume);
+        ApplyVolumes();
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        _bgmVolume = Mathf.Clamp01(volume);
+        ApplyVolumes();
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        _sfxVolume = Mathf.Clamp01(volume);
+        ApplyVolumes();
+    }
+
+    void ApplyVolumes()
+    {
+        if (_currentCrossfade == null)
+        {
+            if (_bgm1 != null)
+                _bgm1.volume = CurrentBGMVolume;
+
+            if (_bgm2 != null)
+                _bgm2.volume = CurrentBGMVolume;
+        }
+
+        if (_sfx != null)
+            _sfx.volume = CurrentSFXVolume;
     }
 
     public void PlayMusic(Music _music)
@@ -148,14 +193,14 @@ public class AudioManager : Singleton<AudioManager>
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / duration;
 
-            sourceOut.volume = Mathf.Lerp(.3f, 0f, t);
-            sourceIn.volume = Mathf.Lerp(0f, .3f, t);
+            sourceOut.volume = Mathf.Lerp(CurrentBGMVolume, 0f, t);
+            sourceIn.volume = Mathf.Lerp(0f, CurrentBGMVolume, t);
 
             yield return null;
         }
 
         sourceOut.volume = 0f;
-        sourceIn.volume = .3f;
+        sourceIn.volume = CurrentBGMVolume;
 
         sourceOut.Stop();
 

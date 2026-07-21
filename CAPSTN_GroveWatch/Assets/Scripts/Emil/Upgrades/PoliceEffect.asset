@@ -16,6 +16,6 @@ MonoBehaviour:
   _desc: "Increase Effectiveness \nResolving Police Officer\nRelated Incidents"
   _id: 9
   _cap: 3
-  _c1: 25000
-  _c2: 50000
-  _c3: 75000
+  _c1: 20000
+  _c2: 35000
+  _c3: 50000

@@ -7,11 +7,11 @@ public class PolicyScreen : MonoBehaviour
 {
     ServiceHub _sH;
     
-    [SerializeField] TextMeshProUGUI _prompt;
-
+    [SerializeField] TextMeshProUGUI _prompt, _rep, _bud;
     [SerializeField] List<PolicyDataSO> _policies;
-
     [SerializeField] PolicyChoice _p1, _p2, _p3;
+    [SerializeField] Sprite _g1, _g2, _r1, _r2;
+    [SerializeField] Animator _info;
 
     Coroutine _promptRoutine;
     
@@ -26,7 +26,8 @@ public class PolicyScreen : MonoBehaviour
 
         UpdatePrompt(pIndex);
         UpdateChoices(pIndex); 
-        StartCoroutine(CardsAnim(true));
+        UpdateInfo();
+        StartCoroutine(PolicyAnim(true));
     }
 
     void OnDisable()
@@ -34,6 +35,10 @@ public class PolicyScreen : MonoBehaviour
             DeactivateAnim(_p1);
             DeactivateAnim(_p2);
             DeactivateAnim(_p3);
+            _info.SetBool("In", false);
+            _p1.Select.gameObject.SetActive(false);
+            _p2.Select.gameObject.SetActive(false);
+            _p3.Select.gameObject.SetActive(false);
             _p1.gameObject.SetActive(false);
             _p2.gameObject.SetActive(false);
             _p3.gameObject.SetActive(false);
@@ -92,6 +97,12 @@ public class PolicyScreen : MonoBehaviour
         textComponent.maxVisibleCharacters = total;
     }
 
+    void UpdateInfo()
+    {
+        _rep.text = (_sH._gM._reputation / _sH._gM._maxReputation * 100).ToString("F0") + "%";
+        _bud.text = _sH._gM._money + "php";
+    }
+
     void UpdateChoices(int pIndex)
     {
         var policy = _policies[pIndex];
@@ -101,7 +112,7 @@ public class PolicyScreen : MonoBehaviour
         UpdateChoice(_p3, policy.Choice3);
     }
 
-    private void UpdateChoice(PolicyChoice choice, PolicyChoiceDataSO data)
+    void UpdateChoice(PolicyChoice choice, PolicyChoiceDataSO data)
     {
         choice.Title.text = data.Title;
 
@@ -113,24 +124,49 @@ public class PolicyScreen : MonoBehaviour
             ? string.Empty
             : FormatValue(data.Budget, " php");
 
-        choice.CD.text = data.GetSign(BonusType.CD);
-        choice.EF.text = data.GetSign(BonusType.EF);
+        choice.CDIcon.gameObject.SetActive(true);
+        var cdValue = data.GetValue(BonusType.CD);
+        if (cdValue < 1f && cdValue >= 0.8f)
+            choice.CDIcon.sprite = _g1;
+        if (cdValue < 0.8f)
+            choice.CDIcon.sprite = _g2;
+        if (cdValue > 1f && cdValue <= 1.2f)
+            choice.CDIcon.sprite = _r1;
+        if (cdValue > 1.2f)
+            choice.CDIcon.sprite = _r2;
+        if (cdValue == 1f)
+            choice.CDIcon.gameObject.SetActive(false);
+
+        choice.EFIcon.gameObject.SetActive(true);
+        var efValue = data.GetValue(BonusType.EF);
+        if (efValue < 1f && efValue >= 0.8f)
+            choice.EFIcon.sprite = _r1;
+        if (efValue < 0.8f)
+            choice.EFIcon.sprite = _r2;
+        if (efValue > 1f && efValue <= 1.2f)
+            choice.EFIcon.sprite = _g1;
+        if (efValue > 1.2f)
+            choice.EFIcon.sprite = _g2;
+        if (efValue == 1f)
+            choice.EFIcon.gameObject.SetActive(false);
 
         choice.Select.onClick.RemoveAllListeners();
         choice.Select.onClick.AddListener(() => _sH._aM.PlaySFX(SFX.Rune));
         choice.Select.onClick.AddListener(() => _sH._UI.ClosePolicyScreen());
+        choice.Select.onClick.AddListener(() => UpdateInfo());
         choice.Select.onClick.AddListener(data.ApplyChoice);
     }
 
-    private string FormatValue(int value, string suffix)
+    string FormatValue(int value, string suffix)
     {
         return $"{(value > 0 ? "+" : "")}{value}{suffix}";
     }
 
-    IEnumerator CardsAnim(bool value)
+    IEnumerator PolicyAnim(bool value)
     {
         if (value)
         {
+            yield return new WaitForSeconds(0.4f);
             _p1.gameObject.SetActive(value);
             ActivateAnim(_p1);
             yield return new WaitForSeconds(0.4f);
@@ -139,6 +175,11 @@ public class PolicyScreen : MonoBehaviour
             yield return new WaitForSeconds(0.4f);
             _p3.gameObject.SetActive(value);
             ActivateAnim(_p3);
+            yield return new WaitForSeconds(0.4f);
+            _p1.Select.gameObject.SetActive(true);
+            _p2.Select.gameObject.SetActive(true);
+            _p3.Select.gameObject.SetActive(true);
+            _info.SetBool("In", true);
         }  
     }
 

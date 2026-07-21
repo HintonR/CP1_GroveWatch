@@ -19,4 +19,4 @@ MonoBehaviour:
   _availableSeason: 2
   _health: 120
   _chance: 15
-  _damage: 0.8
+  _damage: 0.7

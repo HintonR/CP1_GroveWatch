@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Negotiate Lower Targets
   _rep: 5
-  _budget: -5000
+  _budget: 5000
   _cooldown: 0.9
   _effectiveness: 0.9

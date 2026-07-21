@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
 
-    const float Q_LENGTH = 75;
-    const float M_LENGTH = 200;
-    const float L_LENGTH = 500;
+    const float Q_LENGTH = 90;
+    const float M_LENGTH = 210;
+    const float L_LENGTH = 480;
     const float E_LENGTH = 999999999;
     ServiceHub _sH;
 
@@ -44,15 +44,13 @@ public class MainMenu : MonoBehaviour
         _sH = ServiceHub.Instance;
     }
 
-    void OnEnable()
-    {
-        
-    }
-
     void Start()
     {
         newGameButton.onClick.AddListener(ShowGameModeMenu);
         newGameButton.onClick.AddListener(PlayGenericSFX);
+
+        optionsButton.onClick.AddListener(() => _sH._gM.OpenSettings());
+        optionsButton.onClick.AddListener(PlayGenericSFX);
 
         quitButton.onClick.AddListener(QuitGame);
        
@@ -68,9 +66,7 @@ public class MainMenu : MonoBehaviour
         backMain.onClick.AddListener(ShowMainMenu);
         backMain.onClick.AddListener(PlayBackSFX);
         backMode.onClick.AddListener(ShowGameModeMenu);
-        backMode.onClick.AddListener(PlayBackSFX);
-   
-        ShowMainMenu();
+        backMode.onClick.AddListener(PlayBackSFX);   
     }
 
     void PlayGenericSFX()
@@ -143,9 +139,11 @@ public class MainMenu : MonoBehaviour
         _sH._gM._progress = 0;
         _sH._gM._money = 5000;
         _sH._gM._gameOverTriggered = false;
+        _sH._gM._victoryTriggered = false;
         _sH._gM._isPaused = false;
         _sH._gM._inScreen = false;
         _sH._gM._isEndless = false;
+        _sH._gM.ResetIncidents();
     }
 
     void QuitGame()

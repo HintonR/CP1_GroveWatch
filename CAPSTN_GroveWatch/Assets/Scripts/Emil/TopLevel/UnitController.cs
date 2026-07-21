@@ -7,7 +7,7 @@ public class UnitController : MonoBehaviour
 {
     ServiceHub _sH;
 
-    const float PENALTY = 15f;
+    const float PENALTY = 20f;
     void Awake()
     {
         ServiceHub.Instance._unit = this;

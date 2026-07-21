@@ -15,5 +15,5 @@ MonoBehaviour:
   _title: Refuse Quota
   _rep: -15
   _budget: 0
-  _cooldown: 1
-  _effectiveness: 1.2
+  _cooldown: 0.9
+  _effectiveness: 1.25

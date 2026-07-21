@@ -12,11 +12,11 @@ public class UIController : MonoBehaviour
     [SerializeField] TransitionSettings _transition;
 
     [SerializeField] Image _repBar, _progBar, _season;
-    [SerializeField] TextMeshProUGUI _money, _month, _year;
+    [SerializeField] TextMeshProUGUI _money, _month, _year, _repPercent, _progPercent;
     [SerializeField] Sprite _dry, _wet, _dryBG, _wetBG, _pausedBG;
     [SerializeField] SpriteRenderer _bg;
     [SerializeField] GameObject _researchScreen, _policyScreen, _pauseMenu, _pauseVolume;
-    [SerializeField] Button _play, _pause;
+    [SerializeField] Button _play, _pause, _settings;
     [SerializeField] GameObject _funit1, _funit2, _runit1, _runit2, _punit1, _punit2;
 
     [SerializeField] Animator _left, _top, _bottom, _right;
@@ -38,9 +38,13 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        
+        _settings.onClick.AddListener(() => _sH._gM.OpenSettings());
+        _settings.onClick.AddListener(() => _sH._aM.PlaySFX(SFX.Generic));
+
         UpdateBar(_sH._gM._progress, _sH._gM._maxProgress, _progBar, _progFill);
+        UpdateProgPercent();
         UpdateBar(_sH._gM._reputation, _sH._gM._maxReputation, _repBar, _repFill);
+        UpdateRepPercent();
         UpdateMoney();
     }
 
@@ -137,6 +141,18 @@ public class UIController : MonoBehaviour
     {
         _season.sprite = isWet ? _wet : _dry;
         _bg.sprite = isWet? _wetBG : _dryBG;
+    }
+
+    public void UpdateRepPercent()
+    {
+        float percent = _sH._gM._reputation / _sH._gM._maxReputation * 100f;
+        _repPercent.text = Mathf.CeilToInt(percent) + "%";
+    }
+
+    public void UpdateProgPercent()
+    {
+        float percent = _sH._gM._progress / _sH._gM._maxProgress * 100f;
+        _progPercent.text = Mathf.FloorToInt(percent) + "%";
     }
 
     public void UpdateBar(float current, float max, Image i, Coroutine c)
@@ -272,10 +288,13 @@ public class UIController : MonoBehaviour
 
     public void OpenPolicyScreen()
     {
+        var _tM = TransitionManager.Instance();
+        if (_tM.isBusy)
+            return;
+
         _sH._gM._inScreen = true;
         _sH._aM.PlayMusic(Music.Policy);
         ToggleHUD(false);
-        var _tM = TransitionManager.Instance();
         _tM.onTransitionCutPointReached += ActivatePolicy;
         _tM.Transition(_transition, 0.1f);
     }

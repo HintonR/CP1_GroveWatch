@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: P4C1
   m_EditorClassIdentifier: 
   _title: Immediately Reduce Patrols
-  _rep: 20
-  _budget: 5000
-  _cooldown: 1
-  _effectiveness: 0.8
+  _rep: 25
+  _budget: 0
+  _cooldown: 0.9
+  _effectiveness: 0.7

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3a7bbaa64130c4781c9d04ef9e1b1e, type: 3}
+  m_Name: Debt Ending
+  m_EditorClassIdentifier: 
+  cutsceneName: Ending G
+  lines:
+  - image: {fileID: 21300000, guid: ad1844ced34557a498b138cdf453f10b, type: 3}
+    title: 
+    text: You are repimanded for making poor financial decisions and mismanaging
+      the DENR budget.
+    changeMusic: 1
+    music: 4
+  - image: {fileID: 21300000, guid: b5c98c31670a52644a8042de4f0c3faf, type: 3}
+    title: 
+    text: Outside the office, riots ensue, claiming corruption against you and the
+      office.
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 8a3e144b151a54047a29ad34bb5a6a3c, type: 3}
+    title: 
+    text: You have failed the citizens of Cebu and tarnished the reputation of both
+      GroveWatch and the DENR.
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 800f436eb9a4d7f47938ad7bd7ce44a3, type: 3}
+    title: 
+    text: 'The computer displays a large red notice showing both financial collapse
+      and significant environmental loss.
+
+'
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 7fb966de05974d24592c850ca1952131, type: 3}
+    title: 
+    text: Due to your failures, you have been forced to resign...
+    changeMusic: 0
+    music: 0
+  onComplete: 0
+  nextSceneName: TitleScreen
+  playMode: 0

@@ -1,10 +1,7 @@
 using EasyTransition;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum IncidentType
 {
@@ -16,10 +13,11 @@ public enum IncidentType
     Construction
 }
 
-public enum GameOverReason
+public enum CutsceneReason
 {
     Reputation,
-    Debt
+    Debt,
+    Victory
 }
 
 public class GameManager : Singleton<GameManager>
@@ -43,8 +41,9 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private int debtThreshold = -50000;
 
-    public static GameOverReason LastGameOverReason = GameOverReason.Reputation;
+    public static CutsceneReason LastGameOverReason = CutsceneReason.Reputation;
     public bool _gameOverTriggered = false;
+    public bool _victoryTriggered = false;
 
     void Awake()
     {
@@ -65,6 +64,9 @@ public class GameManager : Singleton<GameManager>
         _progress = 0;
 
         _money = 5000;
+
+        _gameOverTriggered = false;
+        _victoryTriggered = false; 
     }
 
     void UpdateProgress()
@@ -72,6 +74,28 @@ public class GameManager : Singleton<GameManager>
         var progBar = _sH._UI.ProgBar;
         var progCo = _sH._UI.ProgFill;
         _sH._UI.UpdateBar(_progress, _maxProgress, progBar, progCo);
+        _sH._UI.UpdateProgPercent();
+        CheckVictory();
+    }
+
+    public void CheckVictory()
+    {
+        if (_gameOverTriggered) return;
+        if (_isEndless) return;
+
+        if (_progress >= _maxProgress)
+            TriggerVictory();
+    }
+
+    private void TriggerVictory()
+    {
+        if (_victoryTriggered || _gameOverTriggered) return;
+        _victoryTriggered = true;
+        LastGameOverReason = CutsceneReason.Victory;
+
+        var _tM = TransitionManager.Instance();
+        var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush");
+        _tM.Transition("CutsceneScene", transitionSetting, 0.2f);
     }
 
     void UpdateReputation()
@@ -79,6 +103,13 @@ public class GameManager : Singleton<GameManager>
         var repBar = _sH._UI.RepBar;
         var repCo = _sH._UI.RepFill;
         _sH._UI.UpdateBar(_reputation, _maxReputation, repBar, repCo);
+        _sH._UI.UpdateRepPercent();
+
+        if (_reputation <= 0 && !_gameOverTriggered) //slight mods here
+        {
+            LastGameOverReason = CutsceneReason.Reputation;
+            TriggerGameOver();
+        }
     }
 
     public void SetMaxProgress(float value)
@@ -97,21 +128,17 @@ public class GameManager : Singleton<GameManager>
     {
         _reputation += value;
         _reputation = Mathf.Min(_reputation, _maxReputation);
+        _reputation = Math.Max(0, _reputation);
         UpdateReputation();
-
-        if (_reputation <= 0 && !_gameOverTriggered) //slight mods here
-        {
-            LastGameOverReason = GameOverReason.Reputation;
-            TriggerGameOver();
-        }
     }
 
     private void TriggerGameOver()
     {
         if (_gameOverTriggered) return;
+        var _tM = TransitionManager.Instance();
+        if (_tM.isBusy) return;
         
         _gameOverTriggered = true;
-        var _tM = TransitionManager.Instance();
         var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush"); //hacky, the entire transitions folder got copied to Resources
         _tM.Transition("CutsceneScene", transitionSetting, 0.2f);
     }
@@ -134,7 +161,7 @@ public class GameManager : Singleton<GameManager>
         if (_gameOverTriggered) return;
         if (_money <= debtThreshold)
         {
-            LastGameOverReason = GameOverReason.Debt;
+            LastGameOverReason = CutsceneReason.Debt;
             TriggerGameOver();
         }
     }
@@ -161,6 +188,16 @@ public class GameManager : Singleton<GameManager>
         }
 
         return (IncidentType)maxIndex;
+    }
+
+    public void ResetIncidents()
+    {
+        Array.Clear(_incidents, 0, _incidents.Length);
+    }
+
+    public void OpenSettings()
+    {
+        SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
     }
 
 }

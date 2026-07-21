@@ -99,9 +99,9 @@ public class TimeController : MonoBehaviour
             int rinc = _sH._iM.GetIncomeForUnit(_r);
             int pinc = _sH._iM.GetIncomeForUnit(_p);
             
-            finc *= _dCounter;
-            rinc *= _dCounter;
-            pinc *= _dCounter;
+            finc *= _dCounter + 1;
+            rinc *= _dCounter + 1;
+            pinc *= _dCounter + 1;
 
             int deploymentIncentive = finc + rinc + pinc;
 

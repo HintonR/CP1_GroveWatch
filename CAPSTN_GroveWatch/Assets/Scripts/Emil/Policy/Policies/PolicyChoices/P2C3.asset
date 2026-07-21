@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _title: Reject Proposal
   _rep: -5
-  _budget: -10000
+  _budget: -5000
   _cooldown: 0.9
   _effectiveness: 1.1
