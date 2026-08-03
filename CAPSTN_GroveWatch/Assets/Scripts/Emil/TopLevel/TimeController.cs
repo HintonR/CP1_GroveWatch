@@ -22,6 +22,8 @@ public class TimeController : MonoBehaviour
     int _yCounter;
     int _dCounter;
 
+    public bool _needPolicy = false;
+
     public int MaxActiveForestEvents
     {
         get
@@ -42,13 +44,12 @@ public class TimeController : MonoBehaviour
 
     void Awake()
     {
-        ServiceHub.Instance._time = this;
+        _sH = ServiceHub.Instance;
+        _sH._time = this;
     }
 
     void Start()
     {
-        _sH = ServiceHub.Instance;
-        
         InitCounters();
 
         UpdateMonth();
@@ -56,6 +57,12 @@ public class TimeController : MonoBehaviour
         UpdateSeason();
 
         StartTime();
+    }
+
+    void Update()
+    {
+        if (_needPolicy)
+            _sH._UI.OpenPolicyScreen();
     }
 
     void InitCounters()
@@ -112,7 +119,7 @@ public class TimeController : MonoBehaviour
             _dCounter++;
 
         if (_mCounter % 6 == 0)
-            _sH._UI.OpenPolicyScreen();
+            _needPolicy = true;
 
         if (_mCounter > 12)
         {

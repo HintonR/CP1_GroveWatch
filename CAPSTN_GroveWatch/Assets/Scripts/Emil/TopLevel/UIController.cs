@@ -194,9 +194,12 @@ public class UIController : MonoBehaviour
 
     public void CloseResearch()
     {
+        var _tM = TransitionManager.Instance();
+        if (_tM.isBusy)
+            return;
+
         _sH._aM.PlayMusic(Music.Gameplay);
         _sH._aM.PlaySFX(SFX.Back);
-        var _tM = TransitionManager.Instance();
         _tM.onTransitionCutPointReached += DeactivateResearch;
         _tM.Transition(_transition, 0.1f);
     }
@@ -247,8 +250,8 @@ public class UIController : MonoBehaviour
 
     public void OpenPauseMenu()
     {
-        _sH._aM.PlaySFX(SFX.Generic);
         _sH._gM._inScreen = true;
+        _sH._aM.PlaySFX(SFX.Generic);
         ToggleHUD(false);
         var _tM = TransitionManager.Instance();
         _tM.onTransitionCutPointReached += ActivatePause;
@@ -257,8 +260,11 @@ public class UIController : MonoBehaviour
 
     public void ClosePauseMenu()
     {
-        _sH._aM.PlaySFX(SFX.Back);    
         var _tM = TransitionManager.Instance();
+        if (_tM.isBusy)
+            return;
+
+        _sH._aM.PlaySFX(SFX.Back);    
         _tM.onTransitionCutPointReached += DeactivatePause;
         _tM.Transition(_transition, 0.1f);
     }
@@ -281,17 +287,24 @@ public class UIController : MonoBehaviour
 
     public void QuitToMenu()
     {
-        _sH._aM.PlaySFX(SFX.Back);
         var _tM = TransitionManager.Instance();
+        if (_tM.isBusy)
+            return;
+
+        _sH._aM.PlaySFX(SFX.Back);
         _tM.Transition("TitleScreen", _transition, 0.2f);
     }
 
     public void OpenPolicyScreen()
     {
+        if (_sH._gM._inScreen)
+            return;
+        
         var _tM = TransitionManager.Instance();
         if (_tM.isBusy)
             return;
 
+        _sH._time._needPolicy = false;
         _sH._gM._inScreen = true;
         _sH._aM.PlayMusic(Music.Policy);
         ToggleHUD(false);
@@ -301,8 +314,11 @@ public class UIController : MonoBehaviour
 
     public void ClosePolicyScreen()
     {
-        _sH._aM.PlayMusic(Music.Gameplay);
         var _tM = TransitionManager.Instance();
+        if (_tM.isBusy)
+            return;
+     
+        _sH._aM.PlayMusic(Music.Gameplay);
         _tM.onTransitionCutPointReached += DeactivatePolicy;
         _tM.Transition(_transition, 0.1f);
     }
