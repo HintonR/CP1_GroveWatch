@@ -87,7 +87,7 @@ MonoBehaviour:
     text: "If at any point you want to change audio settings\nor quit the game, you
       may press the Gear Button \nor [Esc] to view the Pause Menu."
     changeMusic: 0
-    music: 0
-  onComplete: 0
-  nextSceneName: Intro
-  playMode: 1
+    music: 1
+  musicOnEnd: 1
+  endMusic: 0
+  nextSceneName: 

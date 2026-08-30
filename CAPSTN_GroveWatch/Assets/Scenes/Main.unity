@@ -8540,6 +8540,7 @@ GameObject:
   - component: {fileID: 1617832371}
   - component: {fileID: 1617832370}
   - component: {fileID: 1617832372}
+  - component: {fileID: 1617832373}
   m_Layer: 0
   m_Name: Bootstrapper
   m_TagString: Untagged
@@ -8586,6 +8587,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f9dfa621465f834aab1650768cd37d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1617832373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617832369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34ae664d3020c6a9c426ea48cac9cd82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introTutorial: {fileID: 11400000, guid: fc2a762be8561554e9e2f99fa848fccb, type: 2}
 --- !u!1 &1629774634
 GameObject:
   m_ObjectHideFlags: 0
@@ -8620,6 +8634,7 @@ MonoBehaviour:
   _f: {fileID: 11400000, guid: ecae6e56e7bc7ea4dad305d4896dc9d5, type: 2}
   _r: {fileID: 11400000, guid: d07f2d85ece511c45b6be4e1c3214cfa, type: 2}
   _p: {fileID: 11400000, guid: a5cfc636c91b82742855ad9523460ee2, type: 2}
+  _needPolicy: 0
 --- !u!4 &1629774636
 Transform:
   m_ObjectHideFlags: 0

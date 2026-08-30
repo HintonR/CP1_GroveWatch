@@ -2772,7 +2772,7 @@ MonoBehaviour:
   mediumButton: {fileID: 82170177}
   longButton: {fileID: 2136549702}
   backMode: {fileID: 1255203177}
-  cutsceneToPlay: {fileID: 11400000, guid: fc2a762be8561554e9e2f99fa848fccb, type: 2}
+  tutorialPromptSceneName: TutorialPromptScene
 --- !u!114 &1039524244
 MonoBehaviour:
   m_ObjectHideFlags: 0

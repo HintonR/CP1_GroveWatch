@@ -5,379 +5,161 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CutscenePlayer : MonoBehaviour
+public class CutscenePlayer : DialoguePlayerBase
 {
-    ServiceHub _sH;
-
-    [Header("UI References")]
-    [SerializeField] private Image displayImage;
-    [SerializeField] private TextMeshProUGUI dialogueText;
-
     [Header("Cutscene Mode UI")]
     [SerializeField] private GameObject continueIndicator;
 
-    [Header("Tutorial Mode UI")]
-    [SerializeField] private Button backButton;
-    [SerializeField] private Button nextButton;
-    [SerializeField] private TextMeshProUGUI titleText;
-    [SerializeField] private Button startGameButton;
+    //used febucci as inspiration
+    //https://blog.febucci.com/2019/02/skip-cutscenes-button/ 
+    [Header("Hold To Skip")]
+    [SerializeField] private bool allowSkip = true;
+    [SerializeField] private KeyCode skipKey = KeyCode.C;
+    [SerializeField] private float holdToSkipDuration = 1.25f;
+    [SerializeField] private float skipReleaseDecay = 2f;
+    [SerializeField] private GameObject skipPromptRoot;  
+    [SerializeField] private Image skipFillImage;
 
-    [Header("Tutorial Prompts")]
-    [SerializeField] private GameObject promptPanel;
-    [SerializeField] private Button promptYesButton;
-    [SerializeField] private Button promptNoButton;
+    [Header("Gameplay")]
+    [SerializeField] private bool holdGameplayWhileActive = false;
 
-    [Header("Tutorial Content")]
-    [SerializeField] private GameObject panelImage;
-    [SerializeField] private GameObject dialoguePanel;
-    [SerializeField] private GameObject navigationRow;
-    [SerializeField] private CutsceneData introCutscene;
-    [SerializeField] GameObject _panel, _tape;
-    [SerializeField] TextMeshProUGUI _pageNumber;
-    [SerializeField] GameObject _tutorialPanel;
+    float skipProgress; //seconds held, clamped to [0, holdToSkipDuration]
+    bool heldGameplay;
 
-    [Header("Typewriter")]
-    [SerializeField] private float charactersPerSecond = 40f;
-
-    [Header("Image Fade")]
-    [SerializeField] private float fadeOutDuration = 0.35f;
-    [SerializeField] private float fadeInDuration = 0.35f;
-
-    [Header("End Fade (Cutscenes)")]
-    [SerializeField] private CanvasGroup fadeGroup;
-    [SerializeField] private float endFadeDuration = 1.2f;
-    [SerializeField] private float endHoldDelay = 0.4f;
-
-
-    [Header("Testing")]
-    [SerializeField] private CutsceneData testCutscene;
-
-
-    [SerializeField] TransitionSettings _transition;
-
-    private CutsceneData currentCutscene;
-    private int currentLine;
-    private Coroutine typingRoutine;
-    private Coroutine lineRoutine;
-    private bool isTyping;
-    private bool isTransitioning;
-    private string currentFullText;
-
-    void Awake()
+    protected override void Awake()
     {
-        _sH = ServiceHub.Instance;
+        base.Awake();
+        if (continueIndicator) continueIndicator.SetActive(false);
+        UpdateSkipUI();
     }
 
-    void Start()
+    protected override void OnDisable()
     {
-        //editor testing, pls empty testCutscene on real builds
-        currentCutscene = CutsceneState.SelectedCutscene != null
-            ? CutsceneState.SelectedCutscene
-            : testCutscene;
-        CutsceneState.Clear(); //clear so next playthrough needs a fresh assignment
-
-        if (currentCutscene.playMode == CutscenePlayMode.Tutorial)
-        {
-            if (backButton != null) backButton.onClick.AddListener(GoBack);
-            if (nextButton != null) nextButton.onClick.AddListener(Advance);
-            if (startGameButton != null) startGameButton.onClick.AddListener(StartGameTutorial);
-            if (promptPanel != null)
-            {
-                promptPanel.SetActive(true);
-                SetTutorialContentActive(false);
-                if (promptYesButton != null) promptYesButton.onClick.AddListener(OnPromptYes);
-                if (promptNoButton != null) promptNoButton.onClick.AddListener(OnPromptNo);
-                return;
-            }
-           
-        }
-
-        currentLine = 0;
-        ShowLine(isFirstLine: true);
+        base.OnDisable();
+        ReleaseGameplay();
     }
 
-    void OnPromptYes()
+    public override void Play(CutsceneData data)
     {
-        _sH._aM.PlaySFX(SFX.Generic);
-        CutsceneState.SelectedCutscene = introCutscene;
-        if (promptPanel != null) promptPanel.SetActive(false);
-        SetTutorialContentActive(true);
-        currentLine = 0;
-        ShowLine(isFirstLine: true);
+        skipProgress = 0f;
+        UpdateSkipUI();
+        HoldGameplay();
+        base.Play(data);
     }
 
-    void OnPromptNo()
-    {
-        _sH._aM.PlaySFX(SFX.Back);
-        var _tM = TransitionManager.Instance();
-
-        if (_tM.isBusy)
-         return;
-         
-        CutsceneState.SelectedCutscene = introCutscene;
-        _tM.Transition("CutsceneScene", _transition, 0.2f);
-    }
-    void StartGameTutorial()
-    {
-        _sH._aM.PlaySFX(SFX.Generic);
-        var _tM = TransitionManager.Instance();
-        CutsceneState.SelectedCutscene = introCutscene;
-        _tM.Transition("CutsceneScene", _transition, 0.2f);
-    }
     void Update()
     {
-        if (currentCutscene.playMode == CutscenePlayMode.Cutscene)
+        if (!IsPlaying) return;
+
+        if (HandleSkipInput()) return; //skipped this frame, nothing left to do
+
+        if (IsFading) return;
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+            OnAdvanceInput();
+    }
+
+    bool HandleSkipInput()
+    {
+        if (!allowSkip || holdToSkipDuration <= 0f) return false;
+
+        bool holding = Input.GetKey(skipKey);
+        float rate = holding ? 1f : -Mathf.Max(0.01f, skipReleaseDecay);
+        skipProgress = Mathf.Clamp(skipProgress + rate * Time.unscaledDeltaTime, 0f, holdToSkipDuration);
+
+        UpdateSkipUI();
+
+        if (holding && skipProgress >= holdToSkipDuration)
         {
-            if (isTransitioning) return;
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                OnAdvanceInput();
+            Skip();
+            return true;
+        }
+        return false;
+    }
+
+    void UpdateSkipUI()
+    {
+        float progress = holdToSkipDuration > 0f ? Mathf.Clamp01(skipProgress / holdToSkipDuration) : 0f;
+
+        if (skipFillImage != null) skipFillImage.fillAmount = progress;
+
+        if (skipPromptRoot != null)
+        {
+            if (skipPromptRoot.activeSelf != allowSkip) skipPromptRoot.SetActive(allowSkip);
         }
     }
 
-    void ShowLine(bool isFirstLine = false)
+    public void Skip()
     {
-        var line = currentCutscene.lines[currentLine];
-        currentFullText = line.text;
-        if (line.changeMusic)
-            ServiceHub.Instance._aM.PlayMusic(line.music);
+        if (!IsPlaying) return;
 
-        dialogueText.text = "";
-
-        if (continueIndicator) 
-            continueIndicator.SetActive(false);
-
-        bool spriteChanged = isFirstLine || (line.image != null && displayImage.sprite != line.image);
-
-        if (currentCutscene.playMode == CutscenePlayMode.Tutorial)
-        {
-            UpdateTutorialUI();
-            return;
-        }
-        
-        if (lineRoutine != null) StopCoroutine(lineRoutine);
-            lineRoutine = StartCoroutine(PlayLine(line.image, spriteChanged));
-
+        ApplyRemainingMusicCues();
+        skipProgress = 0f;
+        UpdateSkipUI();
+        Finish();
     }
-
-    void UpdateTutorialUI()
+    void ApplyRemainingMusicCues()
     {
-        int lastIndex = currentCutscene.lines.Length - 1;
-        if (backButton != null) backButton.gameObject.SetActive(currentLine > 0);
-        if (nextButton != null) nextButton.gameObject.SetActive(currentLine < lastIndex);
-        if (startGameButton != null) startGameButton.gameObject.SetActive(currentLine == lastIndex);
-        if (titleText != null) titleText.text = currentCutscene.lines[currentLine].title;
-        dialogueText.text = currentCutscene.lines[currentLine].text;
-        var currentPage = currentLine + 1;
-        _pageNumber.text = currentPage + "/" + currentCutscene.lines.Length;
+        if (sequence == null || sequence.lines == null) return;
+        if (_sH == null || _sH._aM == null) return;
 
-        var line = currentCutscene.lines[currentLine];
-        currentFullText = line.text;
-        bool isFirstLine = false;
-        bool spriteChanged = isFirstLine || (line.image != null && displayImage.sprite != line.image);
-        if (lineRoutine != null) StopCoroutine(lineRoutine);
-            lineRoutine = StartCoroutine(TutorialImage(line.image, spriteChanged));
-
-        
-        _tutorialPanel.GetComponent<Shake>().DoShake();
-    }
-
-    void SetTutorialContentActive(bool active)
-    {
-        if (panelImage != null) panelImage.SetActive(active);
-        if (dialoguePanel != null) dialoguePanel.SetActive(active);
-        if (navigationRow != null) navigationRow.SetActive(active);
-        if (displayImage != null) displayImage.gameObject.SetActive(active);
-        if (titleText != null) titleText.gameObject.SetActive(active);
-        if (_panel != null) _panel.SetActive(active);
-        if (_tape != null) _tape.SetActive(active);
-    }
-
-    IEnumerator TutorialImage(Sprite newSprite, bool fade)
-    {
-                if (fade && newSprite != null)
+        for (int i = LastLineIndex; i > currentLine; i--)
         {
-            isTransitioning = true;
-
-            if (displayImage.sprite != null && displayImage.color.a > 0f)
-                yield return FadeImage(1f, 0f, fadeOutDuration);
-
-            displayImage.sprite = newSprite;
-
-            yield return FadeImage(0f, 1f, fadeInDuration);
-
-            isTransitioning = false;
-        }
-        else if (newSprite != null)
-        {
-            displayImage.sprite = newSprite;
-        }
-    }
-
-    IEnumerator PlayLine(Sprite newSprite, bool fade)
-    {
-        if (fade && newSprite != null)
-        {
-            isTransitioning = true;
-
-            if (displayImage.sprite != null && displayImage.color.a > 0f)
-                yield return FadeImage(1f, 0f, fadeOutDuration);
-
-            displayImage.sprite = newSprite;
-
-            yield return FadeImage(0f, 1f, fadeInDuration);
-
-            isTransitioning = false;
-        }
-        else if (newSprite != null)
-        {
-            displayImage.sprite = newSprite;
-        }
-
-        if (typingRoutine != null) StopCoroutine(typingRoutine);
-        typingRoutine = StartCoroutine(TypewriterRoutine());
-
-    }
-
-    IEnumerator FadeImage(float from, float to, float duration)
-    {
-        float t = 0f;
-        Color c = displayImage.color;
-        c.a = from;
-        displayImage.color = c;
-
-        while (t < duration)
-        {
-            t += Time.deltaTime;
-            c.a = Mathf.Lerp(from, to, t / duration);
-            displayImage.color = c;
-            yield return null;
-        }
-
-        c.a = to;
-        displayImage.color = c;
-    }
-
-    IEnumerator TypewriterRoutine()
-    {
-        isTyping = true;
-        if (continueIndicator) continueIndicator.SetActive(false);
-
-        dialogueText.text = currentFullText;
-        dialogueText.maxVisibleCharacters = 0;
-
-        int total = currentFullText.Length;
-        float interval = 1f / charactersPerSecond;
-        float timer = 0f;
-        int visible = 0;
-        int charsSinceBlip = 0;
-
-        while (visible < total)
-        {
-            timer += Time.deltaTime;
-            while (timer >= interval && visible < total)
+            if (sequence.lines[i].changeMusic)
             {
-                timer -= interval;
-                visible++;
-                dialogueText.maxVisibleCharacters = visible;
-                charsSinceBlip++;
-                if (charsSinceBlip >= 3) //spaced by 3 chars because the sfx murders your ears if it plays on each text
-                {
-                    ServiceHub.Instance._aM.PlaySFX(SFX.Text);
-                    charsSinceBlip = 0;
-                }
+                _sH._aM.PlayMusic(sequence.lines[i].music);
+                return;
             }
-            yield return null;
         }
-
-        isTyping = false;
-        if (continueIndicator) continueIndicator.SetActive(true);
     }
 
     void OnAdvanceInput()
     {
-        if (isTyping)
-        {
-            if (typingRoutine != null) StopCoroutine(typingRoutine);
-            dialogueText.text = currentFullText;
-            dialogueText.maxVisibleCharacters = currentFullText.Length;
-            isTyping = false;
-            if (continueIndicator) continueIndicator.SetActive(true);
-        }
+        if (IsTyping)
+            CompleteTyping();
         else
-        {
-            Advance();
-        }
+            AdvanceLine();
     }
 
-    void Advance()
-    {
-        _sH._aM.PlaySFX(SFX.Generic);
-        currentLine++;
-        if (currentLine >= currentCutscene.lines.Length)
-            OnCutsceneComplete();
-        else
-            ShowLine();
-    }
-
-    void GoBack()
-    {
-        _sH._aM.PlaySFX(SFX.Generic);
-        if (currentLine <= 0) return;
-        currentLine--;
-        ShowLine();
-    }
-
-    void OnCutsceneComplete()
+    protected override void OnLineShown(DialogueLine line)
     {
         if (continueIndicator) continueIndicator.SetActive(false);
-
-        if (currentCutscene.playMode == CutscenePlayMode.Cutscene)
-        {
-            var _tM = TransitionManager.Instance();
-            if (_tM.isBusy)
-                return;      
-            _tM.Transition(currentCutscene.nextSceneName, _transition, 0.2f);
-        }
-        else
-            HandleCompletion();
     }
 
-    IEnumerator EndFadeRoutine() //mostly unused now, here if needed later
+    protected override void OnTypingStarted()
     {
-        isTransitioning = true;
-
-        if (endHoldDelay > 0f)
-            yield return new WaitForSeconds(endHoldDelay);
-
-        if (fadeGroup != null)
-        {
-            float t = 0f;
-            float start = fadeGroup.alpha;
-            while (t < endFadeDuration)
-            {
-                t += Time.deltaTime;
-                fadeGroup.alpha = Mathf.Lerp(start, 0f, t / endFadeDuration);
-                yield return null;
-            }
-            fadeGroup.alpha = 0f;
-        }
-
-        HandleCompletion();
+        if (continueIndicator) continueIndicator.SetActive(false);
     }
 
-    void HandleCompletion()
+    protected override void OnTypingFinished()
     {
-        switch (currentCutscene.onComplete)
-        {
-            case CutsceneCompletionAction.LoadScene:
-                if (!string.IsNullOrEmpty(currentCutscene.nextSceneName))
-                    SceneManager.LoadScene(currentCutscene.nextSceneName);
-                else
-                    Debug.Log("you can't park here sir (nextSceneName empty)");
-                break;
-            case CutsceneCompletionAction.DoNothing:
-                Debug.Log("cutscene finished");
-                break;
-        }
+        if (continueIndicator) continueIndicator.SetActive(true);
+    }
+
+    protected override void OnSequenceComplete()
+    {
+        if (continueIndicator) continueIndicator.SetActive(false);
+        if (skipPromptRoot != null) skipPromptRoot.SetActive(false);
+
+        ReleaseGameplay();
+        gameObject.SetActive(false);
+    }
+
+    void HoldGameplay()
+    {
+        if (!holdGameplayWhileActive || heldGameplay) return;
+        if (_sH == null || _sH._gM == null) return;
+
+        _sH._gM._inScreen = true;
+        heldGameplay = true;
+    }
+
+    void ReleaseGameplay()
+    {
+        if (!heldGameplay) return;
+        heldGameplay = false;
+
+        if (_sH == null || _sH._gM == null) return;
+        _sH._gM._inScreen = false;
     }
 }

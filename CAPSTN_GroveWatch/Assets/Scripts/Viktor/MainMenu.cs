@@ -37,7 +37,8 @@ public class MainMenu : MonoBehaviour
     public Button backMode;
 
     //cutscene here
-    [SerializeField] private CutsceneData cutsceneToPlay;
+    //[SerializeField] private CutsceneData cutsceneToPlay;
+    [SerializeField] private string tutorialPromptSceneName = "TutorialPromptScene";
 
     void Awake()
     {
@@ -106,15 +107,8 @@ public class MainMenu : MonoBehaviour
         ResetVariables();
         _sH._gM._isEndless = value;
         _sH._gM.SetMaxProgress(progressValue);
-        
-        //cutscene
-        var _tM = TransitionManager.Instance();
-        
-        if (_tM.isBusy)
-            return;
-        
-        _tM.Transition("TutorialScene", _transition, 0.2f);
-        CutsceneState.SelectedCutscene = cutsceneToPlay;
+
+        GoToTutorialPrompt();
     }
 
     void OnDurationSelected(float progressValue)
@@ -123,14 +117,19 @@ public class MainMenu : MonoBehaviour
         _sH._gM.SetMaxProgress(progressValue);
         ResetVariables();
 
-        //cutscene
+        GoToTutorialPrompt();
+    }
+
+    void GoToTutorialPrompt()
+    {
+        TutorialState.Clear();
+
         var _tM = TransitionManager.Instance();
 
         if (_tM.isBusy)
             return;
-            
-        _tM.Transition("TutorialScene", _transition, 0.2f);
-        CutsceneState.SelectedCutscene = cutsceneToPlay;
+
+        _tM.Transition(tutorialPromptSceneName, _transition, 0.2f);
     }
 
     void ResetVariables()

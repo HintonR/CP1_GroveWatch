@@ -93,9 +93,13 @@ public class GameManager : Singleton<GameManager>
         _victoryTriggered = true;
         LastGameOverReason = CutsceneReason.Victory;
 
-        var _tM = TransitionManager.Instance();
+        //old, remove if everything seems fine
+        //var _tM = TransitionManager.Instance();
+        //var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush");
+        //_tM.Transition("CutsceneScene", transitionSetting, 0.2f);
+
         var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush");
-        _tM.Transition("CutsceneScene", transitionSetting, 0.2f);
+        CutsceneSceneDirector.GoToCutsceneScene(transitionSetting, 0.2f);
     }
 
     void UpdateReputation()
@@ -140,7 +144,8 @@ public class GameManager : Singleton<GameManager>
         
         _gameOverTriggered = true;
         var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush"); //hacky, the entire transitions folder got copied to Resources
-        _tM.Transition("CutsceneScene", transitionSetting, 0.2f);
+        CutsceneSceneDirector.GoToCutsceneScene(transitionSetting, 0.2f);
+        //_tM.Transition("CutsceneScene", transitionSetting, 0.2f);
     }
 
     public void ChangeMoney(int value)
