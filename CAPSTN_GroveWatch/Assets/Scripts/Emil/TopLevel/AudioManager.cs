@@ -9,7 +9,11 @@ public enum Music
     Research,
     Policy,
     GameOver,
-    Victory
+    Victory,
+    Overworld,
+    Cebu,
+    Bagiuo,
+    Pawalan
 }
 public enum SFX
 {
@@ -49,6 +53,8 @@ public class AudioManager : Singleton<AudioManager>
     AudioClip _runeBTN, _purchaseBTN, _researchBTN, _backBTN, _genericBTN, 
             _invalidSFX, _textSFX, _droppedSFX, _switchSFX, _deforSFX, 
             _policySFX, _successSFX, _moneySFX;
+
+    AudioClip _drivingBGM, _cebuBGM, _bagiuoBGM, _palawanBGM;
 
     Music _current;
     Coroutine _currentCrossfade;
@@ -100,12 +106,14 @@ public class AudioManager : Singleton<AudioManager>
         _successSFX   = Resources.Load<AudioClip>("Audio/Success");
         _moneySFX     = Resources.Load<AudioClip>("Audio/Money");
 
+        _drivingBGM   = Resources.Load<AudioClip>("Audio/Driving");
+
         PreloadMusic();
     }
 
     void PreloadMusic()
     {
-        AudioClip[] clips = { _titleBGM, _gameplayBGM, _researchBGM, _policyBGM, _gameoverBGM, _victoryBGM };
+        AudioClip[] clips = { _titleBGM, _gameplayBGM, _researchBGM, _policyBGM, _gameoverBGM, _victoryBGM, _drivingBGM };
 
         foreach (var c in clips)
             c.LoadAudioData();
@@ -149,12 +157,13 @@ public class AudioManager : Singleton<AudioManager>
         AudioClip _nextMusic = null;
         switch (_music)
         {
-            case Music.Title    : _nextMusic = _titleBGM;     break;
-            case Music.Gameplay : _nextMusic = _gameplayBGM;  break;
-            case Music.Research : _nextMusic = _researchBGM;  break;
-            case Music.Policy   : _nextMusic = _policyBGM;    break;
-            case Music.Victory  : _nextMusic = _victoryBGM;   break;
-            case Music.GameOver  : _nextMusic = _gameoverBGM; break;
+            case Music.Title     : _nextMusic = _titleBGM;     break;
+            case Music.Gameplay  : _nextMusic = _gameplayBGM;  break;
+            case Music.Research  : _nextMusic = _researchBGM;  break;
+            case Music.Policy    : _nextMusic = _policyBGM;    break;
+            case Music.Victory   : _nextMusic = _victoryBGM;   break;
+            case Music.GameOver  : _nextMusic = _gameoverBGM;  break;
+            case Music.Overworld : _nextMusic = _drivingBGM;   break;
         }
 
         _current = _music;

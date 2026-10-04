@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PolicyScreen : MonoBehaviour
@@ -11,6 +13,7 @@ public class PolicyScreen : MonoBehaviour
     [SerializeField] List<PolicyDataSO> _policies;
     [SerializeField] PolicyChoice _p1, _p2, _p3;
     [SerializeField] Sprite _g1, _g2, _r1, _r2;
+    [SerializeField] Sprite _smile, _frown;
     [SerializeField] Animator _info;
 
     Coroutine _promptRoutine;
@@ -53,6 +56,8 @@ public class PolicyScreen : MonoBehaviour
     {
         var textSpeed = 40f;
         StartTypewriter(_prompt, _policies[pIndex].Prompt, textSpeed, ref _promptRoutine);
+
+        _sH._nM._policy = _policies[pIndex].Prompt;
     }
 
     void StartTypewriter(TextMeshProUGUI textComponent, string content, float speed, ref Coroutine routine)
@@ -125,36 +130,60 @@ public class PolicyScreen : MonoBehaviour
             : FormatValue(data.Budget, " php");
 
         choice.CDIcon.gameObject.SetActive(true);
-        var cdValue = data.GetValue(BonusType.CD);
-        if (cdValue < 1f && cdValue >= 0.8f)
+        var cdValue = data.GetModifierValue(BonusType.CD);
+        if (cdValue < 1f && cdValue >= News.UNIT_FLOOR)
             choice.CDIcon.sprite = _g1;
-        if (cdValue < 0.8f)
+        if (cdValue < News.UNIT_FLOOR)
             choice.CDIcon.sprite = _g2;
-        if (cdValue > 1f && cdValue <= 1.2f)
+        if (cdValue > 1f && cdValue <= News.UNIT_CEILING)
             choice.CDIcon.sprite = _r1;
-        if (cdValue > 1.2f)
+        if (cdValue > News.UNIT_CEILING)
             choice.CDIcon.sprite = _r2;
         if (cdValue == 1f)
             choice.CDIcon.gameObject.SetActive(false);
 
         choice.EFIcon.gameObject.SetActive(true);
-        var efValue = data.GetValue(BonusType.EF);
-        if (efValue < 1f && efValue >= 0.8f)
+        var efValue = data.GetModifierValue(BonusType.EF);
+        if (efValue < 1f && efValue >= News.UNIT_FLOOR)
             choice.EFIcon.sprite = _r1;
-        if (efValue < 0.8f)
+        if (efValue < News.UNIT_FLOOR)
             choice.EFIcon.sprite = _r2;
-        if (efValue > 1f && efValue <= 1.2f)
+        if (efValue > 1f && efValue <= News.UNIT_CEILING)
             choice.EFIcon.sprite = _g1;
-        if (efValue > 1.2f)
+        if (efValue > News.UNIT_CEILING)
             choice.EFIcon.sprite = _g2;
         if (efValue == 1f)
             choice.EFIcon.gameObject.SetActive(false);
+
+        DrawFactionStatus(choice, data, Faction.Tourist);
+        DrawFactionStatus(choice, data, Faction.Citizen);
+        DrawFactionStatus(choice, data, Faction.Government);
 
         choice.Select.onClick.RemoveAllListeners();
         choice.Select.onClick.AddListener(() => _sH._aM.PlaySFX(SFX.Rune));
         choice.Select.onClick.AddListener(() => _sH._UI.ClosePolicyScreen());
         choice.Select.onClick.AddListener(() => UpdateInfo());
         choice.Select.onClick.AddListener(data.ApplyChoice);
+    }
+
+    void DrawFactionStatus(PolicyChoice choice, PolicyChoiceDataSO data, Faction faction)
+    {
+        var img = choice.F1;
+        if (faction == Faction.Tourist)
+            img = choice.F1;
+        if (faction == Faction.Citizen)
+            img = choice.F2;
+        if (faction == Faction.Government)
+            img = choice.F3;
+
+        img.gameObject.SetActive(true);
+        var value = data.GetFactionValue(faction);
+        if (value > 0)
+            choice.F1.sprite = _smile;
+        if (value < 0)
+            choice.F1.sprite = _frown;
+        if (value == 0)
+            img.gameObject.SetActive(false);
     }
 
     string FormatValue(int value, string suffix)
@@ -166,16 +195,16 @@ public class PolicyScreen : MonoBehaviour
     {
         if (value)
         {
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
             _p1.gameObject.SetActive(value);
             ActivateAnim(_p1);
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
             _p2.gameObject.SetActive(value);
             ActivateAnim(_p2);
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.3f);
             _p3.gameObject.SetActive(value);
             ActivateAnim(_p3);
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.2f);
             _p1.Select.gameObject.SetActive(true);
             _p2.Select.gameObject.SetActive(true);
             _p3.Select.gameObject.SetActive(true);

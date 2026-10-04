@@ -14,6 +14,11 @@ public class ServiceHub : Singleton<ServiceHub>
     public TimeController _time;
     public UIController _UI;
 
+    public FactionManager _fM;
+    public NewsManager _nM;
+
+    public DrivingHUD _dUI;
+
     void Awake()
     {
         _gM = GameManager.Instance;

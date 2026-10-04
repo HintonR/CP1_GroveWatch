@@ -12,7 +12,7 @@ public class CutsceneSceneDirector : MonoBehaviour
     [Header("Where To Go After")]
     [SerializeField] private TransitionSettings _transition;
     [SerializeField] private float transitionDelay = 0.2f;
-    [SerializeField] private string fallbackSceneName = "Main"; //default "Main" so it'll go back to main gameplay
+    [SerializeField] private string fallbackSceneName = "TutorialLevel"; //default "Main" so it'll go back to main gameplay
 
     [Header("Testing")]
     [SerializeField] private CutsceneData testCutscene; //plays when editor is in CutsceneScene, empty during real builds

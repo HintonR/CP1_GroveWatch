@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TimeController : MonoBehaviour
 {
-    const int QUATERLY_BUDGET = 10000;
     const float TIME_SPEED = 20;
     
     ServiceHub _sH;
@@ -13,6 +12,7 @@ public class TimeController : MonoBehaviour
     [SerializeField] int _baseActiveEvents = 1;
     [SerializeField] int _difficultyScaler = 2;
     [SerializeField] UnitData _f, _r, _p;
+    [SerializeField] int _quarterlyBudget;
 
     string[] _months = { "January", "February", "March", "April", 
                          "May", "June", "July", "August", 
@@ -21,6 +21,9 @@ public class TimeController : MonoBehaviour
     int _mCounter;
     int _yCounter;
     int _dCounter;
+
+    public void SetQuarterlyBudget(int value) { _quarterlyBudget = value; }
+    public int GetQuarterlyBudget => _quarterlyBudget;
 
     public bool _needPolicy = false;
 
@@ -59,7 +62,7 @@ public class TimeController : MonoBehaviour
         StartTime();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (_needPolicy)
             _sH._UI.OpenPolicyScreen();
@@ -112,7 +115,9 @@ public class TimeController : MonoBehaviour
 
             int deploymentIncentive = finc + rinc + pinc;
 
-            _sH._gM.ChangeMoney(QUATERLY_BUDGET + deploymentIncentive);
+            _sH._nM._deployment = deploymentIncentive;
+
+            _sH._gM.ChangeMoney(_quarterlyBudget + deploymentIncentive + _sH._gMods._tourBudget);
         }
 
         if (_mCounter % 4 == 0)
@@ -135,6 +140,8 @@ public class TimeController : MonoBehaviour
     void UpdateYear()
     {
         _sH._UI.UpdateYear(_yCounter);
+        _sH._nM._year = _yCounter;
+        _sH._nM._dispatches = 0;
     }
 
     void UpdateSeason()

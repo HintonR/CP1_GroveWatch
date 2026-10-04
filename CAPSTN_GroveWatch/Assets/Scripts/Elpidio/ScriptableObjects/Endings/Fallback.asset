@@ -19,6 +19,6 @@ MonoBehaviour:
     text: I'm a bug
     changeMusic: 1
     music: 3
-  onComplete: 0
-  nextSceneName: Main
-  playMode: 0
+  musicOnEnd: 0
+  endMusic: 0
+  nextSceneName: TutorialLevel

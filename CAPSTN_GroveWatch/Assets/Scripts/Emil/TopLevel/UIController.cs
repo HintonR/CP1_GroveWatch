@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -18,10 +19,13 @@ public class UIController : MonoBehaviour
     [SerializeField] GameObject _researchScreen, _policyScreen, _pauseMenu, _pauseVolume;
     [SerializeField] Button _play, _pause, _settings;
     [SerializeField] GameObject _funit1, _funit2, _runit1, _runit2, _punit1, _punit2;
+    [SerializeField] GameObject _newsBulletin;
 
     [SerializeField] Animator _left, _top, _bottom, _right;
 
     [SerializeField] RectTransform _fbn;
+
+    bool _inPauseScreen, _inResearchScreen, _inNewsScreen;
 
     Coroutine _repFill, _progFill;
 
@@ -32,8 +36,8 @@ public class UIController : MonoBehaviour
 
     void Awake()
     {
-        ServiceHub.Instance._UI = this;
         _sH = ServiceHub.Instance;
+        _sH._UI = this;
     }
 
     void Start()
@@ -50,6 +54,7 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.Space) && !_sH._gM._inScreen)
         {         
             if (_sH._gM._isPaused)
@@ -58,17 +63,40 @@ public class UIController : MonoBehaviour
                 PauseGameplay();
         }
 
+        if (_sH._gM._inScreen && Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_inPauseScreen)
+            {
+                if (_sH._gM._inSettings)
+                {
+                    _sH._gM._inSettings = false;
+                    _sH._aM.PlaySFX(SFX.Back);
+                    SceneManager.UnloadSceneAsync("Settings");
+                    return;
+                }
+                ClosePauseMenu();
+            }
+            else if (_inResearchScreen)
+                CloseResearch();
+            else if (_inNewsScreen)
+                CloseNews();
+        }
+
+
         if (_sH._gM._inScreen)
             return;
 
         if (TransitionManager.Instance().isBusy)
             return;
+        
+        if (Input.GetKeyDown(KeyCode.N))
+            OpenNews();
 
         if (Input.GetKeyDown(KeyCode.Tab))
-                OpenResearch();
+            OpenResearch();
 
         if (Input.GetKeyDown(KeyCode.Escape))
-                OpenPauseMenu();
+            OpenPauseMenu();
     }
 
     public void UpdateMoney()
@@ -183,6 +211,7 @@ public class UIController : MonoBehaviour
 
     public void OpenResearch()
     {
+        _inResearchScreen = true;
         _sH._gM._inScreen = true;
         _sH._aM.PlayMusic(Music.Research);
         _sH._aM.PlaySFX(SFX.Research);
@@ -213,6 +242,7 @@ public class UIController : MonoBehaviour
 
     void DeactivateResearch()
     {
+        _inResearchScreen = false;
         _sH._gM._inScreen = false;
         _researchScreen.SetActive(false);
         ToggleHUD(true);
@@ -250,6 +280,7 @@ public class UIController : MonoBehaviour
 
     public void OpenPauseMenu()
     {
+        _inPauseScreen = true;
         _sH._gM._inScreen = true;
         _sH._aM.PlaySFX(SFX.Generic);
         ToggleHUD(false);
@@ -278,6 +309,7 @@ public class UIController : MonoBehaviour
 
     void DeactivatePause()
     {
+        _inPauseScreen = false;
         _sH._gM._inScreen = false;
         _pauseMenu.SetActive(false);
         ToggleHUD(true);
@@ -362,5 +394,44 @@ public class UIController : MonoBehaviour
                     _punit2.SetActive(true);
                 break;
         }
+    }
+
+    public void OpenNews()
+    {
+        _inNewsScreen = true;
+        _sH._gM._inScreen = true;
+        _sH._aM.PlaySFX(SFX.Generic);
+        ToggleHUD(false);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached += ActivateNews;
+        _tM.Transition(_transition, 0.1f);
+    }
+
+    public void CloseNews()
+    {
+        var _tM = TransitionManager.Instance();
+        if (_tM.isBusy)
+            return;
+
+        _sH._aM.PlaySFX(SFX.Back);    
+        _tM.onTransitionCutPointReached += DeactivateNews;
+        _tM.Transition(_transition, 0.1f);
+    }
+
+    void ActivateNews()
+    {
+        _newsBulletin.SetActive(true);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached -= ActivateNews;
+    }
+
+    void DeactivateNews()
+    {
+        _inNewsScreen = false;
+        _sH._gM._inScreen = false;
+        _newsBulletin.SetActive(false);
+        ToggleHUD(true);
+        var _tM = TransitionManager.Instance();
+        _tM.onTransitionCutPointReached -= DeactivateNews;
     }
 }

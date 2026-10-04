@@ -33,8 +33,10 @@ public class GameManager : Singleton<GameManager>
 
     public bool _isPaused;
     public bool _inScreen;
+    public bool _inSettings;
 
     public bool _isEndless;
+    public bool _is3D;
 
     public int[] _incidents = new int[6];
 
@@ -83,7 +85,7 @@ public class GameManager : Singleton<GameManager>
         if (_gameOverTriggered) return;
         if (_isEndless) return;
 
-        if (_progress >= _maxProgress)
+        if (_progress >= _maxProgress) //TODO: SEPERATE FOR ENDLESS MODE
             TriggerVictory();
     }
 
@@ -92,11 +94,6 @@ public class GameManager : Singleton<GameManager>
         if (_victoryTriggered || _gameOverTriggered) return;
         _victoryTriggered = true;
         LastGameOverReason = CutsceneReason.Victory;
-
-        //old, remove if everything seems fine
-        //var _tM = TransitionManager.Instance();
-        //var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush");
-        //_tM.Transition("CutsceneScene", transitionSetting, 0.2f);
 
         var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush");
         CutsceneSceneDirector.GoToCutsceneScene(transitionSetting, 0.2f);
@@ -145,7 +142,6 @@ public class GameManager : Singleton<GameManager>
         _gameOverTriggered = true;
         var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush"); //hacky, the entire transitions folder got copied to Resources
         CutsceneSceneDirector.GoToCutsceneScene(transitionSetting, 0.2f);
-        //_tM.Transition("CutsceneScene", transitionSetting, 0.2f);
     }
 
     public void ChangeMoney(int value)
@@ -202,7 +198,9 @@ public class GameManager : Singleton<GameManager>
 
     public void OpenSettings()
     {
+        _inSettings = true;
         SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
+        
     }
 
 }

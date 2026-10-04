@@ -24,8 +24,16 @@ public class UnitController : MonoBehaviour
         
         if (nfs.RequiredUnit != unitDrag.UnitData.Type)
         {
-            _sH._gM.ChangeReputation(-PENALTY);
+            _sH._gM.ChangeReputation(-PENALTY 
+                                * _sH._gMods._citizenRepPenalty
+                                * _sH._gMods._tourRepPenalty);
             _sH._aM.PlaySFX(SFX.Invalid);
+
+            var factionPenalty = -1;
+            _sH._fM.UpdateFactionStanding(Faction.Tourist, factionPenalty);
+            _sH._fM.UpdateFactionStanding(Faction.Citizen, factionPenalty);
+            _sH._fM.UpdateFactionStanding(Faction.Government, factionPenalty);
+
             return false;
         }
 

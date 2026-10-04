@@ -103,6 +103,7 @@ public class AudioSettings : MonoBehaviour
 
     public void CloseSettings()
     {
+        _sH._gM._inSettings = false;
         _sH._aM.PlaySFX(SFX.Back);
         SceneManager.UnloadSceneAsync("Settings");
     }

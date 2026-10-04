@@ -17,3 +17,6 @@ MonoBehaviour:
   _budget: 20000
   _cooldown: 0.7
   _effectiveness: 0.7
+  _tour: 4
+  _citi: 3
+  _gov: 3

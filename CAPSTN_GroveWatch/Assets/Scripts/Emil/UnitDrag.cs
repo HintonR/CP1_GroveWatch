@@ -71,19 +71,45 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     void TryDropOnWorld(PointerEventData eventData)
     {
+        Forest forest = _sH._gM._is3D
+            ? Get3DForestAtPointer(eventData)
+            : Get2DForestAtPointer(eventData);
+
+        if (forest != null)
+            _sH._unit.TryResolveEvent(this, forest);
+
+        _rect.anchoredPosition = _originalPos;
+    }
+
+    Forest Get2DForestAtPointer(PointerEventData eventData)
+    {
         Vector2 worldPos = Camera.main.ScreenToWorldPoint(eventData.position);
 
         RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        return GetForestFromCollider(hit.collider);
+    }
 
-        if (hit.collider != null)
-        {
-            Forest forest = hit.collider.GetComponent<Forest>();
+    Forest Get3DForestAtPointer(PointerEventData eventData)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
 
-            if (forest != null)
-                _sH._unit.TryResolveEvent(this, forest);
-        }
+        if (!Physics.Raycast(ray, out RaycastHit hit))
+            return null;
 
-        _rect.anchoredPosition = _originalPos;
+        return GetForestFromCollider(hit.collider);
+    }
+
+    Forest GetForestFromCollider(Component hitCollider)
+    {
+        if (hitCollider == null)
+            return null;
+
+        Forest forest = hitCollider.GetComponent<Forest>();
+
+        if (forest != null)
+            return forest;
+
+        return hitCollider.GetComponentInParent<Forest>();
     }
 
     public bool TryCommitToResolution()
@@ -121,6 +147,8 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             UnitType.Police      => _sH._gMods._researchPCDR,
             _ => 0f
         };
+
+        modifier *= _sH._gMods._govCDR;
 
         float cooldown = _unitData.Cooldown * modifier * _sH._gMods._policyCDR;
 

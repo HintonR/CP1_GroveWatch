@@ -43,6 +43,6 @@ MonoBehaviour:
     text: ' Welcome to GroveWatch!'
     changeMusic: 0
     music: 0
-  onComplete: 0
-  nextSceneName: Main
-  playMode: 0
+  musicOnEnd: 0
+  endMusic: 0
+  nextSceneName: TutorialLevel
