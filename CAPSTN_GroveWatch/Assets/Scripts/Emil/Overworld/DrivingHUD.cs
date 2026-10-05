@@ -67,15 +67,6 @@ public class DrivingHUD : MonoBehaviour
 
     public void MoveToDestination()
     {
-        if (_player == null || _tpDestination == null)
-        {
-            Debug.LogWarning("Cannot teleport: the player or destination has not been set.", this);
-            return;
-        }
-
-        // The vehicle is driven by a non-kinematic Rigidbody. Moving its Transform
-        // directly can be overwritten by the next physics simulation, especially
-        // while Rigidbody interpolation is enabled.
         if (_player.TryGetComponent(out Rigidbody playerBody))
         {
             playerBody.velocity = Vector3.zero;
@@ -83,9 +74,6 @@ public class DrivingHUD : MonoBehaviour
             playerBody.position = _tpDestination.position;
             playerBody.rotation = _tpDestination.rotation;
             playerBody.Sleep();
-
-            // Update trigger/collider poses immediately, rather than waiting for
-            // the next physics tick.
             Physics.SyncTransforms();
         }
         else
@@ -100,7 +88,9 @@ public class DrivingHUD : MonoBehaviour
 
     public void StartLevel()
     {
-        //For Trey
+        Debug.Log("Load " + _levelToLoad);
+        //For Trey - Use _levelToLoad string for TransitionManager/SceneManagement to load or save next scene
+        //Because this scene is the level to be loaded AFTER a cutscene.
     }
 
 }
