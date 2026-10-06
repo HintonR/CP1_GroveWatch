@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [DefaultExecutionOrder(-100)] //you're a wizard harry
+
 public class GameOverCutsceneSelector : MonoBehaviour
 {
     [Header("Cutscene per IncidentType (match with GameManager.cs)")]
@@ -20,6 +21,17 @@ public class GameOverCutsceneSelector : MonoBehaviour
     [Header("Fallback")]
     [SerializeField] private CutsceneData fallbackEnding;
 
+    [System.Serializable]
+    public class LevelCutscenes
+    {
+        public string level;        //scene name: Cebu, TutorialLevel, Baguio, ect
+        public CutsceneData intro;
+        public CutsceneData win; 
+    }
+
+    [Header("Per Level (scene name > intro / win cutscene)")]
+    [SerializeField] private LevelCutscenes[] levels = new LevelCutscenes[0];
+
     ServiceHub _sH; //_sH.gM. to access GameManager
 
     void Awake()
@@ -27,16 +39,32 @@ public class GameOverCutsceneSelector : MonoBehaviour
         if (CutsceneState.SelectedCutscene != null)
             return;
 
+        if (CutsceneState.PendingLevel != null)   //play current level's intro
+        {
+            var entry = FindLevel(CutsceneState.PendingLevel);
+            CutsceneState.SelectedCutscene = entry != null ? entry.intro : null;
+            CutsceneState.PendingLevel = null;
+            return;
+        }
+
         _sH = ServiceHub.Instance;
         CutsceneData chosen = SelectEnding();
         CutsceneState.SelectedCutscene = chosen != null ? chosen : fallbackEnding;
     }
-
+    LevelCutscenes FindLevel(string level)
+    {
+        foreach (var l in levels)
+            if (l.level == level) return l;
+        return null;
+    }
     CutsceneData SelectEnding()
     {
         //victory
         if (GameManager.LastGameOverReason == CutsceneReason.Victory)
-            return victoryEnding;
+        {
+            var entry = FindLevel(CutsceneState.LastLevel);
+            return entry != null && entry.win != null ? entry.win : victoryEnding;
+        }
 
         //debt
         if (GameManager.LastGameOverReason == CutsceneReason.Debt)

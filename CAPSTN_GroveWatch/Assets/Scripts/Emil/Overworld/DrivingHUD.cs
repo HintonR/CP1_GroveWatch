@@ -89,8 +89,10 @@ public class DrivingHUD : MonoBehaviour
     public void StartLevel()
     {
         Debug.Log("Load " + _levelToLoad);
+        CutsceneSceneDirector.PlayLevel(_levelToLoad); //added
         //For Trey - Use _levelToLoad string for TransitionManager/SceneManagement to load or save next scene
         //Because this scene is the level to be loaded AFTER a cutscene.
+
     }
 
 }

@@ -16,26 +16,26 @@ MonoBehaviour:
   lines:
   - image: {fileID: 21300000, guid: 75e590af7edf7f040ae94c608f6e68c6, type: 3}
     title: 
-    text: You are a newly recruited dispatcher assigned to the city of Minglanilla,
-      Cebu.
+    text: You are a newly recruited dispatcher assigned by the DENR to help protect
+      the forests of the Philippines.
     changeMusic: 1
     music: 0
   - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
     title: 
-    text: "Minglanilla is a city nestled deep within one of the region\u2019s last
-      remaining forested frontiers."
+    text: "Your first objective, Minglanilla, is a city nestled deep within one of
+      the region\u2019s last remaining forested frontiers."
     changeMusic: 0
     music: 0
   - image: {fileID: 21300000, guid: 8a3e144b151a54047a29ad34bb5a6a3c, type: 3}
     title: 
     text: The trust of the people have diminished as illegal activity and natural
-      disasters have impacted the Lapad Forest.
+      disasters have impacted many landscapes across the Philippines.
     changeMusic: 0
     music: 0
   - image: {fileID: 21300000, guid: 8a3e144b151a54047a29ad34bb5a6a3c, type: 3}
     title: 
-    text: You have been tasked to oversee the forest. Do your best to sway back the
-      citizen's favor!
+    text: You have been tasked to oversee the forests. Do your best to sway back
+      the citizen's favor!
     changeMusic: 0
     music: 0
   - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
@@ -45,4 +45,4 @@ MonoBehaviour:
     music: 0
   musicOnEnd: 0
   endMusic: 0
-  nextSceneName: TutorialLevel
+  nextSceneName: Overworld

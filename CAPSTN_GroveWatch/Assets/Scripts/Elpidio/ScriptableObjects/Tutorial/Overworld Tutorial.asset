@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c3a7bbaa64130c4781c9d04ef9e1b1e, type: 3}
-  m_Name: Fallback
+  m_Name: Overworld Tutorial
   m_EditorClassIdentifier: 
-  cutsceneName: Fallback
+  cutsceneName: Overworld Tutorial
   lines:
-  - image: {fileID: 21300000, guid: 800f436eb9a4d7f47938ad7bd7ce44a3, type: 3}
-    title: 
-    text: I'm a bug
-    changeMusic: 1
-    music: 3
-  musicOnEnd: 0
+  - image: {fileID: 21300000, guid: 9ecdf0768efb3b8479fcba7044005517, type: 3}
+    title: Overworld
+    text: Overworld tutorial Placeholder! our driving mechanics are so clean bruh
+    changeMusic: 0
+    music: 2
+  musicOnEnd: 1
   endMusic: 0
-  nextSceneName: TitleScreen
+  nextSceneName: 

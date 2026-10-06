@@ -33,9 +33,21 @@ public class CutsceneSceneDirector : MonoBehaviour
 
     public static void GoToCutsceneScene(TransitionSettings transition, float startDelay = 0.2f)
     {
+        CutsceneState.LastLevel = SceneManager.GetActiveScene().name;
         LoadScene(CutsceneSceneName, transition, startDelay);
     }
+    public static void PlayLevel(string levelScene)
+    {
+        //NOTES: temp fix, bc after clearing tutorial level going to Cebu will be unclearable
+        var gM = ServiceHub.Instance._gM;
+        gM._progress = 0;
+        gM._victoryTriggered = false;
+        gM._gameOverTriggered = false;
+        //temp fix end
 
+        CutsceneState.PendingLevel = levelScene;
+        LoadScene(CutsceneSceneName, Resources.Load<TransitionSettings>("Transitions/Brush/Brush"), 0.2f);
+    }
     static void LoadScene(string sceneName, TransitionSettings transition, float startDelay)
     {
         if (string.IsNullOrEmpty(sceneName)) return;

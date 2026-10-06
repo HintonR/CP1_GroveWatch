@@ -99,6 +99,7 @@ public class TutorialPlayer : DialoguePlayerBase
         if (_sH == null || _sH._gM == null) return;
 
         _sH._gM._inScreen = true;
+        if (_sH._dUI != null) _sH._dUI._inScreen = true;
         heldGameplay = true;
     }
 
@@ -108,6 +109,7 @@ public class TutorialPlayer : DialoguePlayerBase
         heldGameplay = false;
 
         if (_sH == null || _sH._gM == null) return;
+        if (_sH._dUI != null) _sH._dUI._inScreen = false;
         _sH._gM._inScreen = false;
     }
 }

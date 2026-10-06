@@ -47,7 +47,8 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        newGameButton.onClick.AddListener(ShowGameModeMenu);
+        //newGameButton.onClick.AddListener(ShowGameModeMenu);
+        newGameButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH)); //assuming medium is now our default
         newGameButton.onClick.AddListener(PlayGenericSFX);
 
         optionsButton.onClick.AddListener(() => _sH._gM.OpenSettings());

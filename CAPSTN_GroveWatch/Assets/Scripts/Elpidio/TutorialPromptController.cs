@@ -9,6 +9,7 @@ public class TutorialPromptController : MonoBehaviour
 
     [Header("Where To Go Next")]
     [SerializeField] private CutsceneData introCutscene;
+    [SerializeField] private CutsceneData yesCutscene;   //VR Cutscene, no still plays introCutscene
     [SerializeField] private TransitionSettings _transition;
     [SerializeField] private float transitionDelay = 0.2f;
 
@@ -25,7 +26,8 @@ public class TutorialPromptController : MonoBehaviour
     {
         if (_sH != null && _sH._aM != null) _sH._aM.PlaySFX(SFX.Generic);
         TutorialState.ShouldShowTutorial = true;
-        ContinueToIntro();
+        //ContinueToIntro();
+        CutsceneSceneDirector.PlayInCutsceneScene(yesCutscene, _transition, transitionDelay);
     }
 
     void OnPromptNo()

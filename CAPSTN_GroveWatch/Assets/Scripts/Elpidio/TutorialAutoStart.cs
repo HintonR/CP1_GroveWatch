@@ -6,7 +6,8 @@ public class TutorialAutoStart : MonoBehaviour
 
     void Start()
     {
-        if (!TutorialState.Consume()) return;
+        if (!TutorialState.ShouldShowTutorial) return;
+        if (!TutorialState.FirstTime(introTutorial)) return;
         TutorialLoader.Show(introTutorial);
     }
 }

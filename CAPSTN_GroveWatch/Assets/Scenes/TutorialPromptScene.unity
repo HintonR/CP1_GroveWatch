@@ -742,6 +742,7 @@ MonoBehaviour:
   yesButton: {fileID: 1186347498}
   noButton: {fileID: 487250468}
   introCutscene: {fileID: 11400000, guid: 95c81bb4a223082459004a75cc7c23ac, type: 2}
+  yesCutscene: {fileID: 11400000, guid: 507bdc8e60cf3a442b4f50cab53ede8e, type: 2}
   _transition: {fileID: 11400000, guid: b76f75edb0a8bc14ca88bb63f4196f97, type: 2}
   transitionDelay: 0.2
 --- !u!1 &1186347496

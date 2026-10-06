@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c3a7bbaa64130c4781c9d04ef9e1b1e, type: 3}
-  m_Name: Fallback
+  m_Name: VR Cutscene
   m_EditorClassIdentifier: 
-  cutsceneName: Fallback
+  cutsceneName: VR Cutscene
   lines:
-  - image: {fileID: 21300000, guid: 800f436eb9a4d7f47938ad7bd7ce44a3, type: 3}
+  - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
     title: 
-    text: I'm a bug
-    changeMusic: 1
-    music: 3
+    text: Placeholder for VR Cutscene! This should lead to TutorialLevel
+    changeMusic: 0
+    music: 0
   musicOnEnd: 0
   endMusic: 0
-  nextSceneName: TitleScreen
+  nextSceneName: TutorialLevel
