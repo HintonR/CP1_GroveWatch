@@ -38,12 +38,7 @@ public class CutsceneSceneDirector : MonoBehaviour
     }
     public static void PlayLevel(string levelScene)
     {
-        //NOTES: temp fix, bc after clearing tutorial level going to Cebu will be unclearable
-        var gM = ServiceHub.Instance._gM;
-        gM._progress = 0;
-        gM._victoryTriggered = false;
-        gM._gameOverTriggered = false;
-        //temp fix end
+        MainMenu.ResetVariables();
 
         CutsceneState.PendingLevel = levelScene;
         LoadScene(CutsceneSceneName, Resources.Load<TransitionSettings>("Transitions/Brush/Brush"), 0.2f);

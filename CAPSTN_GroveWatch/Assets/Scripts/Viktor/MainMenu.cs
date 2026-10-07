@@ -47,8 +47,8 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        //newGameButton.onClick.AddListener(ShowGameModeMenu);
-        newGameButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH)); //assuming medium is now our default
+        //newGameButton.onClick.AddListener(ShowGameModeMenu); //uncomment for intended endless mode
+        newGameButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH)); //comment if this blocks endless mode
         newGameButton.onClick.AddListener(PlayGenericSFX);
 
         optionsButton.onClick.AddListener(() => _sH._gM.OpenSettings());
@@ -57,6 +57,7 @@ public class MainMenu : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
        
         classicButton.onClick.AddListener(ShowDurationMenu);
+        //classicButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH)); //uncomment for intended endless mode
         classicButton.onClick.AddListener(PlayGenericSFX);
         
         endlessButton.onClick.AddListener(() => OnDurationSelected(E_LENGTH, true));
@@ -133,8 +134,9 @@ public class MainMenu : MonoBehaviour
         _tM.Transition(tutorialPromptSceneName, _transition, 0.2f);
     }
 
-    void ResetVariables()
+    public static void ResetVariables()
     {
+        var _sH = ServiceHub.Instance;
         _sH._gM._reputation = _sH._gM._maxReputation * 0.8f;
         _sH._gM._progress = 0;
         _sH._gM._money = 5000;
