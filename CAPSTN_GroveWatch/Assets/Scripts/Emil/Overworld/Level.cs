@@ -7,6 +7,7 @@ public class Level : MonoBehaviour
     ServiceHub _sH;
 
     [SerializeField] string _levelName, _levelDescription;
+    [SerializeField] int _mp;
     
 
     void Awake()
@@ -21,6 +22,7 @@ public class Level : MonoBehaviour
             _sH._dUI.UpdateLevelName(_levelName);
             _sH._dUI.UpdateLevelDesc(_levelDescription);
             _sH._dUI._levelToLoad = _levelName;
+            _sH._dUI._mp = _mp;
             _sH._dUI.OpenLevelInfo();
         }
     }

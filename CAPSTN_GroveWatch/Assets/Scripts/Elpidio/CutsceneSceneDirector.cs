@@ -36,9 +36,9 @@ public class CutsceneSceneDirector : MonoBehaviour
         CutsceneState.LastLevel = SceneManager.GetActiveScene().name;
         LoadScene(CutsceneSceneName, transition, startDelay);
     }
-    public static void PlayLevel(string levelScene)
+    public static void PlayLevel(string levelScene, int value)
     {
-        MainMenu.ResetVariables();
+        MainMenu.ResetVariables(value);
 
         CutsceneState.PendingLevel = levelScene;
         LoadScene(CutsceneSceneName, Resources.Load<TransitionSettings>("Transitions/Brush/Brush"), 0.2f);

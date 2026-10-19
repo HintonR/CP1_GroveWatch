@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] TransitionSettings _transition;
 
     [SerializeField] Image _repBar, _progBar, _season;
-    [SerializeField] TextMeshProUGUI _money, _month, _year, _repPercent, _progPercent;
+    [SerializeField] TextMeshProUGUI _money, _month, _year, _repPercent, _progPercent, _seasonalShift;
     [SerializeField] Sprite _dry, _wet, _dryBG, _wetBG, _pausedBG;
     [SerializeField] SpriteRenderer _bg;
     [SerializeField] GameObject _researchScreen, _policyScreen, _pauseMenu, _pauseVolume;
@@ -169,6 +169,7 @@ public class UIController : MonoBehaviour
     {
         _season.sprite = isWet ? _wet : _dry;
         _bg.sprite = isWet? _wetBG : _dryBG;
+        _seasonalShift.text = isWet ? "December" : "June";
     }
 
     public void UpdateRepPercent()

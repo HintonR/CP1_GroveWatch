@@ -19,6 +19,8 @@ public class ServiceHub : Singleton<ServiceHub>
 
     public DrivingHUD _dUI;
 
+    public Bookmarks _bM;
+
     void Awake()
     {
         _gM = GameManager.Instance;

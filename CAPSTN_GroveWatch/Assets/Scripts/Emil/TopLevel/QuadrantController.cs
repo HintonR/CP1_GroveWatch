@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 public class QuadrantController : MonoBehaviour
 {
     ServiceHub _sH;
@@ -55,6 +56,19 @@ public class QuadrantController : MonoBehaviour
         _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q1.sprite = _q1A;
+        
+        if (_sH._gM._is3D)
+        {
+            Transform cam = Camera.main.transform;
+            Vector3 targetPos = _sH._bM._b1.position;
+
+            cam.DOMove(
+                new Vector3(targetPos.x, cam.position.y, targetPos.z),
+                0.5f
+            );
+        }
+
+
     }
     public void ActivateQ2()
     {
@@ -65,6 +79,17 @@ public class QuadrantController : MonoBehaviour
         _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q2.sprite = _q2A;
+
+        if (_sH._gM._is3D)
+        {
+            Transform cam = Camera.main.transform;
+            Vector3 targetPos = _sH._bM._b2.position;
+
+            cam.DOMove(
+                new Vector3(targetPos.x, cam.position.y, targetPos.z),
+                0.5f
+            );
+        }
     }
     public void ActivateQ3()
     {
@@ -75,6 +100,17 @@ public class QuadrantController : MonoBehaviour
         _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q3.sprite = _q3A;
+
+        if (_sH._gM._is3D)
+        {
+            Transform cam = Camera.main.transform;
+            Vector3 targetPos = _sH._bM._b3.position;
+
+            cam.DOMove(
+                new Vector3(targetPos.x, cam.position.y, targetPos.z),
+                0.5f
+            );
+        }
     }
     public void ActivateQ4()
     {
@@ -85,6 +121,17 @@ public class QuadrantController : MonoBehaviour
         _sH._aM.PlaySFX(SFX.Switch);
         DeactivateAll();
         _q4.sprite = _q4A;
+    
+        if (_sH._gM._is3D)
+        {
+            Transform cam = Camera.main.transform;
+            Vector3 targetPos = _sH._bM._b4.position;
+
+            cam.DOMove(
+                new Vector3(targetPos.x, cam.position.y, targetPos.z),
+                0.5f
+            );
+        }
     }
 
     void DeactivateAll()

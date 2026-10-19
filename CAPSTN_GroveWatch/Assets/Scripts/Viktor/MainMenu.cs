@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 {
 
     const float Q_LENGTH = 90;
-    const float M_LENGTH = 210;
+    const float M_LENGTH = 10;
     const float L_LENGTH = 480;
     const float E_LENGTH = 999999999;
     ServiceHub _sH;
@@ -56,15 +56,15 @@ public class MainMenu : MonoBehaviour
 
         quitButton.onClick.AddListener(QuitGame);
        
-        classicButton.onClick.AddListener(ShowDurationMenu);
+        //classicButton.onClick.AddListener(ShowDurationMenu);
         //classicButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH)); //uncomment for intended endless mode
-        classicButton.onClick.AddListener(PlayGenericSFX);
+        //classicButton.onClick.AddListener(PlayGenericSFX);
         
-        endlessButton.onClick.AddListener(() => OnDurationSelected(E_LENGTH, true));
+        //endlessButton.onClick.AddListener(() => OnDurationSelected(E_LENGTH, true));
  
-        quickButton.onClick.AddListener(() => OnDurationSelected(Q_LENGTH));
-        mediumButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH));
-        longButton.onClick.AddListener(() => OnDurationSelected(L_LENGTH));
+        //quickButton.onClick.AddListener(() => OnDurationSelected(Q_LENGTH));
+        //mediumButton.onClick.AddListener(() => OnDurationSelected(M_LENGTH));
+        //longButton.onClick.AddListener(() => OnDurationSelected(L_LENGTH));
 
         backMain.onClick.AddListener(ShowMainMenu);
         backMain.onClick.AddListener(PlayBackSFX);
@@ -106,7 +106,6 @@ public class MainMenu : MonoBehaviour
     void OnDurationSelected(float progressValue, bool value)
     {
         _sH._aM.PlaySFX(SFX.Generic);
-        ResetVariables();
         _sH._gM._isEndless = value;
         _sH._gM.SetMaxProgress(progressValue);
 
@@ -117,7 +116,6 @@ public class MainMenu : MonoBehaviour
     {
         _sH._aM.PlaySFX(SFX.Generic);
         _sH._gM.SetMaxProgress(progressValue);
-        ResetVariables();
 
         GoToTutorialPrompt();
     }
@@ -134,7 +132,7 @@ public class MainMenu : MonoBehaviour
         _tM.Transition(tutorialPromptSceneName, _transition, 0.2f);
     }
 
-    public static void ResetVariables()
+    public static void ResetVariables(int value)
     {
         var _sH = ServiceHub.Instance;
         _sH._gM._reputation = _sH._gM._maxReputation * 0.8f;
@@ -146,6 +144,8 @@ public class MainMenu : MonoBehaviour
         _sH._gM._inScreen = false;
         _sH._gM._isEndless = false;
         _sH._gM.ResetIncidents();
+
+        _sH._gM.SetMaxProgress(value);
     }
 
     void QuitGame()

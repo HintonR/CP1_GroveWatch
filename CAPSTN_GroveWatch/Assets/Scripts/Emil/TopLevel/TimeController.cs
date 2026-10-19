@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TimeController : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class TimeController : MonoBehaviour
     [SerializeField] int _difficultyScaler = 2;
     [SerializeField] UnitData _f, _r, _p;
     [SerializeField] int _quarterlyBudget;
+    [SerializeField] GameObject _rain;
 
-    string[] _months = { "January", "February", "March", "April", 
+    public string[] _months = { "January", "February", "March", "April", 
                          "May", "June", "July", "August", 
                          "September", "October", "November", "December" };
 
@@ -148,6 +150,14 @@ public class TimeController : MonoBehaviour
     {
         _isWet = _mCounter >= 5 && _mCounter <= 10;
         _sH._UI.UpdateSeason(_isWet);
+
+        if (!_sH._gM._is3D)
+            return;
+        
+        if (_isWet)
+            _rain.SetActive(true);
+        else
+            _rain.SetActive(false);
     }
 
     public bool IsStateAvailable(Season availableSeason)
