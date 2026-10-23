@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager>
 
     public bool _isEndless;
     public bool _is3D;
+    public string _currentLevelSceneName;
 
     public int[] _incidents = new int[6];
 
@@ -68,7 +69,7 @@ public class GameManager : Singleton<GameManager>
         _money = 5000;
 
         _gameOverTriggered = false;
-        _victoryTriggered = false; 
+        _victoryTriggered = false;
     }
 
     void UpdateProgress()

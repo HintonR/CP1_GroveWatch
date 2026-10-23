@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PolicyScreen : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PolicyScreen : MonoBehaviour
     
     [SerializeField] TextMeshProUGUI _prompt, _rep, _bud;
 
-    [LayoutStart("Policies", ELayout.FoldoutBox)]
+    [LayoutStart("Policies", ELayout.TitleBox)]
     [SerializeField] List<PolicyDataSO> _cebuPolicies;
     [SerializeField] List<PolicyDataSO> _baguioPolicies;
     [SerializeField] List<PolicyDataSO> _palawanPolicies;
@@ -31,6 +32,25 @@ public class PolicyScreen : MonoBehaviour
 
     void OnEnable()
     {
+        string levelSceneName = GameManager.Instance._currentLevelSceneName;
+        _policies = new List<PolicyDataSO>();
+
+        switch (levelSceneName) 
+        {
+            case "Cebu":
+                _policies = _cebuPolicies;
+                break;
+            case "Baguio":
+                _policies = _baguioPolicies;
+                break;
+            case "Palawan":
+                _policies = _palawanPolicies;
+                break;
+            default:
+                Debug.LogError("Invalid Scene Name");
+                break;
+        }
+
         int pIndex = GetRandomPromptIndex();
 
         UpdatePrompt(pIndex);

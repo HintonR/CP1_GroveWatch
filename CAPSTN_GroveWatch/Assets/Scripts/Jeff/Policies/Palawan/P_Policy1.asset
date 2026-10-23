@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf1225adb058ac4bb67a3fc9cd20619, type: 3}
+  m_Name: P_Policy1
+  m_EditorClassIdentifier: 
+  _prompt: The municipality requested more funding.
+  _c1: {fileID: 11400000, guid: 32df3730401d9804c97b5a63f8c5dc33, type: 2}
+  _c2: {fileID: 11400000, guid: 43713c1c4d4e2534c8589cdeaf87995c, type: 2}
+  _c3: {fileID: 11400000, guid: 0c237fe4aac110f42ab575e45396f8f2, type: 2}

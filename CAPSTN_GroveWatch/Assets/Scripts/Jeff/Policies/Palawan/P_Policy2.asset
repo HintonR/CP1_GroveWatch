@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf1225adb058ac4bb67a3fc9cd20619, type: 3}
+  m_Name: P_Policy2
+  m_EditorClassIdentifier: 
+  _prompt: A famous tourist resort requests to expand by building a new resort that
+    requires relocating locals.
+  _c1: {fileID: 11400000, guid: 9f047b0c9a2636b4abb6ee159027bf51, type: 2}
+  _c2: {fileID: 11400000, guid: f1cdc9fe0604e4241a8a8bf35118fb68, type: 2}
+  _c3: {fileID: 11400000, guid: cc88184c71d73df4e964ac763b06ef24, type: 2}

@@ -6894,12 +6894,24 @@ MonoBehaviour:
   _prompt: {fileID: 1057262263}
   _rep: {fileID: 1326928948}
   _bud: {fileID: 858216006}
-  _policies:
+  _cebuPolicies:
   - {fileID: 11400000, guid: 73d44225f2eb66443b9e6a1fa3da75fc, type: 2}
   - {fileID: 11400000, guid: 7da901f923f710e4f986a84230482053, type: 2}
   - {fileID: 11400000, guid: ab703704f458e134087dd6f8021591aa, type: 2}
   - {fileID: 11400000, guid: dcba6928a08af124c88fe1bfb8cf2d45, type: 2}
   - {fileID: 11400000, guid: b8652baa1235ab04ebfe850d6222472c, type: 2}
+  _baguioPolicies:
+  - {fileID: 11400000, guid: 4e1e4947c3756fe4ba8b73f7d52ce997, type: 2}
+  - {fileID: 11400000, guid: d1f2fbe1ac2023b4491a4a18d580c489, type: 2}
+  - {fileID: 11400000, guid: ee71cea87b0125e409f54a4a9ca75408, type: 2}
+  - {fileID: 11400000, guid: c9bf307786a411c47800859e248de892, type: 2}
+  - {fileID: 11400000, guid: a5cce2207d37bb44aaedfb907f370bb9, type: 2}
+  _palawanPolicies:
+  - {fileID: 11400000, guid: aa59f023c798c9943bff65c31afe1270, type: 2}
+  - {fileID: 11400000, guid: f2167a09974f0d24c95d30b1886f3a49, type: 2}
+  - {fileID: 11400000, guid: 148da714ede9c3540b4682c71f16a742, type: 2}
+  - {fileID: 11400000, guid: 3794940cd9223df46b755096be75259c, type: 2}
+  - {fileID: 11400000, guid: 532e30d7fe9dc8248a78d3da43e6721b, type: 2}
   _p1: {fileID: 236514484}
   _p2: {fileID: 1285357291}
   _p3: {fileID: 303823231}

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using EasyTransition;
+using SaintsField;
 using TMPro;
 using UnityEngine;
 
@@ -87,13 +86,13 @@ public class DrivingHUD : MonoBehaviour
         CloseTransportMenu();
     }
 
-    public void StartLevel()
+    public void StartLevel(string levelToLoad)
     {
-        Debug.Log("Load " + _levelToLoad);
-        CutsceneSceneDirector.PlayLevel(_levelToLoad, _mp); //added
+        Debug.Log("Load " + levelToLoad);
+        GameManager.Instance._currentLevelSceneName = levelToLoad;
+        CutsceneSceneDirector.PlayLevel(levelToLoad, _mp); //added
         //For Trey - Use _levelToLoad string for TransitionManager/SceneManagement to load or save next scene
         //Because this scene is the level to be loaded AFTER a cutscene.
-
     }
 
 }

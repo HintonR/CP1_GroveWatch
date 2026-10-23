@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf1225adb058ac4bb67a3fc9cd20619, type: 3}
+  m_Name: B_Policy3
+  m_EditorClassIdentifier: 
+  _prompt: Locals report about increasing cases of illegal logging of the Benguet
+    pine trees.
+  _c1: {fileID: 11400000, guid: 114aaf0c6e4e55d42999e32d0679e45d, type: 2}
+  _c2: {fileID: 11400000, guid: 7f0e64b86418b024da0f6103ff1e585c, type: 2}
+  _c3: {fileID: 11400000, guid: f7c2ba633c74d954fb32052c3f097172, type: 2}

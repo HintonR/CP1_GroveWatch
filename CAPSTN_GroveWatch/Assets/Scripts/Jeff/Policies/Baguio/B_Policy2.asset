@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf1225adb058ac4bb67a3fc9cd20619, type: 3}
+  m_Name: B_Policy2
+  m_EditorClassIdentifier: 
+  _prompt: Informal settlers protest about the removal of their settlements located
+    in the outskirts of the city.
+  _c1: {fileID: 11400000, guid: d0710b2d5df49344fb171cc61291e107, type: 2}
+  _c2: {fileID: 11400000, guid: 76d63c089b00de543ad9460a7beb08b0, type: 2}
+  _c3: {fileID: 11400000, guid: 9dd5d6c3c20ef2c45bdbc476b845d8ee, type: 2}

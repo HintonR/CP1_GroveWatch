@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf1225adb058ac4bb67a3fc9cd20619, type: 3}
+  m_Name: P_Policy3
+  m_EditorClassIdentifier: 
+  _prompt: Locals complain about tourists disrupting local businesses.
+  _c1: {fileID: 11400000, guid: 4ace23dd7b3016e4da64dd10e855206d, type: 2}
+  _c2: {fileID: 11400000, guid: b1e4156c154045b479e1526ace8a33e3, type: 2}
+  _c3: {fileID: 11400000, guid: bd8b7d480e45b9d438dbedb6b60de290, type: 2}

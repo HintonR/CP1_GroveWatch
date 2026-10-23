@@ -51,6 +51,7 @@ public class CutsceneSceneDirector : MonoBehaviour
         if (transition == null)
         {
             SceneManager.LoadScene(sceneName);
+            
             return;
         }
 
