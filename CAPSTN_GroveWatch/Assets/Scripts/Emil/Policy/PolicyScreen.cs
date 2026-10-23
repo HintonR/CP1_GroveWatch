@@ -1,7 +1,7 @@
+using SaintsField.Playa;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PolicyScreen : MonoBehaviour
@@ -9,12 +9,19 @@ public class PolicyScreen : MonoBehaviour
     ServiceHub _sH;
     
     [SerializeField] TextMeshProUGUI _prompt, _rep, _bud;
-    [SerializeField] List<PolicyDataSO> _policies;
+
+    [LayoutStart("Policies", ELayout.FoldoutBox)]
+    [SerializeField] List<PolicyDataSO> _cebuPolicies;
+    [SerializeField] List<PolicyDataSO> _baguioPolicies;
+    [SerializeField] List<PolicyDataSO> _palawanPolicies;
+    [LayoutEnd]
+
     [SerializeField] PolicyChoice _p1, _p2, _p3;
     [SerializeField] Sprite _g1, _g2, _r1, _r2;
     [SerializeField] Sprite _smile, _frown;
     [SerializeField] Animator _info;
 
+    private List<PolicyDataSO> _policies;
     Coroutine _promptRoutine;
     
     void Awake()
