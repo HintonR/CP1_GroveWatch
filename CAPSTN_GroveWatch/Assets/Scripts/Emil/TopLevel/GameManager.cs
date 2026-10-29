@@ -39,6 +39,8 @@ public class GameManager : Singleton<GameManager>
     public bool _is3D;
     public string _currentLevelSceneName;
 
+    public bool _CebuWin, _BagiuoWin, _PalawanWin;
+
     public int[] _incidents = new int[6];
 
 
