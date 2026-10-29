@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Cebu.unity
     guid: a08d66ee85151514eb96540f76092e8d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Bagiuo.unity
+    guid: d228b9ccc97b61d42a0cd9e87dcef1e3
+  - enabled: 1
+    path: Assets/Scenes/Levels/Palawan.unity
+    guid: 6ccd47989f94d254ba059f03968dc600
   m_configObjects: {}

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DroneControls : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
-    [SerializeField] private float _moveSpeed = 10f;
+    [SerializeField] Camera _camera;
+    [SerializeField] float _moveSpeed = 10f;
+    [SerializeField] BoxCollider _bounds;
 
-    private void Update()
+    void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
@@ -24,5 +25,18 @@ public class DroneControls : MonoBehaviour
         Vector3 move = (forward * z + right * x).normalized;
 
         transform.position += move * _moveSpeed * Time.deltaTime;
+    }
+
+    void LateUpdate()
+    {
+
+    Bounds bounds = _bounds.bounds;
+    Vector3 pos = transform.position;
+
+    pos.x = Mathf.Clamp(pos.x, bounds.min.x, bounds.max.x);
+    pos.z = Mathf.Clamp(pos.z, bounds.min.z, bounds.max.z);
+
+    transform.position = pos;
+
     }
 }
