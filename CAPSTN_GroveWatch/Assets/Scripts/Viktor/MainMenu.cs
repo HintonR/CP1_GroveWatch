@@ -115,7 +115,10 @@ public class MainMenu : MonoBehaviour
     void OnDurationSelected(float progressValue)
     {
         _sH._aM.PlaySFX(SFX.Generic);
-        _sH._gM.SetMaxProgress(progressValue);
+        ResetVariables((int)progressValue);
+        _sH._gM._CebuWin = _sH._gM._BagiuoWin = _sH._gM._PalawanWin = false; //campaign starts over in case we start playing a new game after victoyr
+
+        //_sH._gM.SetMaxProgress(progressValue); //disabled since resetVariables already does this
 
         GoToTutorialPrompt();
     }

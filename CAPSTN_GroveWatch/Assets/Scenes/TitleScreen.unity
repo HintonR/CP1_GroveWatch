@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!1 &139913287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!1 &430168666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,6 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!114 &500917260 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5224578934515573478, guid: 2c0d013cd5619ef41ad0cfbfb380973c, type: 3}
@@ -3053,6 +3056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!1 &1115588316
 GameObject:
   m_ObjectHideFlags: 0
@@ -3188,6 +3192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!1001 &1226304087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4186,7 +4191,6 @@ GameObject:
   - component: {fileID: 1976023346}
   - component: {fileID: 1976023345}
   - component: {fileID: 1976023348}
-  - component: {fileID: 1976023349}
   m_Layer: 0
   m_Name: NewGame
   m_TagString: Untagged
@@ -4308,18 +4312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1976023349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1976023343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!1 &2017352837
 GameObject:
   m_ObjectHideFlags: 0
@@ -4454,6 +4447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!1 &2081272024
 GameObject:
   m_ObjectHideFlags: 0
@@ -4724,6 +4718,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!1 &2136574560
 GameObject:
   m_ObjectHideFlags: 0

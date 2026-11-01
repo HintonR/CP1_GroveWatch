@@ -57,11 +57,16 @@ public class GameOverCutsceneSelector : MonoBehaviour
             if (l.level == level) return l;
         return null;
     }
+
     CutsceneData SelectEnding()
     {
         //victory
         if (GameManager.LastGameOverReason == CutsceneReason.Victory)
         {
+            if (CutsceneState.LastLevel == "Cebu") _sH._gM._CebuWin = true;
+            if (CutsceneState.LastLevel == "Bagiuo") _sH._gM._BagiuoWin = true;  //baguio or bagiuo
+            if (CutsceneState.LastLevel == "Palawan") _sH._gM._PalawanWin = true;
+
             var entry = FindLevel(CutsceneState.LastLevel);
             return entry != null && entry.win != null ? entry.win : victoryEnding;
         }

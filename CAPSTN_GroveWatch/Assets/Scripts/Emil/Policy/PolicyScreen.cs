@@ -43,6 +43,9 @@ public class PolicyScreen : MonoBehaviour
             case "Baguio":
                 _policies = _baguioPolicies;
                 break;
+            case "Bagiuo": //remove once we decide to kill the typos >_>
+                _policies = _baguioPolicies;
+                break;
             case "Palawan":
                 _policies = _palawanPolicies;
                 break;

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c3a7bbaa64130c4781c9d04ef9e1b1e, type: 3}
+  m_Name: Baguio Cutscene
+  m_EditorClassIdentifier: 
+  cutsceneName: Baguio Cutscene
+  lines:
+  - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
+    title: 
+    text: 'Placeholder for Baguio Cutscene! This should lead to Baguio (reminder:
+      scene name is Bagiuo)'
+    changeMusic: 0
+    music: 0
+  musicOnEnd: 0
+  endMusic: 0
+  nextSceneName: Bagiuo

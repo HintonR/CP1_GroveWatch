@@ -1830,6 +1830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!114 &863199781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2074,6 +2075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!114 &945111809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2127,7 +2129,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Baguio
+          m_StringArgument: Bagiuo
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &945111810
@@ -2356,10 +2358,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1047180384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34ae664d3020c6a9c426ea48cac9cd82, type: 3}
+  m_Script: {fileID: 11500000, guid: a52445237b3e84943981df65f3d0663a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introTutorial: {fileID: 11400000, guid: bc19f8ccb1fdf4947a77ff9c76a4801a, type: 2}
+  victoryCutscene: {fileID: 11400000, guid: cff2d1a0f75bbc749bf136dca4e0386a, type: 2}
 --- !u!1 &1059497651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3062,7 +3064,7 @@ MonoBehaviour:
   _levelToLoad: 
   _tpDestination: {fileID: 0}
   _inScreen: 0
-  _mp: 0
+  _mp: 10
 --- !u!1 &1531698179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef2d4e09d492f4d91eee9cb366a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hoverScale: 1.08
 --- !u!114 &1531698182
 MonoBehaviour:
   m_ObjectHideFlags: 0

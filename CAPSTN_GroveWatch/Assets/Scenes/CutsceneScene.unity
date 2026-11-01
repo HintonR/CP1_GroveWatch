@@ -751,6 +751,12 @@ MonoBehaviour:
   - level: Cebu
     intro: {fileID: 11400000, guid: 7f257054436c3fd488fa8e24a317aee3, type: 2}
     win: {fileID: 11400000, guid: 12afa2a78ca1f7f4bba88e00ba1bfc69, type: 2}
+  - level: Bagiuo
+    intro: {fileID: 11400000, guid: 31fb5da379747b94fbc7efcc9063bf7c, type: 2}
+    win: {fileID: 11400000, guid: d01070cbfedff4149b0f15e5176594dd, type: 2}
+  - level: Palawan
+    intro: {fileID: 11400000, guid: cd507e5945ba4d045b03ac2979805073, type: 2}
+    win: {fileID: 11400000, guid: c77f2729a17a16540b43d565c1d8faf0, type: 2}
 --- !u!1 &1087742234
 GameObject:
   m_ObjectHideFlags: 0

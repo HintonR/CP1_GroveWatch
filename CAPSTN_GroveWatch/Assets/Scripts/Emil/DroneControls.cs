@@ -8,10 +8,13 @@ public class DroneControls : MonoBehaviour
     [SerializeField] float _moveSpeed = 10f;
     [SerializeField] BoxCollider _bounds;
 
+    [SerializeField] float _edgeSize = 30f; //edgescrolling, adjust if needed
     void Update()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
+
+        AddEdgeScroll(ref x, ref z);
 
         Vector3 forward = _camera.transform.forward;
         Vector3 right = _camera.transform.right;
@@ -38,5 +41,17 @@ public class DroneControls : MonoBehaviour
 
     transform.position = pos;
 
+    }
+
+    void AddEdgeScroll(ref float x, ref float z) 
+    {
+        var gM = ServiceHub.Instance._gM;
+        if (gM._isPaused || gM._inScreen || !Application.isFocused) return; 
+
+        Vector3 mouse = Input.mousePosition;
+        if (mouse.x < 0 || mouse.y < 0 || mouse.x > Screen.width || mouse.y > Screen.height) return; //cursor outside the game
+
+        if (mouse.x <= _edgeSize) x -= 1f; else if (mouse.x >= Screen.width - _edgeSize) x += 1f;
+        if (mouse.y <= _edgeSize) z -= 1f; else if (mouse.y >= Screen.height - _edgeSize) z += 1f;
     }
 }
