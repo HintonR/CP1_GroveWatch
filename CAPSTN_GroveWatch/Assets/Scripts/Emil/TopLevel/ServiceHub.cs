@@ -21,6 +21,8 @@ public class ServiceHub : Singleton<ServiceHub>
 
     public Bookmarks _bM;
 
+    public TooltipUI _tUI;
+
     void Awake()
     {
         _gM = GameManager.Instance;
