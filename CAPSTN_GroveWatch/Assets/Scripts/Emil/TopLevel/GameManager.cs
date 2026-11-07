@@ -1,4 +1,5 @@
 using EasyTransition;
+using SaintsField.Playa;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,10 +25,12 @@ public class GameManager : Singleton<GameManager>
 {
     ServiceHub _sH;
 
+    [LayoutStart("Parameters", ELayout.CollapseBox)]
     public float _reputation;
     public float _maxReputation;
     public float _progress;
     public float _maxProgress;
+    [LayoutEnd]
 
     public int _money;
 
@@ -54,6 +57,7 @@ public class GameManager : Singleton<GameManager>
     {
         ServiceHub.Instance._gM = this;
         _sH = ServiceHub.Instance;
+        // _currentLevelSceneName = SceneManager.GetActiveScene().ToString();
     }
 
     void Start()
@@ -63,19 +67,42 @@ public class GameManager : Singleton<GameManager>
 
     void InitValues()
     {
-        _maxProgress = 50; //to be removed
-        _maxReputation = 300;
-        _reputation = _maxReputation * 0.8f;
-        _progress = 0;
-
         _money = 5000;
 
         _gameOverTriggered = false;
         _victoryTriggered = false;
+
+        switch (_currentLevelSceneName)
+        {
+            case "Cebu":
+                _maxProgress = 50; //to be removed
+                _maxReputation = 300;
+                _reputation = _maxReputation * 0.8f;
+                _progress = 0;
+                break;
+            case "Palawan":
+                _maxProgress = 50; //to be removed
+                _maxReputation = 100;
+                _reputation = _maxReputation * 0.5f;
+                _progress = 0;
+                break;
+            case "Baguio":
+                _maxProgress = 50; //to be removed
+                _maxReputation = 300;
+                _reputation = _maxReputation * 0.8f;
+                _progress = 0;
+                break;
+            default:
+                _maxProgress = 50; //to be removed
+                _maxReputation = 300;
+                _reputation = _maxReputation * 0.8f;
+                _progress = 0;
+                break;
+        }
     }
 
     void UpdateProgress()
-    { 
+    {
         var progBar = _sH._UI.ProgBar;
         var progCo = _sH._UI.ProgFill;
         _sH._UI.UpdateBar(_progress, _maxProgress, progBar, progCo);
@@ -103,7 +130,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     void UpdateReputation()
-    {   
+    {
         var repBar = _sH._UI.RepBar;
         var repCo = _sH._UI.RepFill;
         _sH._UI.UpdateBar(_reputation, _maxReputation, repBar, repCo);
@@ -141,7 +168,7 @@ public class GameManager : Singleton<GameManager>
         if (_gameOverTriggered) return;
         var _tM = TransitionManager.Instance();
         if (_tM.isBusy) return;
-        
+
         _gameOverTriggered = true;
         var transitionSetting = Resources.Load<TransitionSettings>("Transitions/Brush/Brush"); //hacky, the entire transitions folder got copied to Resources
         CutsceneSceneDirector.GoToCutsceneScene(transitionSetting, 0.2f);
@@ -150,7 +177,7 @@ public class GameManager : Singleton<GameManager>
     public void ChangeMoney(int value)
     {
         _sH._UI.SpawnFloatingMoney(value);
-        
+
         if (value > 0)
             _sH._aM.PlaySFX(SFX.Money);
 
@@ -203,7 +230,18 @@ public class GameManager : Singleton<GameManager>
     {
         _inSettings = true;
         SceneManager.LoadScene("Settings", LoadSceneMode.Additive);
-        
+
     }
 
+    #region DEBUG
+    [Button]
+    public void InitializeValues()
+    {
+        InitValues();
+        UpdateProgress();
+        UpdateReputation();
+        _sH._UI.UpdateMoney();
+        _sH._UI.UpdateUIElements();
+    }
+    #endregion
 }

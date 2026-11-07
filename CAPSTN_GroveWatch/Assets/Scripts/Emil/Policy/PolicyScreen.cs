@@ -50,6 +50,7 @@ public class PolicyScreen : MonoBehaviour
                 _policies = _palawanPolicies;
                 break;
             default:
+                _policies = _cebuPolicies;
                 Debug.LogError("Invalid Scene Name");
                 break;
         }

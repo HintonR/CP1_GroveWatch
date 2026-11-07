@@ -12,7 +12,8 @@ public class UIController : MonoBehaviour
     ServiceHub _sH;
     [SerializeField] TransitionSettings _transition;
 
-    [SerializeField] Image _repBar, _progBar, _season;
+    [SerializeField] Image _repBar, _repBarBG, _palawanRepBarBG,  _progBar, _season;
+    [SerializeField] Slider _palawanRepSlider;
     [SerializeField] TextMeshProUGUI _money, _month, _year, _repPercent, _progPercent, _seasonalShift;
     [SerializeField] Sprite _dry, _wet, _dryBG, _wetBG, _pausedBG;
     [SerializeField] SpriteRenderer _bg;
@@ -50,6 +51,7 @@ public class UIController : MonoBehaviour
         UpdateBar(_sH._gM._reputation, _sH._gM._maxReputation, _repBar, _repFill);
         UpdateRepPercent();
         UpdateMoney();
+        UpdateUIElements();
     }
 
     void Update()
@@ -97,6 +99,25 @@ public class UIController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
             OpenPauseMenu();
+    }
+
+    public void UpdateUIElements()
+    {
+        switch (_sH._gM._currentLevelSceneName)
+        {
+            case "Palawan":
+                _repBar.gameObject.SetActive(false);
+                _repBarBG.gameObject.SetActive(false);
+                _palawanRepBarBG.gameObject.SetActive(true);
+                _palawanRepSlider.gameObject.SetActive(true);
+                break;
+            default:
+                _repBar.gameObject.SetActive(true);
+                _repBarBG.gameObject.SetActive(true);
+                _palawanRepBarBG.gameObject.SetActive(false);
+                _palawanRepSlider.gameObject.SetActive(false);
+                break;
+        }
     }
 
     public void UpdateMoney()
