@@ -1639,7 +1639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dayLength: 24
-  _rSpeed: 20
 --- !u!1 &53108889
 GameObject:
   m_ObjectHideFlags: 0
@@ -10707,6 +10706,7 @@ MonoBehaviour:
   _moveSpeed: 45
   _bounds: {fileID: 1921213910}
   _edgeSize: 30
+  _dragSensitivity: 1.5
 --- !u!4 &521214404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3956000436647353175, guid: 362459dbd7240b148857733f0022e9d1, type: 3}
@@ -28220,6 +28220,7 @@ MonoBehaviour:
   _p: {fileID: 11400000, guid: a5cfc636c91b82742855ad9523460ee2, type: 2}
   _quarterlyBudget: 10000
   _rain: {fileID: 1953401332}
+  _policyWindow: 4
   _months:
   - January
   - February

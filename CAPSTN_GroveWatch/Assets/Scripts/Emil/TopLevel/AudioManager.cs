@@ -108,9 +108,9 @@ public class AudioManager : Singleton<AudioManager>
         _moneySFX     = Resources.Load<AudioClip>("Audio/Money");
 
         _drivingBGM   = Resources.Load<AudioClip>("Audio/Driving");
-        _cebuBGM      = Resources.Load<AudioClip>("Audio/CebuBGM");
+        _palawanBGM   = Resources.Load<AudioClip>("Audio/CebuBGM"); //swapped with cebu
         _bagiuoBGM    = Resources.Load<AudioClip>("Audio/BaguioBGM");
-        _palawanBGM   = Resources.Load<AudioClip>("Audio/PalawanBGM");
+        _cebuBGM      = Resources.Load<AudioClip>("Audio/PalawanBGM"); //swapped with palawan
         _credits      = Resources.Load<AudioClip>("Audio/Credits");
 
         PreloadMusic();
