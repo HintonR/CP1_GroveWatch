@@ -13,7 +13,8 @@ public enum Music
     Overworld,
     Cebu,
     Bagiuo,
-    Pawalan
+    Pawalan,
+    Credits
 }
 public enum SFX
 {
@@ -54,7 +55,7 @@ public class AudioManager : Singleton<AudioManager>
             _invalidSFX, _textSFX, _droppedSFX, _switchSFX, _deforSFX, 
             _policySFX, _successSFX, _moneySFX;
 
-    AudioClip _drivingBGM, _cebuBGM, _bagiuoBGM, _palawanBGM;
+    AudioClip _drivingBGM, _cebuBGM, _bagiuoBGM, _palawanBGM, _credits;
 
     Music _current;
     Coroutine _currentCrossfade;
@@ -107,6 +108,10 @@ public class AudioManager : Singleton<AudioManager>
         _moneySFX     = Resources.Load<AudioClip>("Audio/Money");
 
         _drivingBGM   = Resources.Load<AudioClip>("Audio/Driving");
+        _cebuBGM      = Resources.Load<AudioClip>("Audio/CebuBGM");
+        _bagiuoBGM    = Resources.Load<AudioClip>("Audio/BaguioBGM");
+        _palawanBGM   = Resources.Load<AudioClip>("Audio/PalawanBGM");
+        _credits      = Resources.Load<AudioClip>("Audio/Credits");
 
         PreloadMusic();
     }
@@ -164,6 +169,10 @@ public class AudioManager : Singleton<AudioManager>
             case Music.Victory   : _nextMusic = _victoryBGM;   break;
             case Music.GameOver  : _nextMusic = _gameoverBGM;  break;
             case Music.Overworld : _nextMusic = _drivingBGM;   break;
+            case Music.Cebu      : _nextMusic = _cebuBGM;      break;
+            case Music.Bagiuo    : _nextMusic = _bagiuoBGM;    break;
+            case Music.Pawalan   : _nextMusic = _palawanBGM;   break;
+            case Music.Credits   : _nextMusic = _credits;      break;
         }
 
         _current = _music;

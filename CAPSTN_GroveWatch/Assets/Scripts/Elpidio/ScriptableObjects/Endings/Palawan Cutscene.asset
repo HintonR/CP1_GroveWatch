@@ -14,9 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneName: Palawan Cutscene
   lines:
+  - image: {fileID: 21300000, guid: a21d305f7ff955a4ca21289b75c25abf, type: 3}
+    title: 
+    text: Flying to Palawan, you get ready to help the Rasa Sanctuary.
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 4cc51047f26b0764399cf6a52a69eb05, type: 3}
+    title: 
+    text: You've reached the Palawan PENR Office and start settling in.
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 75e590af7edf7f040ae94c608f6e68c6, type: 3}
+    title: 
+    text: Your Palawan tenure begins...
+    changeMusic: 0
+    music: 0
   - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
     title: 
-    text: Placeholder for Palawan Cutscene! This should lead to Palawan
+    text: ...Now!
     changeMusic: 0
     music: 0
   musicOnEnd: 0

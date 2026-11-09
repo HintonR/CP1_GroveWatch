@@ -44,6 +44,8 @@ public class GameManager : Singleton<GameManager>
 
     public bool _CebuWin, _BagiuoWin, _PalawanWin;
 
+    public bool _hasFog;
+
     public int[] _incidents = new int[6];
 
 
@@ -57,7 +59,8 @@ public class GameManager : Singleton<GameManager>
     {
         ServiceHub.Instance._gM = this;
         _sH = ServiceHub.Instance;
-        // _currentLevelSceneName = SceneManager.GetActiveScene().ToString();
+        _currentLevelSceneName = SceneManager.GetActiveScene().name.ToString();
+        //Debug.Log("scene:" + _currentLevelSceneName);
     }
 
     void Start()
@@ -165,6 +168,7 @@ public class GameManager : Singleton<GameManager>
 
     private void TriggerGameOver()
     {
+        if (SceneManager.GetActiveScene().name == "Palawan") return;
         if (_gameOverTriggered) return;
         var _tM = TransitionManager.Instance();
         if (_tM.isBusy) return;
@@ -241,7 +245,6 @@ public class GameManager : Singleton<GameManager>
         UpdateProgress();
         UpdateReputation();
         _sH._UI.UpdateMoney();
-        _sH._UI.UpdateUIElements();
     }
     #endregion
 }

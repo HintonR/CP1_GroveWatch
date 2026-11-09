@@ -10,6 +10,7 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     [SerializeField] UnitData _unitData;
     [SerializeField] Image _cd;
+    [SerializeField] LayerMask _forestLayer;
 
     Vector2 _originalPos;
     RectTransform _rect;
@@ -93,7 +94,7 @@ public class UnitDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         Ray ray = Camera.main.ScreenPointToRay(eventData.position);
 
-        if (!Physics.Raycast(ray, out RaycastHit hit))
+        if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _forestLayer))
             return null;
 
         return GetForestFromCollider(hit.collider);

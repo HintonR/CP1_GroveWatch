@@ -10,6 +10,8 @@ public class QuadrantController : MonoBehaviour
     [SerializeField] Sprite _q1A, _q1N, _q2A, _q2N, _q3A, _q3N, _q4A, _q4N;
     [SerializeField] GameObject _a1, _a2, _a3, _a4;
 
+    bool _wasFogActive;
+
     void Awake()
     {
         _sH = ServiceHub.Instance;
@@ -19,6 +21,7 @@ public class QuadrantController : MonoBehaviour
     {
         RegisterQuadrantManagerListener();
         RefreshAlerts();
+        _wasFogActive = HasFog();
     }
 
     void Start()
@@ -38,6 +41,13 @@ public class QuadrantController : MonoBehaviour
 
     void Update()
     {
+        bool hasFog = HasFog();
+        if (hasFog != _wasFogActive)
+        {
+            _wasFogActive = hasFog;
+            RefreshAlerts();
+        }
+
         if (_sH._gM._inScreen)
             return;
 
@@ -171,7 +181,7 @@ public class QuadrantController : MonoBehaviour
 
     void SetAlert(int quadrant, bool isActive)
     {
-        bool shouldShow = isActive && ShouldShowAlertForQuadrant(quadrant);
+        bool shouldShow = isActive && !HasFog();
 
         switch (quadrant)
         {
@@ -193,11 +203,8 @@ public class QuadrantController : MonoBehaviour
         _sH._qM.ActiveQuadrantChanged += HandleActiveQuadrantChanged;
     }
 
-    bool ShouldShowAlertForQuadrant(int quadrant)
+    bool HasFog()
     {
-        if (_sH == null || _sH._qM == null)
-            return false;
-
-        return _sH._qM.ActiveQuadrant != quadrant;
+        return _sH != null && _sH._gM != null && _sH._gM._hasFog;
     }
 }

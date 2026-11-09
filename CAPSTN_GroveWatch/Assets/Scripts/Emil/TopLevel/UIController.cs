@@ -9,10 +9,12 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    const int PALAWAN_REP_MAX_DIFFERENCE = 30;
+
     ServiceHub _sH;
     [SerializeField] TransitionSettings _transition;
 
-    [SerializeField] Image _repBar, _repBarBG, _palawanRepBarBG,  _progBar, _season;
+    [SerializeField] Image _repBar,  _progBar, _season;
     [SerializeField] Slider _palawanRepSlider;
     [SerializeField] TextMeshProUGUI _money, _month, _year, _repPercent, _progPercent, _seasonalShift;
     [SerializeField] Sprite _dry, _wet, _dryBG, _wetBG, _pausedBG;
@@ -51,7 +53,7 @@ public class UIController : MonoBehaviour
         UpdateBar(_sH._gM._reputation, _sH._gM._maxReputation, _repBar, _repFill);
         UpdateRepPercent();
         UpdateMoney();
-        UpdateUIElements();
+        UpdatePalawanRepSlider();
     }
 
     void Update()
@@ -101,28 +103,23 @@ public class UIController : MonoBehaviour
             OpenPauseMenu();
     }
 
-    public void UpdateUIElements()
-    {
-        switch (_sH._gM._currentLevelSceneName)
-        {
-            case "Palawan":
-                _repBar.gameObject.SetActive(false);
-                _repBarBG.gameObject.SetActive(false);
-                _palawanRepBarBG.gameObject.SetActive(true);
-                _palawanRepSlider.gameObject.SetActive(true);
-                break;
-            default:
-                _repBar.gameObject.SetActive(true);
-                _repBarBG.gameObject.SetActive(true);
-                _palawanRepBarBG.gameObject.SetActive(false);
-                _palawanRepSlider.gameObject.SetActive(false);
-                break;
-        }
-    }
-
     public void UpdateMoney()
     {
         _money.text = _sH._gM._money + "php";
+    }
+
+    public void UpdatePalawanRepSlider()
+    {
+        if (SceneManager.GetActiveScene().name != "Palawan")
+            return;
+
+        //Tourists (left -); Citizens (right +).
+        _palawanRepSlider.minValue = -PALAWAN_REP_MAX_DIFFERENCE;
+        _palawanRepSlider.maxValue = PALAWAN_REP_MAX_DIFFERENCE;
+        _palawanRepSlider.SetValueWithoutNotify(Mathf.Clamp(
+            _sH._fM.Citizen - _sH._fM.Tourist,
+            -PALAWAN_REP_MAX_DIFFERENCE,
+            PALAWAN_REP_MAX_DIFFERENCE));
     }
 
     public void SpawnFloatingMoney(int value)
@@ -248,8 +245,15 @@ public class UIController : MonoBehaviour
         var _tM = TransitionManager.Instance();
         if (_tM.isBusy)
             return;
-
-        _sH._aM.PlayMusic(Music.Gameplay);
+        Music musicToPlay;
+        switch(_sH._gM._currentLevelSceneName)
+        {
+            case "Cebu"    : musicToPlay = Music.Cebu; break;
+            case "Bagiuo"  : musicToPlay = Music.Bagiuo; break;
+            case "Palawan" : musicToPlay = Music.Pawalan; break;
+            default        : musicToPlay = Music.Gameplay; break;
+        }
+        _sH._aM.PlayMusic(musicToPlay);
         _sH._aM.PlaySFX(SFX.Back);
         _tM.onTransitionCutPointReached += DeactivateResearch;
         _tM.Transition(_transition, 0.1f);
@@ -371,8 +375,17 @@ public class UIController : MonoBehaviour
         var _tM = TransitionManager.Instance();
         if (_tM.isBusy)
             return;
-     
-        _sH._aM.PlayMusic(Music.Gameplay);
+             
+        Music musicToPlay;
+        switch(_sH._gM._currentLevelSceneName)
+        {
+            case "Cebu"    : musicToPlay = Music.Cebu; break;
+            case "Bagiuo"  : musicToPlay = Music.Bagiuo; break;
+            case "Palawan" : musicToPlay = Music.Pawalan; break;
+            default        : musicToPlay = Music.Gameplay; break;
+        }   
+        _sH._aM.PlayMusic(musicToPlay);
+        
         _tM.onTransitionCutPointReached += DeactivatePolicy;
         _tM.Transition(_transition, 0.1f);
     }

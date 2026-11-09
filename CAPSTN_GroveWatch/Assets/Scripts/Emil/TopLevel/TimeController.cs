@@ -15,6 +15,7 @@ public class TimeController : MonoBehaviour
     [SerializeField] UnitData _f, _r, _p;
     [SerializeField] int _quarterlyBudget;
     [SerializeField] GameObject _rain;
+    [SerializeField] int _policyWindow = 6;
 
     public string[] _months = { "January", "February", "March", "April", 
                          "May", "June", "July", "August", 
@@ -125,7 +126,7 @@ public class TimeController : MonoBehaviour
         if (_mCounter % 4 == 0)
             _dCounter++;
 
-        if (_mCounter % 6 == 0)
+        if (_mCounter % _policyWindow == 0)
             _needPolicy = true;
 
         if (_mCounter > 12)

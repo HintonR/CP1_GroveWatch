@@ -14,10 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneName: Baguio Cutscene
   lines:
+  - image: {fileID: 21300000, guid: 1015547dcd968b644b155cf5a8ab0f1d, type: 3}
+    title: 
+    text: You drive off to Baguio to protect the Busol Forest!
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 4cc51047f26b0764399cf6a52a69eb05, type: 3}
+    title: 
+    text: You've reached the Baguio PENR Office and start settling in.
+    changeMusic: 0
+    music: 0
+  - image: {fileID: 21300000, guid: 75e590af7edf7f040ae94c608f6e68c6, type: 3}
+    title: 
+    text: Your Baguio tenure begins...
+    changeMusic: 0
+    music: 0
   - image: {fileID: 21300000, guid: 9174c61b321e14a42acb75ed096e8782, type: 3}
     title: 
-    text: 'Placeholder for Baguio Cutscene! This should lead to Baguio (reminder:
-      scene name is Bagiuo)'
+    text: ...Now!
     changeMusic: 0
     music: 0
   musicOnEnd: 0

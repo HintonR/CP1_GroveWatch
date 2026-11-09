@@ -3061,10 +3061,13 @@ MonoBehaviour:
   _levelName: {fileID: 549230893}
   _levelDesc: {fileID: 774695925}
   _transportName: {fileID: 1289829071}
+  _b1: {fileID: 1531698179}
+  _b2: {fileID: 945111806}
+  _b3: {fileID: 863199778}
   _levelToLoad: 
   _tpDestination: {fileID: 0}
   _inScreen: 0
-  _mp: 10
+  _mp: 30
 --- !u!1 &1531698179
 GameObject:
   m_ObjectHideFlags: 0

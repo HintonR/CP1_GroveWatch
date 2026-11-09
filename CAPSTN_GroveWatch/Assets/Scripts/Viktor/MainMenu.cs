@@ -146,6 +146,7 @@ public class MainMenu : MonoBehaviour
         _sH._gM._isPaused = false;
         _sH._gM._inScreen = false;
         _sH._gM._isEndless = false;
+        _sH._gM._hasFog = false;
         _sH._gM.ResetIncidents();
 
         _sH._gM.SetMaxProgress(value);

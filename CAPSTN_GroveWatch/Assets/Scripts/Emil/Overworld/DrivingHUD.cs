@@ -11,6 +11,7 @@ public class DrivingHUD : MonoBehaviour
     [SerializeField] GameObject _levelInfo, _transportInfo;
     [SerializeField] TextMeshProUGUI _levelName, _levelDesc;
     [SerializeField] TextMeshProUGUI _transportName;
+    [SerializeField] GameObject _b1, _b2, _b3;
 
     public string _levelToLoad;
     public Transform _tpDestination;
@@ -25,6 +26,18 @@ public class DrivingHUD : MonoBehaviour
         _tM = TransitionManager.Instance();
 
         _sH._dUI = this;
+    }
+
+    void Start()
+    {
+        if (_sH._gM._CebuWin)
+            _b1.gameObject.SetActive(false);
+
+        if (_sH._gM._BagiuoWin)
+            _b2.gameObject.SetActive(false);
+
+        if (_sH._gM._PalawanWin)
+            _b3.gameObject.SetActive(false);
     }
 
     public void OpenLevelInfo()
@@ -89,6 +102,7 @@ public class DrivingHUD : MonoBehaviour
     public void StartLevel(string levelToLoad)
     {
         Debug.Log("Load " + levelToLoad);
+        _mp = 30;
         GameManager.Instance._currentLevelSceneName = levelToLoad;
         CutsceneSceneDirector.PlayLevel(levelToLoad, _mp); //added
         //For Trey - Use _levelToLoad string for TransitionManager/SceneManagement to load or save next scene

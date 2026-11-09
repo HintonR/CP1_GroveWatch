@@ -5,7 +5,6 @@ public class DayNightCycle : MonoBehaviour
     ServiceHub _sH;
 
     [SerializeField] float _dayLength = 24f;
-    [SerializeField] float _rSpeed = 30f;
 
     float _time;
 
@@ -21,7 +20,7 @@ public class DayNightCycle : MonoBehaviour
 
         _time += Time.deltaTime;
 
-        float yRotation = _time * _rSpeed;
+        float yRotation = (_time / _dayLength) * 360f;
         transform.rotation = Quaternion.Euler(60, yRotation, 0f);
 
         if (_time >= _dayLength)

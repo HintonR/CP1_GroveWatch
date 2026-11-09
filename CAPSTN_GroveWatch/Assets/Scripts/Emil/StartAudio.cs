@@ -12,22 +12,25 @@ public class StartAudio : MonoBehaviour
     void Start()
     {
         Scene _currentScene = SceneManager.GetActiveScene();           
-        if(_currentScene.name == "TitleScreen")
+        if (_currentScene.name == "TitleScreen")
             _sH._aM.PlayMusic(Music.Title);
 
-        if(_currentScene.name == "TutorialLevel")
+        if (_currentScene.name == "TutorialLevel")
             _sH._aM.PlayMusic(Music.Gameplay);
 
-        if(_currentScene.name == "Overworld")
-            _sH._aM.PlayMusic(Music.Overworld);
-        
-        if(_currentScene.name == "Cebu")
+        if (_currentScene.name == "Overworld")
             _sH._aM.PlayMusic(Music.Gameplay);
         
-        if(_currentScene.name == "Bagiuo")
-            _sH._aM.PlayMusic(Music.Gameplay);
+        if (_currentScene.name == "Cebu")
+            _sH._aM.PlayMusic(Music.Cebu);
+        
+        if (_currentScene.name == "Bagiuo")
+            _sH._aM.PlayMusic(Music.Bagiuo);
 
-        if(_currentScene.name == "Palawan")
-            _sH._aM.PlayMusic(Music.Gameplay);    
+        if (_currentScene.name == "Palawan")
+            _sH._aM.PlayMusic(Music.Pawalan);
+            
+        if (_currentScene.name == "Credits")
+            _sH._aM.PlayMusic(Music.Credits);   
     }
 }

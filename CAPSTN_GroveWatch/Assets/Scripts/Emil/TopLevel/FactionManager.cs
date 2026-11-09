@@ -26,6 +26,9 @@ public class FactionManager : MonoBehaviour
     {
         _sH = ServiceHub.Instance;
         _sH._fM = this;
+
+        if (_sH._UI != null)
+            _sH._UI.UpdatePalawanRepSlider();
     }
 
     public void UpdateFactionStanding(Faction faction, int value)
@@ -49,6 +52,9 @@ public class FactionManager : MonoBehaviour
         _tourist = Mathf.Clamp(_tourist, 0, 25);
         _citizen = Mathf.Clamp(_citizen, 0, 25);
         _government = Mathf.Clamp(_government, 0, 25);
+
+        if (_sH._UI != null)
+            _sH._UI.UpdatePalawanRepSlider();
     }
 
     void CheckStanding(Faction faction, int value)
