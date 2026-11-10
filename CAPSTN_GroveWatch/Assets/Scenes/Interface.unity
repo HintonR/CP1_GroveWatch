@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 6863536}
   - component: {fileID: 6863538}
   - component: {fileID: 6863537}
+  - component: {fileID: 6863539}
   m_Layer: 5
   m_Name: BudgetBonus
   m_TagString: Untagged
@@ -391,6 +392,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6863535}
   m_CullTransparentMesh: 1
+--- !u!114 &6863539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or subtract to your budget.
+  delay: 0.5
 --- !u!1 &12484855
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,6 +615,7 @@ GameObject:
   - component: {fileID: 36763594}
   - component: {fileID: 36763596}
   - component: {fileID: 36763595}
+  - component: {fileID: 36763597}
   m_Layer: 5
   m_Name: E2
   m_TagString: Untagged
@@ -665,6 +681,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36763593}
   m_CullTransparentMesh: 1
+--- !u!114 &36763597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36763593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The number of times a Drought destroyed a forest.
+  delay: 0.5
 --- !u!1 &37411036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,6 +1334,7 @@ GameObject:
   - component: {fileID: 107865415}
   - component: {fileID: 107865417}
   - component: {fileID: 107865416}
+  - component: {fileID: 107865418}
   m_Layer: 5
   m_Name: CD
   m_TagString: Untagged
@@ -1368,6 +1399,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107865414}
   m_CullTransparentMesh: 1
+--- !u!114 &107865418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107865414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Modifier for how fast your units recover the cooldown from a dispatch.
+  delay: 0.5
 --- !u!1 &120668927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,6 +1787,7 @@ GameObject:
   - component: {fileID: 128397364}
   - component: {fileID: 128397363}
   - component: {fileID: 128397365}
+  - component: {fileID: 128397366}
   m_Layer: 5
   m_Name: Reputation
   m_TagString: Untagged
@@ -1818,6 +1864,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00467ea783022e14c96fe53fce449309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &128397366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128397360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is your Reputation.
+
+    If this reaches 0%, you lose!'
+  delay: 0.5
 --- !u!1 &139017645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +2087,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1450983287262159113, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 158533294}
   m_SourcePrefab: {fileID: 100100000, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
 --- !u!224 &158533289 stripped
 RectTransform:
@@ -2037,6 +2102,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1450983287262159113, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
   m_PrefabInstance: {fileID: 158533288}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &158533294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158533290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Police unit.
+
+    Police can resolve Blue incidents.'
+  delay: 0.5
 --- !u!1 &167124638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,6 +2668,7 @@ GameObject:
   - component: {fileID: 232923094}
   - component: {fileID: 232923093}
   - component: {fileID: 232923096}
+  - component: {fileID: 232923097}
   m_Layer: 5
   m_Name: Q3 Button
   m_TagString: Untagged
@@ -2721,6 +2803,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &232923097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232923091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: This leads you to a quadrant on the map!
+  delay: 0.5
 --- !u!1 &236514480
 GameObject:
   m_ObjectHideFlags: 0
@@ -3056,6 +3152,7 @@ GameObject:
   - component: {fileID: 263130780}
   - component: {fileID: 263130782}
   - component: {fileID: 263130781}
+  - component: {fileID: 263130783}
   m_Layer: 5
   m_Name: CDIcon
   m_TagString: Untagged
@@ -3120,6 +3217,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 263130779}
   m_CullTransparentMesh: 1
+--- !u!114 &263130783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263130779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or reduce the cooldown of your dispatches.
+  delay: 0.5
 --- !u!1 &267374369
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,6 +3391,7 @@ GameObject:
   - component: {fileID: 281655133}
   - component: {fileID: 281655132}
   - component: {fileID: 281655135}
+  - component: {fileID: 281655136}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -3413,6 +3525,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &281655136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281655130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'Access the Upgrades menu here!
+
+    Purchase additional units, upgrade
+    their cooldown, and more!'
+  delay: 0.5
 --- !u!1 &282577335
 GameObject:
   m_ObjectHideFlags: 0
@@ -3558,6 +3687,7 @@ GameObject:
   - component: {fileID: 294925405}
   - component: {fileID: 294925407}
   - component: {fileID: 294925406}
+  - component: {fileID: 294925408}
   m_Layer: 5
   m_Name: ReputationBonus
   m_TagString: Untagged
@@ -3681,6 +3811,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294925404}
   m_CullTransparentMesh: 1
+--- !u!114 &294925408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294925404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy can modify your reputation positively or negatively.
+  delay: 0.5
 --- !u!1 &297490177
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,6 +4402,7 @@ GameObject:
   - component: {fileID: 351385080}
   - component: {fileID: 351385082}
   - component: {fileID: 351385081}
+  - component: {fileID: 351385083}
   m_Layer: 5
   m_Name: CDIcon
   m_TagString: Untagged
@@ -4322,6 +4467,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351385079}
   m_CullTransparentMesh: 1
+--- !u!114 &351385083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351385079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or reduce the cooldown of your dispatches.
+  delay: 0.5
 --- !u!1 &357474035
 GameObject:
   m_ObjectHideFlags: 0
@@ -4606,6 +4765,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387050427}
   m_CullTransparentMesh: 1
+--- !u!1 &389683639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2436495825559249785, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
+  m_PrefabInstance: {fileID: 33124216861177629}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &389683643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389683639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Ranger unit.
+
+    Rangers can resolve Green incidents.'
+  delay: 0.5
 --- !u!1 &391103801
 GameObject:
   m_ObjectHideFlags: 0
@@ -4802,6 +4982,7 @@ GameObject:
   - component: {fileID: 418105636}
   - component: {fileID: 418105637}
   - component: {fileID: 418105638}
+  - component: {fileID: 418105639}
   m_Layer: 5
   m_Name: Season
   m_TagString: Untagged
@@ -4866,6 +5047,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &418105639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418105635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: "Seasons affect the chances of the next incident.\nOn Dry seasons,
+    expect fires and droughts! \nOn Wet seasons, expect flood and rain!"
+  delay: 0.5
 --- !u!224 &418686988 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3227903962891360934, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
@@ -5238,6 +5434,7 @@ GameObject:
   - component: {fileID: 507461139}
   - component: {fileID: 507461141}
   - component: {fileID: 507461140}
+  - component: {fileID: 507461142}
   m_Layer: 5
   m_Name: F1icon
   m_TagString: Untagged
@@ -5302,6 +5499,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507461138}
   m_CullTransparentMesh: 1
+--- !u!114 &507461142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507461138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Standing with the Tourist faction.
+  delay: 0.5
 --- !u!1 &517288287
 GameObject:
   m_ObjectHideFlags: 0
@@ -5808,6 +6019,7 @@ GameObject:
   - component: {fileID: 537489728}
   - component: {fileID: 537489727}
   - component: {fileID: 537489730}
+  - component: {fileID: 537489731}
   m_Layer: 5
   m_Name: Q2 Button
   m_TagString: Untagged
@@ -5942,6 +6154,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &537489731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537489725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: This leads you to a quadrant on the map!
+  delay: 0.5
 --- !u!1 &541874319
 GameObject:
   m_ObjectHideFlags: 0
@@ -6611,6 +6837,7 @@ GameObject:
   - component: {fileID: 586421744}
   - component: {fileID: 586421743}
   - component: {fileID: 586421746}
+  - component: {fileID: 586421747}
   m_Layer: 5
   m_Name: Cancel
   m_TagString: Untagged
@@ -6744,6 +6971,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &586421747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586421741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Return to the game!
+  delay: 0.5
 --- !u!1 &593611954
 GameObject:
   m_ObjectHideFlags: 0
@@ -7211,6 +7452,7 @@ GameObject:
   - component: {fileID: 677218683}
   - component: {fileID: 677218685}
   - component: {fileID: 677218684}
+  - component: {fileID: 677218686}
   m_Layer: 5
   m_Name: BudgetBonus
   m_TagString: Untagged
@@ -7334,6 +7576,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677218682}
   m_CullTransparentMesh: 1
+--- !u!114 &677218686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677218682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or subtract to your budget.
+  delay: 0.5
 --- !u!1001 &687000826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7449,7 +7705,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1450983287262159113, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 687000832}
   m_SourcePrefab: {fileID: 100100000, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
 --- !u!224 &687000827 stripped
 RectTransform:
@@ -7461,6 +7720,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1450983287262159113, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
   m_PrefabInstance: {fileID: 687000826}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &687000832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687000828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Police unit.
+
+    Police can resolve Blue incidents.'
+  delay: 0.5
 --- !u!1 &688622603
 GameObject:
   m_ObjectHideFlags: 0
@@ -7472,6 +7747,7 @@ GameObject:
   - component: {fileID: 688622604}
   - component: {fileID: 688622606}
   - component: {fileID: 688622605}
+  - component: {fileID: 688622607}
   m_Layer: 5
   m_Name: E5
   m_TagString: Untagged
@@ -7537,6 +7813,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 688622603}
   m_CullTransparentMesh: 1
+--- !u!114 &688622607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688622603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The number of times Illegal Logging destroyed a forest.
+  delay: 0.5
 --- !u!1 &692437168
 GameObject:
   m_ObjectHideFlags: 0
@@ -7653,6 +7943,7 @@ GameObject:
   - component: {fileID: 714026537}
   - component: {fileID: 714026539}
   - component: {fileID: 714026538}
+  - component: {fileID: 714026540}
   m_Layer: 5
   m_Name: ReputationBonus
   m_TagString: Untagged
@@ -7776,6 +8067,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714026536}
   m_CullTransparentMesh: 1
+--- !u!114 &714026540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714026536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy can modify your reputation positively or negatively.
+  delay: 0.5
 --- !u!1 &732432259
 GameObject:
   m_ObjectHideFlags: 0
@@ -7787,6 +8092,7 @@ GameObject:
   - component: {fileID: 732432260}
   - component: {fileID: 732432262}
   - component: {fileID: 732432261}
+  - component: {fileID: 732432263}
   m_Layer: 5
   m_Name: ReputationBonus
   m_TagString: Untagged
@@ -7910,6 +8216,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732432259}
   m_CullTransparentMesh: 1
+--- !u!114 &732432263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 732432259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy can modify your reputation positively or negatively.
+  delay: 0.5
 --- !u!1 &748241864
 GameObject:
   m_ObjectHideFlags: 0
@@ -8091,6 +8411,7 @@ GameObject:
   - component: {fileID: 775841315}
   - component: {fileID: 775841317}
   - component: {fileID: 775841316}
+  - component: {fileID: 775841318}
   m_Layer: 5
   m_Name: CDIcon
   m_TagString: Untagged
@@ -8155,6 +8476,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775841314}
   m_CullTransparentMesh: 1
+--- !u!114 &775841318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775841314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or reduce the cooldown of your dispatches.
+  delay: 0.5
 --- !u!1 &807589122
 GameObject:
   m_ObjectHideFlags: 0
@@ -8166,6 +8501,7 @@ GameObject:
   - component: {fileID: 807589123}
   - component: {fileID: 807589125}
   - component: {fileID: 807589124}
+  - component: {fileID: 807589126}
   m_Layer: 5
   m_Name: F3Icon
   m_TagString: Untagged
@@ -8230,6 +8566,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807589122}
   m_CullTransparentMesh: 1
+--- !u!114 &807589126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807589122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Standing with the Government faction.
+  delay: 0.5
 --- !u!1 &810838296
 GameObject:
   m_ObjectHideFlags: 0
@@ -8241,6 +8591,7 @@ GameObject:
   - component: {fileID: 810838297}
   - component: {fileID: 810838299}
   - component: {fileID: 810838298}
+  - component: {fileID: 810838300}
   m_Layer: 5
   m_Name: E6
   m_TagString: Untagged
@@ -8306,6 +8657,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 810838296}
   m_CullTransparentMesh: 1
+--- !u!114 &810838300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810838296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The number of times Illegal Construction destroyed a forest.
+  delay: 0.5
 --- !u!1 &816010166
 GameObject:
   m_ObjectHideFlags: 0
@@ -8393,6 +8758,7 @@ GameObject:
   - component: {fileID: 816142407}
   - component: {fileID: 816142406}
   - component: {fileID: 816142408}
+  - component: {fileID: 816142409}
   m_Layer: 5
   m_Name: Reputation Bar
   m_TagString: Untagged
@@ -8469,6 +8835,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00467ea783022e14c96fe53fce449309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &816142409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816142404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is your Reputation.
+
+    If this reaches 0%, you lose!'
+  delay: 0.5
 --- !u!1 &828818133
 GameObject:
   m_ObjectHideFlags: 0
@@ -9603,6 +9985,7 @@ GameObject:
   - component: {fileID: 939074344}
   - component: {fileID: 939074346}
   - component: {fileID: 939074345}
+  - component: {fileID: 939074347}
   m_Layer: 5
   m_Name: EFIcon
   m_TagString: Untagged
@@ -9667,6 +10050,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939074343}
   m_CullTransparentMesh: 1
+--- !u!114 &939074347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939074343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or reduce the active time of your dispatches.
+  delay: 0.5
 --- !u!1 &940144667
 GameObject:
   m_ObjectHideFlags: 0
@@ -10439,6 +10836,7 @@ GameObject:
   - component: {fileID: 985759013}
   - component: {fileID: 985759015}
   - component: {fileID: 985759014}
+  - component: {fileID: 985759016}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -10562,6 +10960,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985759012}
   m_CullTransparentMesh: 1
+--- !u!114 &985759016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985759012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is your budget.
+
+    You can go up to -50,000 in debt before
+    you lose!'
+  delay: 0.5
 --- !u!1 &1015778830
 GameObject:
   m_ObjectHideFlags: 0
@@ -10709,6 +11124,7 @@ GameObject:
   - component: {fileID: 1034042242}
   - component: {fileID: 1034042241}
   - component: {fileID: 1034042244}
+  - component: {fileID: 1034042245}
   m_Layer: 5
   m_Name: News
   m_TagString: Untagged
@@ -10842,6 +11258,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &1034042245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034042239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: "Access the News menu here! \nThe News menu contains information about
+    your faction reputation, incidents, and budget!"
+  delay: 0.5
 --- !u!1 &1035227844
 GameObject:
   m_ObjectHideFlags: 0
@@ -12340,9 +12771,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3295154300949988672, guid: 32e494714aaa01442b37e5773476d365, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295154300949988672, guid: 32e494714aaa01442b37e5773476d365, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295154300949988672, guid: 32e494714aaa01442b37e5773476d365, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295154300949988672, guid: 32e494714aaa01442b37e5773476d365, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295154300949988672, guid: 32e494714aaa01442b37e5773476d365, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295154300949988672, guid: 32e494714aaa01442b37e5773476d365, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3313815649593755113, guid: 32e494714aaa01442b37e5773476d365, type: 3}
       propertyPath: m_Name
       value: TooltipPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6358269160350893903, guid: 32e494714aaa01442b37e5773476d365, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12942,7 +13401,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2436495825559249785, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1167495987}
   m_SourcePrefab: {fileID: 100100000, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
 --- !u!224 &1167495982 stripped
 RectTransform:
@@ -12954,6 +13416,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2436495825559249785, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
   m_PrefabInstance: {fileID: 1167495981}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1167495987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167495983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Ranger unit.
+
+    Rangers can resolve Green incidents.'
+  delay: 0.5
 --- !u!1 &1180884013
 GameObject:
   m_ObjectHideFlags: 0
@@ -13506,6 +13984,7 @@ GameObject:
   - component: {fileID: 1273176856}
   - component: {fileID: 1273176858}
   - component: {fileID: 1273176857}
+  - component: {fileID: 1273176859}
   m_Layer: 5
   m_Name: EF
   m_TagString: Untagged
@@ -13570,6 +14049,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273176855}
   m_CullTransparentMesh: 1
+--- !u!114 &1273176859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273176855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Modifier for how fast your units resolve a dispatch.
+  delay: 0.5
 --- !u!1 &1277958414
 GameObject:
   m_ObjectHideFlags: 0
@@ -13870,6 +14363,7 @@ GameObject:
   - component: {fileID: 1282656944}
   - component: {fileID: 1282656946}
   - component: {fileID: 1282656945}
+  - component: {fileID: 1282656947}
   m_Layer: 5
   m_Name: E4
   m_TagString: Untagged
@@ -13935,6 +14429,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282656943}
   m_CullTransparentMesh: 1
+--- !u!114 &1282656947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282656943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The number of times Illegal Camping destroyed a forest.
+  delay: 0.5
 --- !u!1 &1285357287
 GameObject:
   m_ObjectHideFlags: 0
@@ -14358,6 +14866,7 @@ GameObject:
   - component: {fileID: 1328660025}
   - component: {fileID: 1328660027}
   - component: {fileID: 1328660026}
+  - component: {fileID: 1328660028}
   m_Layer: 5
   m_Name: E1
   m_TagString: Untagged
@@ -14423,6 +14932,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328660024}
   m_CullTransparentMesh: 1
+--- !u!114 &1328660028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328660024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The number of times a Forest Fire destroyed a forest.
+  delay: 0.5
 --- !u!1 &1330534742
 GameObject:
   m_ObjectHideFlags: 0
@@ -15499,7 +16022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: Play or pause the game. You can still deploy units even when paused!
+  description: "Play or pause the game. \nYou can still deploy units even when paused!"
   delay: 0.5
 --- !u!1 &1415292456
 GameObject:
@@ -15587,6 +16110,7 @@ GameObject:
   - component: {fileID: 1421552939}
   - component: {fileID: 1421552941}
   - component: {fileID: 1421552940}
+  - component: {fileID: 1421552942}
   m_Layer: 5
   m_Name: EFIcon
   m_TagString: Untagged
@@ -15651,6 +16175,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421552938}
   m_CullTransparentMesh: 1
+--- !u!114 &1421552942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421552938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or reduce the active time of your dispatches.
+  delay: 0.5
 --- !u!1001 &1421973851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15762,7 +16300,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2436495825559249785, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1421973857}
   m_SourcePrefab: {fileID: 100100000, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
 --- !u!224 &1421973852 stripped
 RectTransform:
@@ -15774,6 +16315,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2436495825559249785, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
   m_PrefabInstance: {fileID: 1421973851}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1421973857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421973853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Ranger unit.
+
+    Rangers can resolve Green incidents.'
+  delay: 0.5
 --- !u!1 &1445073544
 GameObject:
   m_ObjectHideFlags: 0
@@ -15909,6 +16466,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 65.200005}
   m_SizeDelta: {x: 200, y: 44.4}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1452773388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7092888283483959395, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
+  m_PrefabInstance: {fileID: 1421717225376220153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1452773392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452773388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Firefighter unit.
+
+    Firefighters can resolve Red incidents.'
+  delay: 0.5
 --- !u!1 &1454580372
 GameObject:
   m_ObjectHideFlags: 0
@@ -16400,6 +16978,7 @@ GameObject:
   - component: {fileID: 1486123776}
   - component: {fileID: 1486123778}
   - component: {fileID: 1486123777}
+  - component: {fileID: 1486123779}
   m_Layer: 5
   m_Name: F2Icon
   m_TagString: Untagged
@@ -16464,6 +17043,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486123775}
   m_CullTransparentMesh: 1
+--- !u!114 &1486123779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1486123775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Standing with the Citizens faction.
+  delay: 0.5
 --- !u!1 &1494569634
 GameObject:
   m_ObjectHideFlags: 0
@@ -16941,6 +17534,7 @@ GameObject:
   - component: {fileID: 1544146568}
   - component: {fileID: 1544146570}
   - component: {fileID: 1544146569}
+  - component: {fileID: 1544146571}
   m_Layer: 5
   m_Name: BudgetBonus
   m_TagString: Untagged
@@ -17064,6 +17658,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544146567}
   m_CullTransparentMesh: 1
+--- !u!114 &1544146571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544146567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or subtract to your budget.
+  delay: 0.5
 --- !u!1 &1571718555
 GameObject:
   m_ObjectHideFlags: 0
@@ -17720,7 +18328,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7092888283483959395, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1616663338}
   m_SourcePrefab: {fileID: 100100000, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
 --- !u!224 &1616663333 stripped
 RectTransform:
@@ -17732,6 +18343,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7092888283483959395, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
   m_PrefabInstance: {fileID: 1616663332}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1616663338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616663334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Firefighter unit.
+
+    Firefighters can resolve Red incidents.'
+  delay: 0.5
 --- !u!1 &1622841922
 GameObject:
   m_ObjectHideFlags: 0
@@ -18714,6 +19341,7 @@ GameObject:
   - component: {fileID: 1711431218}
   - component: {fileID: 1711431220}
   - component: {fileID: 1711431219}
+  - component: {fileID: 1711431221}
   m_Layer: 5
   m_Name: Budget
   m_TagString: Untagged
@@ -18778,6 +19406,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711431217}
   m_CullTransparentMesh: 1
+--- !u!114 &1711431221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711431217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is your budget.
+
+    You can go up to -50,000 in debt before
+    you lose!'
+  delay: 0.5
 --- !u!1 &1716980688
 GameObject:
   m_ObjectHideFlags: 0
@@ -18926,6 +19571,7 @@ GameObject:
   - component: {fileID: 1719593860}
   - component: {fileID: 1719593859}
   - component: {fileID: 1719593861}
+  - component: {fileID: 1719593862}
   m_Layer: 5
   m_Name: Progress Bar
   m_TagString: Untagged
@@ -19002,6 +19648,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccd896aa56017a4b84d8132374e619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1719593862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719593857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is your Progress.
+
+    If this reaches 100%, you win!'
+  delay: 0.5
 --- !u!1 &1727972377
 GameObject:
   m_ObjectHideFlags: 0
@@ -19828,7 +20490,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7092888283483959395, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1785339382}
   m_SourcePrefab: {fileID: 100100000, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
 --- !u!224 &1785339377 stripped
 RectTransform:
@@ -19840,6 +20505,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7092888283483959395, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
   m_PrefabInstance: {fileID: 1785339376}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1785339382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785339378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Firefighter unit.
+
+    Firefighters can resolve Red incidents.'
+  delay: 0.5
 --- !u!1 &1786387251
 GameObject:
   m_ObjectHideFlags: 0
@@ -19987,6 +20668,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!1 &1799935939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1450983287262159113, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
+  m_PrefabInstance: {fileID: 536546461424817472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1799935943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799935939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is a Police unit.
+
+    Police can resolve Blue incidents.'
+  delay: 0.5
 --- !u!1 &1805860093
 GameObject:
   m_ObjectHideFlags: 0
@@ -20134,6 +20836,7 @@ GameObject:
   - component: {fileID: 1815779980}
   - component: {fileID: 1815779982}
   - component: {fileID: 1815779981}
+  - component: {fileID: 1815779983}
   m_Layer: 5
   m_Name: EFIcon
   m_TagString: Untagged
@@ -20198,6 +20901,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815779979}
   m_CullTransparentMesh: 1
+--- !u!114 &1815779983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815779979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Enacting this policy may add or reduce the active time of your dispatches.
+  delay: 0.5
 --- !u!1 &1822643157
 GameObject:
   m_ObjectHideFlags: 0
@@ -20209,6 +20926,7 @@ GameObject:
   - component: {fileID: 1822643158}
   - component: {fileID: 1822643160}
   - component: {fileID: 1822643159}
+  - component: {fileID: 1822643161}
   m_Layer: 5
   m_Name: E3
   m_TagString: Untagged
@@ -20274,6 +20992,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1822643157}
   m_CullTransparentMesh: 1
+--- !u!114 &1822643161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822643157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The number of times a Flood destroyed a forest.
+  delay: 0.5
 --- !u!1 &1833007265
 GameObject:
   m_ObjectHideFlags: 0
@@ -20988,6 +21720,7 @@ GameObject:
   - component: {fileID: 1903494395}
   - component: {fileID: 1903494394}
   - component: {fileID: 1903494397}
+  - component: {fileID: 1903494398}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -21121,6 +21854,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &1903494398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903494392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Access the Settings here!
+  delay: 0.5
 --- !u!1 &1905442188
 GameObject:
   m_ObjectHideFlags: 0
@@ -21709,6 +22456,7 @@ GameObject:
   - component: {fileID: 1965580968}
   - component: {fileID: 1965580967}
   - component: {fileID: 1965580970}
+  - component: {fileID: 1965580971}
   m_Layer: 5
   m_Name: Q1 Button
   m_TagString: Untagged
@@ -21843,6 +22591,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &1965580971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965580965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: This leads you to a quadrant on the map!
+  delay: 0.5
 --- !u!1 &1979865782
 GameObject:
   m_ObjectHideFlags: 0
@@ -22477,6 +23239,7 @@ GameObject:
   - component: {fileID: 2089927461}
   - component: {fileID: 2089927460}
   - component: {fileID: 2089927462}
+  - component: {fileID: 2089927463}
   m_Layer: 5
   m_Name: Progress
   m_TagString: Untagged
@@ -22553,6 +23316,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ccd896aa56017a4b84d8132374e619d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2089927463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089927458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'This is your Progress.
+
+    If this reaches 100%, you win!'
+  delay: 0.5
 --- !u!1 &2095698353
 GameObject:
   m_ObjectHideFlags: 0
@@ -22934,6 +23713,7 @@ GameObject:
   - component: {fileID: 2142687688}
   - component: {fileID: 2142687687}
   - component: {fileID: 2142687690}
+  - component: {fileID: 2142687691}
   m_Layer: 5
   m_Name: Q4 Button
   m_TagString: Untagged
@@ -23068,6 +23848,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverScale: 1.08
+--- !u!114 &2142687691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142687685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: This leads you to a quadrant on the map!
+  delay: 0.5
 --- !u!1001 &33124216861177629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23183,7 +23977,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2436495825559249785, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 389683643}
   m_SourcePrefab: {fileID: 100100000, guid: 78e38e7c273f18743beec2dea3a36302, type: 3}
 --- !u!1001 &536546461424817472
 PrefabInstance:
@@ -23300,7 +24097,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1450983287262159113, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799935943}
   m_SourcePrefab: {fileID: 100100000, guid: 64eb404b919f8d04eaed81345ce86887, type: 3}
 --- !u!1001 &1421717225376220153
 PrefabInstance:
@@ -23417,7 +24217,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7092888283483959395, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1452773392}
   m_SourcePrefab: {fileID: 100100000, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -34,8 +33,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         if (waiting != null) StopCoroutine(waiting);
         waiting = null;
-
-        var hub = ServiceHub.Instance;                  //null while the game is quitting
+        var hub = ServiceHub.Instance;
         if (hub != null && hub._tUI != null) hub._tUI.Hide();
     }
 }
