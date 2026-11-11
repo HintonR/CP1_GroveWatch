@@ -2127,6 +2127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 167124639}
+  - component: {fileID: 167124640}
   m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
@@ -2154,6 +2155,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 40, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &167124640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167124638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a47956b19726d40a5cc45ac5377f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: "Shows which side your policies favor. \nLean too far on one side,
+    and the other side will turn on you!"
+  delay: 0.5
 --- !u!1 &183777707
 GameObject:
   m_ObjectHideFlags: 0
@@ -10974,7 +10990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'This is your budget.
 
-    You can go up to -50,000 in debt before
+    You can go up to 50000php in debt before
     you lose!'
   delay: 0.5
 --- !u!1 &1015778830
@@ -19420,7 +19436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 'This is your budget.
 
-    You can go up to -50,000 in debt before
+    You can go up to 50000php in debt before
     you lose!'
   delay: 0.5
 --- !u!1 &1716980688

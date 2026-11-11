@@ -14,10 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneName: Cebu Tutorial
   lines:
-  - image: {fileID: 21300000, guid: 9ecdf0768efb3b8479fcba7044005517, type: 3}
-    title: Cebu
-    text: Cebu tutorial Placeholder!
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Lapad Forest
+    text: Welcome to Cebu's Lapad Forest! Before the incidents start rolling in,
+      let's get you started with moving the camera.
     changeMusic: 1
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Camera/Drone Controls
+    text: Press WASD or the Arrow Keys to move your view across the map.
+    changeMusic: 0
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Camera/Drone Controls
+    text: Push your mouse against any edge of the screen and the view will glide
+      in that direction.
+    changeMusic: 0
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Camera/Drone Controls
+    text: You may also hold [Right Click] and drag to pull the view where you want
+      it.
+    changeMusic: 0
     music: 2
   musicOnEnd: 1
   endMusic: 0

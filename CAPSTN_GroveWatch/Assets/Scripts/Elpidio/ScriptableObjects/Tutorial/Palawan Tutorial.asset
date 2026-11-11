@@ -14,10 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutsceneName: Palawan Tutorial
   lines:
-  - image: {fileID: 21300000, guid: 9ecdf0768efb3b8479fcba7044005517, type: 3}
-    title: Palawan
-    text: Palawan tutorial Placeholder!
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Rasa Sanctuary
+    text: Welcome to Palawan's Rasa Sanctuary! There are more people to please here,
+      but first, a quick refresher on the camera controls.
     changeMusic: 1
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Camera/Drone Controls
+    text: Press WASD or the Arrow Keys to move your view across the map.
+    changeMusic: 0
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Camera/Drone Controls
+    text: Push your mouse against any edge of the screen and the view will glide
+      in that direction.
+    changeMusic: 0
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Camera/Drone Controls
+    text: You may also hold [Right Click] and drag to pull the view where you want
+      it.
+    changeMusic: 0
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Faction Reputation
+    text: "In Palawan, both Tourists and Citizens are watching. \nThe new bar shows
+      who you're favoring:\nTourists on the left, Citizens on the right."
+    changeMusic: 0
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Faction Reputation
+    text: Every Policy you choose pushes the bar toward one side or the other. Choose
+      carefully!
+    changeMusic: 0
+    music: 2
+  - image: {fileID: 21300000, guid: 5f60ac86da50e004289595693fedb7af, type: 3}
+    title: Faction Reputation
+    text: "Happy Tourists bring extra budget every quarter. \nHappy Citizens make
+      your reputation grow faster. \nUpset either side, and your reputation will
+      drain!"
+    changeMusic: 0
     music: 2
   musicOnEnd: 1
   endMusic: 0
