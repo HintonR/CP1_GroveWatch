@@ -125,6 +125,7 @@ public class GameManager : Singleton<GameManager>
     private void TriggerVictory()
     {
         if (_victoryTriggered || _gameOverTriggered) return;
+        if (TransitionManager.Instance().isBusy) return; //blocker fixed here
         _victoryTriggered = true;
         LastGameOverReason = CutsceneReason.Victory;
 

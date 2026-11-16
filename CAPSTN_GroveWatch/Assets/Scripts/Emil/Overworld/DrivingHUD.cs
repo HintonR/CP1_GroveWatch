@@ -40,7 +40,7 @@ public class DrivingHUD : MonoBehaviour
         if (_sH._gM._PalawanWin)
             _b3.gameObject.SetActive(false);
 
-        //progression stuff, baguio & palawan uhhh
+        //progression stuff
 
         //_b2.GetComponent<Button>().interactable = _sH._gM._CebuWin;
         //_b3.GetComponent<Button>().interactable = _sH._gM._CebuWin;

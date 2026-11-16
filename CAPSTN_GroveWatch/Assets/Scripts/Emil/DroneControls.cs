@@ -50,7 +50,7 @@ public class DroneControls : MonoBehaviour
     void AddEdgeScroll(ref float x, ref float z)
     {
         var gM = ServiceHub.Instance._gM;
-        if (gM._isPaused || gM._inScreen || !Application.isFocused || Input.GetMouseButton(1)) return;
+        if (gM._inScreen || !Application.isFocused || Input.GetMouseButton(1)) return;
 
         Vector3 mouse = Input.mousePosition;
         if (mouse.x < 0 || mouse.y < 0 || mouse.x > Screen.width || mouse.y > Screen.height) return;
@@ -64,7 +64,7 @@ public class DroneControls : MonoBehaviour
     void RightClickDrag(Vector3 forward, Vector3 right)
     {
         var gM = ServiceHub.Instance._gM;
-        if (gM._isPaused || gM._inScreen || !Application.isFocused) return;
+        if (gM._inScreen || !Application.isFocused) return;
         transform.position -= (right * Input.GetAxis("Mouse X") + forward * Input.GetAxis("Mouse Y")) * _dragSpeed;
     }
     //void AddRightClickDrag(ref float x, ref float z)
