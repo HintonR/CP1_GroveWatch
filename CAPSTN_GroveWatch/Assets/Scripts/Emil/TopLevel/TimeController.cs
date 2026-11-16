@@ -149,7 +149,8 @@ public class TimeController : MonoBehaviour
 
     void UpdateSeason()
     {
-        _isWet = _mCounter >= 5 && _mCounter <= 10;
+        //_isWet = _mCounter >= 5 && _mCounter <= 10;
+        _isWet = _mCounter >= 6 && _mCounter <= 11; //seasonal shift fix
         _sH._UI.UpdateSeason(_isWet);
 
         if (!_sH._gM._is3D)

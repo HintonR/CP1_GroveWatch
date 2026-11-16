@@ -405,7 +405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or subtract to your budget.
-  delay: 0.5
 --- !u!1 &12484855
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +693,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: The number of times a Drought destroyed a forest.
-  delay: 0.5
 --- !u!1 &37411036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,7 +1410,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Modifier for how fast your units recover the cooldown from a dispatch.
-  delay: 0.5
 --- !u!1 &120668927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1447,8 +1444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 128}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -2.5, y: 127.33}
+  m_SizeDelta: {x: 200, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &120668929
 MonoBehaviour:
@@ -1474,7 +1471,9 @@ MonoBehaviour:
 
     Title
 
-    Third'
+    Third
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}
   m_sharedMaterial: {fileID: 2800134297060617489, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}
@@ -1504,9 +1503,9 @@ MonoBehaviour:
   m_fontSize: 28
   m_fontSizeBase: 28
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 16
+  m_fontSizeMax: 28
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1519,7 +1518,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -1537,7 +1536,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -2.5003738, y: -35.00531, z: 2.500351, w: -30.004517}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1879,7 +1878,6 @@ MonoBehaviour:
   description: 'This is your Reputation.
 
     If this reaches 0%, you lose!'
-  delay: 0.5
 --- !u!1 &139017645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,7 +2115,6 @@ MonoBehaviour:
   description: 'This is a Police unit.
 
     Police can resolve Blue incidents.'
-  delay: 0.5
 --- !u!1 &167124638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,7 +2166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "Shows which side your policies favor. \nLean too far on one side,
     and the other side will turn on you!"
-  delay: 0.5
 --- !u!1 &183777707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2832,7 +2828,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: This leads you to a quadrant on the map!
-  delay: 0.5
 --- !u!1 &236514480
 GameObject:
   m_ObjectHideFlags: 0
@@ -3246,7 +3241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or reduce the cooldown of your dispatches.
-  delay: 0.5
 --- !u!1 &267374369
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,7 +3551,6 @@ MonoBehaviour:
 
     Purchase additional units, upgrade
     their cooldown, and more!'
-  delay: 0.5
 --- !u!1 &282577335
 GameObject:
   m_ObjectHideFlags: 0
@@ -3840,7 +3833,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy can modify your reputation positively or negatively.
-  delay: 0.5
 --- !u!1 &297490177
 GameObject:
   m_ObjectHideFlags: 0
@@ -4496,7 +4488,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or reduce the cooldown of your dispatches.
-  delay: 0.5
 --- !u!1 &357474035
 GameObject:
   m_ObjectHideFlags: 0
@@ -4801,7 +4792,6 @@ MonoBehaviour:
   description: 'This is a Ranger unit.
 
     Rangers can resolve Green incidents.'
-  delay: 0.5
 --- !u!1 &391103801
 GameObject:
   m_ObjectHideFlags: 0
@@ -5077,7 +5067,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "Seasons affect the chances of the next incident.\nOn Dry seasons,
     expect fires and droughts! \nOn Wet seasons, expect flood and rain!"
-  delay: 0.5
 --- !u!224 &418686988 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3227903962891360934, guid: cdaaa34e45f341a4a88fbf218960ea2c, type: 3}
@@ -5528,7 +5517,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Standing with the Tourist faction.
-  delay: 0.5
 --- !u!1 &517288287
 GameObject:
   m_ObjectHideFlags: 0
@@ -6183,7 +6171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: This leads you to a quadrant on the map!
-  delay: 0.5
 --- !u!1 &541874319
 GameObject:
   m_ObjectHideFlags: 0
@@ -6459,7 +6446,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -6473,7 +6460,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1454580374}
   m_FillRect: {fileID: 1729408417}
   m_HandleRect: {fileID: 1454580373}
@@ -7000,7 +6987,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Return to the game!
-  delay: 0.5
 --- !u!1 &593611954
 GameObject:
   m_ObjectHideFlags: 0
@@ -7605,7 +7591,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or subtract to your budget.
-  delay: 0.5
 --- !u!1001 &687000826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7751,7 +7736,6 @@ MonoBehaviour:
   description: 'This is a Police unit.
 
     Police can resolve Blue incidents.'
-  delay: 0.5
 --- !u!1 &688622603
 GameObject:
   m_ObjectHideFlags: 0
@@ -7842,7 +7826,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: The number of times Illegal Logging destroyed a forest.
-  delay: 0.5
 --- !u!1 &692437168
 GameObject:
   m_ObjectHideFlags: 0
@@ -8096,7 +8079,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy can modify your reputation positively or negatively.
-  delay: 0.5
 --- !u!1 &732432259
 GameObject:
   m_ObjectHideFlags: 0
@@ -8245,7 +8227,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy can modify your reputation positively or negatively.
-  delay: 0.5
 --- !u!1 &748241864
 GameObject:
   m_ObjectHideFlags: 0
@@ -8505,7 +8486,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or reduce the cooldown of your dispatches.
-  delay: 0.5
 --- !u!1 &807589122
 GameObject:
   m_ObjectHideFlags: 0
@@ -8595,7 +8575,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Standing with the Government faction.
-  delay: 0.5
 --- !u!1 &810838296
 GameObject:
   m_ObjectHideFlags: 0
@@ -8686,7 +8665,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: The number of times Illegal Construction destroyed a forest.
-  delay: 0.5
 --- !u!1 &816010166
 GameObject:
   m_ObjectHideFlags: 0
@@ -8866,7 +8844,6 @@ MonoBehaviour:
   description: 'This is your Reputation.
 
     If this reaches 0%, you lose!'
-  delay: 0.5
 --- !u!1 &828818133
 GameObject:
   m_ObjectHideFlags: 0
@@ -9452,8 +9429,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 127.999985}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -2.5, y: 127.33}
+  m_SizeDelta: {x: 200, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &882266928
 MonoBehaviour:
@@ -9479,7 +9456,9 @@ MonoBehaviour:
 
     Title
 
-    Third'
+    Third
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}
   m_sharedMaterial: {fileID: 2800134297060617489, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}
@@ -9509,9 +9488,9 @@ MonoBehaviour:
   m_fontSize: 28
   m_fontSizeBase: 28
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 16
+  m_fontSizeMax: 28
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -9524,7 +9503,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -9542,7 +9521,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -2.5003738, y: -35.00531, z: 2.500351, w: -30.004517}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -10079,7 +10058,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or reduce the active time of your dispatches.
-  delay: 0.5
 --- !u!1 &940144667
 GameObject:
   m_ObjectHideFlags: 0
@@ -10992,7 +10970,6 @@ MonoBehaviour:
 
     You can go up to 50000php in debt before
     you lose!'
-  delay: 0.5
 --- !u!1 &1015778830
 GameObject:
   m_ObjectHideFlags: 0
@@ -11288,7 +11265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "Access the News menu here! \nThe News menu contains information about
     your faction reputation, incidents, and budget!"
-  delay: 0.5
 --- !u!1 &1035227844
 GameObject:
   m_ObjectHideFlags: 0
@@ -11823,8 +11799,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13, y: 10}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -2, y: -7}
+  m_SizeDelta: {x: 810, y: 95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1057262263
 MonoBehaviour:
@@ -11878,9 +11854,9 @@ MonoBehaviour:
   m_fontSize: 45
   m_fontSizeBase: 45
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 26
+  m_fontSizeMax: 45
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -11893,7 +11869,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -11911,7 +11887,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -169.71193, y: 0, z: -150.57478, w: -29.699566}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -13447,7 +13423,6 @@ MonoBehaviour:
   description: 'This is a Ranger unit.
 
     Rangers can resolve Green incidents.'
-  delay: 0.5
 --- !u!1 &1180884013
 GameObject:
   m_ObjectHideFlags: 0
@@ -14078,7 +14053,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Modifier for how fast your units resolve a dispatch.
-  delay: 0.5
 --- !u!1 &1277958414
 GameObject:
   m_ObjectHideFlags: 0
@@ -14458,7 +14432,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: The number of times Illegal Camping destroyed a forest.
-  delay: 0.5
 --- !u!1 &1285357287
 GameObject:
   m_ObjectHideFlags: 0
@@ -14961,7 +14934,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: The number of times a Forest Fire destroyed a forest.
-  delay: 0.5
 --- !u!1 &1330534742
 GameObject:
   m_ObjectHideFlags: 0
@@ -16039,7 +16011,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: "Play or pause the game. \nYou can still deploy units even when paused!"
-  delay: 0.5
 --- !u!1 &1415292456
 GameObject:
   m_ObjectHideFlags: 0
@@ -16204,7 +16175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or reduce the active time of your dispatches.
-  delay: 0.5
 --- !u!1001 &1421973851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16346,7 +16316,6 @@ MonoBehaviour:
   description: 'This is a Ranger unit.
 
     Rangers can resolve Green incidents.'
-  delay: 0.5
 --- !u!1 &1445073544
 GameObject:
   m_ObjectHideFlags: 0
@@ -16502,7 +16471,6 @@ MonoBehaviour:
   description: 'This is a Firefighter unit.
 
     Firefighters can resolve Red incidents.'
-  delay: 0.5
 --- !u!1 &1454580372
 GameObject:
   m_ObjectHideFlags: 0
@@ -17072,7 +17040,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Standing with the Citizens faction.
-  delay: 0.5
 --- !u!1 &1494569634
 GameObject:
   m_ObjectHideFlags: 0
@@ -17687,7 +17654,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or subtract to your budget.
-  delay: 0.5
 --- !u!1 &1571718555
 GameObject:
   m_ObjectHideFlags: 0
@@ -18374,7 +18340,6 @@ MonoBehaviour:
   description: 'This is a Firefighter unit.
 
     Firefighters can resolve Red incidents.'
-  delay: 0.5
 --- !u!1 &1622841922
 GameObject:
   m_ObjectHideFlags: 0
@@ -19193,8 +19158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 127.999985}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -2.5, y: 127.33}
+  m_SizeDelta: {x: 200, y: 87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1670074525
 MonoBehaviour:
@@ -19220,7 +19185,9 @@ MonoBehaviour:
 
     Title
 
-    Third'
+    Third
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}
   m_sharedMaterial: {fileID: 2800134297060617489, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}
@@ -19250,9 +19217,9 @@ MonoBehaviour:
   m_fontSize: 28
   m_fontSizeBase: 28
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 16
+  m_fontSizeMax: 28
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -19265,7 +19232,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -19283,7 +19250,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -2.5003738, y: -35.00531, z: 2.500351, w: -30.004517}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -19438,7 +19405,6 @@ MonoBehaviour:
 
     You can go up to 50000php in debt before
     you lose!'
-  delay: 0.5
 --- !u!1 &1716980688
 GameObject:
   m_ObjectHideFlags: 0
@@ -19679,7 +19645,6 @@ MonoBehaviour:
   description: 'This is your Progress.
 
     If this reaches 100%, you win!'
-  delay: 0.5
 --- !u!1 &1727972377
 GameObject:
   m_ObjectHideFlags: 0
@@ -20536,7 +20501,6 @@ MonoBehaviour:
   description: 'This is a Firefighter unit.
 
     Firefighters can resolve Red incidents.'
-  delay: 0.5
 --- !u!1 &1786387251
 GameObject:
   m_ObjectHideFlags: 0
@@ -20704,7 +20668,6 @@ MonoBehaviour:
   description: 'This is a Police unit.
 
     Police can resolve Blue incidents.'
-  delay: 0.5
 --- !u!1 &1805860093
 GameObject:
   m_ObjectHideFlags: 0
@@ -20930,7 +20893,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Enacting this policy may add or reduce the active time of your dispatches.
-  delay: 0.5
 --- !u!1 &1822643157
 GameObject:
   m_ObjectHideFlags: 0
@@ -21021,7 +20983,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: The number of times a Flood destroyed a forest.
-  delay: 0.5
 --- !u!1 &1833007265
 GameObject:
   m_ObjectHideFlags: 0
@@ -21883,7 +21844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: Access the Settings here!
-  delay: 0.5
 --- !u!1 &1905442188
 GameObject:
   m_ObjectHideFlags: 0
@@ -22620,7 +22580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: This leads you to a quadrant on the map!
-  delay: 0.5
 --- !u!1 &1979865782
 GameObject:
   m_ObjectHideFlags: 0
@@ -23347,7 +23306,6 @@ MonoBehaviour:
   description: 'This is your Progress.
 
     If this reaches 100%, you win!'
-  delay: 0.5
 --- !u!1 &2095698353
 GameObject:
   m_ObjectHideFlags: 0
@@ -23877,7 +23835,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   description: This leads you to a quadrant on the map!
-  delay: 0.5
 --- !u!1001 &33124216861177629
 PrefabInstance:
   m_ObjectHideFlags: 0

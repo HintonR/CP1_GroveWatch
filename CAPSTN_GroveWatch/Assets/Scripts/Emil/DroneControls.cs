@@ -7,18 +7,19 @@ public class DroneControls : MonoBehaviour
     [SerializeField] BoxCollider _bounds;
 
     [SerializeField] float _edgeSize = 30f;
-    [SerializeField] float _dragSensitivity = 1.5f;
+    //[SerializeField] float _dragSensitivity = 1.5f;
+    [SerializeField] float _dragSpeed = 1f;
 
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+        var gM = ServiceHub.Instance._gM;
+
+        //float x = Input.GetAxisRaw("Horizontal");
+        //float z = Input.GetAxisRaw("Vertical");
+        float x = gM._inScreen ? 0f : Input.GetAxisRaw("Horizontal");
+        float z = gM._inScreen ? 0f : Input.GetAxisRaw("Vertical");
 
         AddEdgeScroll(ref x, ref z);
-
-        if (Input.GetMouseButton(1))
-            AddRightClickDrag(ref x, ref z);
-
         Vector3 forward = _camera.transform.forward;
         Vector3 right = _camera.transform.right;
 
@@ -29,8 +30,10 @@ public class DroneControls : MonoBehaviour
         right.Normalize();
 
         Vector3 move = (forward * z + right * x).normalized;
-
         transform.position += move * _moveSpeed * Time.deltaTime;
+
+        if (Input.GetMouseButton(1))
+            RightClickDrag(forward, right);
     }
 
     void LateUpdate()
@@ -58,13 +61,18 @@ public class DroneControls : MonoBehaviour
         if (mouse.y <= _edgeSize) z -= 1f;
         else if (mouse.y >= Screen.height - _edgeSize) z += 1f;
     }
-
-    void AddRightClickDrag(ref float x, ref float z)
+    void RightClickDrag(Vector3 forward, Vector3 right)
     {
-        if (ServiceHub.Instance._gM._isPaused || ServiceHub.Instance._gM._inScreen || !Application.isFocused)
-            return;
-
-        x -= Input.GetAxis("Mouse X") * _dragSensitivity;
-        z -= Input.GetAxis("Mouse Y") * _dragSensitivity;
+        var gM = ServiceHub.Instance._gM;
+        if (gM._isPaused || gM._inScreen || !Application.isFocused) return;
+        transform.position -= (right * Input.GetAxis("Mouse X") + forward * Input.GetAxis("Mouse Y")) * _dragSpeed;
     }
+    //void AddRightClickDrag(ref float x, ref float z)
+    //{
+    //    if (ServiceHub.Instance._gM._isPaused || ServiceHub.Instance._gM._inScreen || !Application.isFocused)
+    //        return;
+
+    //    x -= Input.GetAxis("Mouse X") * _dragSensitivity;
+    //    z -= Input.GetAxis("Mouse Y") * _dragSensitivity;
+    //}
 }

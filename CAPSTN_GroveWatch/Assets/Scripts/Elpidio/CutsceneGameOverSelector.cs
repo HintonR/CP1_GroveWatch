@@ -11,6 +11,7 @@ public class GameOverCutsceneSelector : MonoBehaviour
     [SerializeField] private CutsceneData campingEnding;      // 3 - Camping
     [SerializeField] private CutsceneData loggingEnding;      // 4 - Logging
     [SerializeField] private CutsceneData constructionEnding; // 5 - Construction
+    [SerializeField] private CutsceneData reputationEnding; //rep ran out but no area died
 
     [Header("Debt / Corruption Ending")]
     [SerializeField] private CutsceneData debtEnding;
@@ -81,7 +82,11 @@ public class GameOverCutsceneSelector : MonoBehaviour
 
     CutsceneData SelectFromIncident()
     {
+        bool anyDied = false;
+        foreach (int count in _sH._gM._incidents)
+            if (count > 0) { anyDied = true; break; }
 
+        if (!anyDied) return reputationEnding; //0 rep 0 incidents ending
         IncidentType dominant = _sH._gM.GetDominantIncident();
 
         switch (dominant)

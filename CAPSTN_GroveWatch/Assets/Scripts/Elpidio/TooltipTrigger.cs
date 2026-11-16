@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField, TextArea] private string description;
-    [SerializeField] private float delay = 0.5f;
+    //[SerializeField] private float delay = 0.5f; //DISABLED FOR SCREENING
+    private const float delay = 0.2f;
 
     bool hovered;
     Coroutine waiting;

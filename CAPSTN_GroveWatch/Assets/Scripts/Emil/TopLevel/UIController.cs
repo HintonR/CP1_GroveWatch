@@ -37,10 +37,17 @@ public class UIController : MonoBehaviour
     public Coroutine RepFill => _repFill;
     public Coroutine ProgFill => _progFill;
 
+    bool _progNearDone;
+    Color _progColor;
+    Vector3 _progScale;
+
     void Awake()
     {
         _sH = ServiceHub.Instance;
         _sH._UI = this;
+
+        _progColor = _progPercent.color;
+        _progScale = _progPercent.transform.localScale;
     }
 
     void Start()
@@ -58,7 +65,11 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        
+        if (_progNearDone) //progress pulse
+        {
+            _progPercent.transform.localScale = _progScale * (1f + 0.08f * Mathf.Sin(Time.unscaledTime * 6f));
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && !_sH._gM._inScreen)
         {         
             if (_sH._gM._isPaused)
@@ -200,6 +211,9 @@ public class UIController : MonoBehaviour
     {
         float percent = _sH._gM._progress / _sH._gM._maxProgress * 100f;
         _progPercent.text = Mathf.FloorToInt(percent) + "%";
+        _progNearDone = percent >= 90f;
+        _progPercent.color = _progNearDone ? Color.yellow : _progColor;
+        if (!_progNearDone) _progPercent.transform.localScale = _progScale;
     }
 
     public void UpdateBar(float current, float max, Image i, Coroutine c)

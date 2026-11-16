@@ -1206,7 +1206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PLAY TUTORIAL?
+  m_text: KEEP TUTORIALS?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}
   m_sharedMaterial: {fileID: 2800134297060617489, guid: fd2bfeae3418fad44a4acb36cefac75c, type: 2}

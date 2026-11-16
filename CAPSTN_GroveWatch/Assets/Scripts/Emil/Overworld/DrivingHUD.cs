@@ -2,6 +2,7 @@ using EasyTransition;
 using SaintsField;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DrivingHUD : MonoBehaviour
 {
@@ -38,6 +39,16 @@ public class DrivingHUD : MonoBehaviour
 
         if (_sH._gM._PalawanWin)
             _b3.gameObject.SetActive(false);
+
+        //progression stuff, baguio & palawan uhhh
+
+        //_b2.GetComponent<Button>().interactable = _sH._gM._CebuWin;
+        //_b3.GetComponent<Button>().interactable = _sH._gM._CebuWin;
+
+        //this is what i think should happen
+
+        _b2.GetComponent<Button>().interactable = _sH._gM._CebuWin;
+        _b3.GetComponent<Button>().interactable = _sH._gM._BagiuoWin;
     }
 
     public void OpenLevelInfo()
