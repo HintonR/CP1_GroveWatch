@@ -47,10 +47,16 @@ public class DrivingHUD : MonoBehaviour
 
         //this is what i think should happen
 
-        _b2.GetComponent<Button>().interactable = _sH._gM._CebuWin;
-        _b3.GetComponent<Button>().interactable = _sH._gM._BagiuoWin;
+        SetLocked(_b2, !_sH._gM._CebuWin);
+        SetLocked(_b3, !_sH._gM._BagiuoWin);
     }
+    void SetLocked(GameObject b, bool locked)
+    {
+        b.GetComponent<Button>().interactable = !locked;
 
+        foreach (var t in b.GetComponentsInChildren<TMP_Text>(true))
+            t.alpha = locked ? 0.1f : 1f;
+    }
     public void OpenLevelInfo()
     {
         _inScreen = true;

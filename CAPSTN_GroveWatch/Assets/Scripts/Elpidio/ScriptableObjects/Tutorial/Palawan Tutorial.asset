@@ -16,26 +16,8 @@ MonoBehaviour:
   lines:
   - image: {fileID: 21300000, guid: c939324442cfbb54fbf91baa240df524, type: 3}
     title: Rasa Sanctuary
-    text: Welcome to Palawan's Rasa Sanctuary! There are more people to please here,
-      but first, a quick refresher on the camera controls.
+    text: Welcome to Palawan's Rasa Sanctuary! There are more people to please here.
     changeMusic: 1
-    music: 2
-  - image: {fileID: 21300000, guid: 1d1d6876ffe504744ac4760105bd01dd, type: 3}
-    title: Camera/Drone Controls
-    text: Press WASD or the Arrow Keys to move your view across the map.
-    changeMusic: 0
-    music: 2
-  - image: {fileID: 21300000, guid: e2ed92289cfe8fe41ad3ed486174db5e, type: 3}
-    title: Camera/Drone Controls
-    text: Push your mouse against any edge of the screen and the view will glide
-      in that direction.
-    changeMusic: 0
-    music: 2
-  - image: {fileID: 21300000, guid: b9f632bfedb571743b731584bc57e086, type: 3}
-    title: Camera/Drone Controls
-    text: You may also hold [Right Click] and drag to pull the view where you want
-      it.
-    changeMusic: 0
     music: 2
   - image: {fileID: 21300000, guid: 99197122cb2dcb1418e77e5e830efd59, type: 3}
     title: Faction Reputation
